@@ -1,5 +1,5 @@
 <?php
-include 'conexion.php';
+include '../conexion.php';
 
 $id_factura = (int)($_GET['id'] ?? 0);
 if ($id_factura <= 0) {
