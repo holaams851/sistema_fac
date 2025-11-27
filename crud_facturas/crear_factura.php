@@ -46,7 +46,7 @@ $totales = [];
             </div>
 
             <div class="container p-4 rounded shadow-sm">
-                <form id="facturaForm" method="POST" action="../guardar_factura.php">
+                <form id="facturaForm" method="POST" action="../crud_facturas/guardar_factura.php">
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label>Cliente:</label>
@@ -146,7 +146,7 @@ $totales = [];
         // Autocomplete para equipos
         $(document).on("focus", ".equipo", function() {
             $(this).autocomplete({
-                source: "../buscar_equipos.php",
+                source: "../crud_equipos/buscar_equipos.php",
                 minLength: 1,
                 select: function(event, ui) {
                     let row = $(this).closest("tr");

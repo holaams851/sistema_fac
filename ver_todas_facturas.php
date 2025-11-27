@@ -87,7 +87,7 @@ $totales = [];
                     <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
                         <h4 class="text-white">Factura #<?= $factura['id_factura'] ?> - Cliente: <?= $factura['nombre'] ?: "<i>Cliente eliminado</i>" ?> (<?= $factura['fecha'] ?>)</h4>
                         
-                        <a href="eliminar_factura.php?id=<?= $factura['id_factura'] ?>" 
+                        <a href="crud_facturas/eliminar_factura.php?id=<?= $factura['id_factura'] ?>" 
                             class="btn btn-danger btn-sm"
                             onclick="return confirm('¿Estás seguro de eliminar esta factura?');">Eliminar</a>
                     </div>
