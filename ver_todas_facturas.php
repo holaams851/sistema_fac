@@ -73,7 +73,8 @@ $totales = [];
                         df.nombre_equipo,
                         df.cantidad,
                         df.precio_unitario,
-                        df.subtotal
+                        df.subtotal,
+                        df.mano_de_obra
                     FROM Detalle_Factura df 
                     JOIN Facturas f ON f.id_factura = df.id_factura
                     WHERE df.id_factura = $id_factura
@@ -97,6 +98,7 @@ $totales = [];
                                 <th>Equipo</th>
                                 <th>Cantidad</th>
                                 <th>Precio unitario</th>
+                                <th>Mano de Obra</th>
                                 <th>Subtotal</th>
                             </tr>
                         </thead>
@@ -105,6 +107,7 @@ $totales = [];
                             <tr>
                                 <td><?= $d['nombre_equipo']?></td>
                                 <td><?= $d['cantidad'] ?></td>
+                                <td><?= $d['mano_de_obra'] ?></td>
                                 <td>$<?= number_format($d['precio_unitario'], 2) ?></td>
                                 <td>$<?= number_format($d['subtotal'], 2) ?></td>
                             </tr>
