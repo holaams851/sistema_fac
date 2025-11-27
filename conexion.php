@@ -1,15 +1,13 @@
 <?php
-// ARCHIVO: conexion.php (Configuración estándar de XAMPP)
+$host     = "sql302.infinityfree.com";     // aparece en el panel de InfinityFree 
+$username = "if0_40376376";
+$password = "Omigato123";
+$database = "if0_40376376_sistema_facturacion";
 
-$servername = "localhost"; // Servidor local
-$username = "root";        // Usuario predeterminado de XAMPP
-$password = "";            // Contraseña predeterminada (generalmente vacía)
-$dbname = "sistema_facturacion"; // Nombre que le daremos a tu DB
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
+$conn = new mysqli($host, $username, $password, $database);
 if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
+    die("Error de conexión: " . $conn->connect_error);
 }
-$conn->set_charset("utf8");
 ?>
+
+ 
