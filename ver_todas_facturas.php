@@ -107,8 +107,8 @@ $totales = [];
                             <tr>
                                 <td><?= $d['nombre_equipo']?></td>
                                 <td><?= $d['cantidad'] ?></td>
-                                <td><?= $d['mano_de_obra'] ?></td>
                                 <td>$<?= number_format($d['precio_unitario'], 2) ?></td>
+                                <td>$<?= number_format($d['mano_de_obra'], 2) ?></td>
                                 <td>$<?= number_format($d['subtotal'], 2) ?></td>
                             </tr>
                         <?php endwhile; ?>
