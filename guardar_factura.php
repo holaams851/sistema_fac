@@ -62,6 +62,7 @@ if (!empty($_POST['equipos']['id'])) {
         $subtotal = (float)$subtotales[$i];
         
         $total_final += $subtotal;
+        $total_final += $mano_de_obra;
 
         if ($id_equipo > 0) {
             $sql_detalle = "INSERT INTO Detalle_Factura (id_factura, cantidad, precio_unitario, id_equipo, nombre_equipo, total, subtotal, mano_de_obra)
