@@ -1,5 +1,22 @@
+:root {
+  --bg-dark: #1f1f1f; /* Fondo muy oscuro, casi negro */
+  --bg-main: #2a2a2a; /* Área principal de contenido */
+  --bg-sidebar: #1f1f1f; /* Mismo que el fondo para uniformidad */
+  --text-light: #E0E0E0; /* Gris claro para el texto normal */
+  --text-white: #FFFFFF; /* Blanco para texto activo */
+  --text-muted: #999999; /* Gris oscuro para iconos no activos */
+  --color-active: #007bff; /* Azul para el color activo/resaltado */
+  --border-color: #444444; /* Color de borde oscuro */
+}
+
 body {
   font-size: .875rem;
+  background-color: var(--bg-main); 
+  color: var(--text-light); 
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-white); 
 }
 
 .feather {
@@ -8,86 +25,156 @@ body {
   vertical-align: text-bottom;
 }
 
-/*
- * Sidebar
- */
-
+/* Sidebar - Contenedor principal */
 .sidebar {
   position: fixed;
-  top: 0;
+  top: 0; 
   bottom: 0;
   left: 0;
-  z-index: 100; /* Behind the navbar */
+  z-index: 100;
   padding: 0;
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  width: 200px; /* Ancho fijo para el sidebar */
+  background-color: var(--bg-sidebar) !important; 
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .5);
+  color: var(--text-light);
 }
 
+/* Título 'Toner & Más' dentro del sidebar (ENCABEZADO FIJO) */
+.sidebar-title {
+    color: var(--text-white);
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: block;
+    width: 100%;
+    text-align: center;
+    /* Estilos del encabezado */
+    background-color: var(--bg-dark); 
+    padding: 15px 0; 
+    border-bottom: 1px solid var(--border-color);
+    text-decoration: none;
+    /* Fija el título en la parte superior */
+    position: sticky; 
+    top: 0;
+    z-index: 10;
+}
+
+/* Sidebar Sticky - Contenedor de la navegación */
 .sidebar-sticky {
   position: -webkit-sticky;
   position: sticky;
-  top: 48px; /* Height of navbar */
-  height: calc(100vh - 48px);
-  padding-top: .5rem;
+  top: 0; 
+  height: 100vh; 
   overflow-x: hidden;
-  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  overflow-y: auto;
+  display: flex; 
+  flex-direction: column; 
+  /* Alineamos el contenido en la parte superior */
+  justify-content: flex-start; 
+  align-items: center; 
+  padding-top: 0; 
+  padding-left: 0;
+}
+
+/* Lista de navegación */
+.sidebar .nav {
+    width: 100%; 
+    padding-left: 0;
+    /* Margen Superior para dar espacio entre el título y el primer enlace */
+    margin-top: 10px; 
+}
+
+.sidebar .nav-item {
+    width: 100%; 
 }
 
 .sidebar .nav-link {
   font-weight: 500;
-  color: #333;
+  color: var(--text-light) !important; 
+  text-align: left; 
+  padding: 10px 15px; 
 }
 
+/* Color de los iconos */
 .sidebar .nav-link .feather {
   margin-right: 4px;
-  color: #999;
+  color: var(--text-muted) !important; 
+}
+
+/* Hover y Activo */
+.sidebar .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1); 
 }
 
 .sidebar .nav-link.active {
-  color: #007bff;
+  color: var(--text-white) !important; 
+  background-color: var(--color-active);
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  border-left: 3px solid var(--color-active);
 }
 
 .sidebar .nav-link:hover .feather,
 .sidebar .nav-link.active .feather {
-  color: inherit;
+  color: var(--text-white);
 }
 
 .sidebar-heading {
   font-size: .75rem;
   text-transform: uppercase;
+  color: var(--text-muted) !important;
 }
 
-/*
- * Navbar
- */
-
-.navbar-brand {
-  padding-top: .75rem;
-  padding-bottom: .75rem;
-  font-size: 1rem;
-  background-color: rgba(0, 0, 0, .25);
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+/* Main Content Area */
+main {
+  /* SE USA MARGIN-LEFT para mover el contenido fuera del sidebar de 200px */
+  margin-left: 200px !important; 
+  width: calc(100% - 200px); 
+  background-color: var(--bg-main);
+  color: var(--text-light);
+  padding-top: 20px !important;
 }
 
-.navbar .form-control {
-  padding: .75rem 1rem;
-  border-width: 0;
-  border-radius: 0;
+/* Contenedor de la Imagen de Perfil */
+.profile-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.form-control-dark {
-  color: #fff;
-  background-color: rgba(255, 255, 255, .1);
-  border-color: rgba(255, 255, 255, .1);
+.profile-pic {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid var(--color-active);
+    object-fit: cover;
 }
 
-.form-control-dark:focus {
-  border-color: transparent;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+.user-name {
+    color: var(--text-white);
+    font-weight: 600;
 }
 
-/*
- * Utilities
- */
+/* Tablas y Utilidades */
+.border-bottom { 
+  border-color: var(--border-color) !important; 
+}
 
-.border-top { border-top: 1px solid #e5e5e5; }
-.border-bottom { border-bottom: 1px solid #e5e5e5; }
+.table {
+  color: var(--text-light); 
+  background-color: var(--bg-main);
+}
+.table thead th {
+  border-bottom: 2px solid var(--border-color);
+  color: var(--text-white);
+}
+.table tbody tr {
+  background-color: var(--bg-sidebar); 
+}
+.table-hover tbody tr:hover {
+  background-color: #444444; 
+}
+
+.alert {
+  background-color: #3f0007; 
+  color: #ffcdd2; 
+  border-color: #8c001a;
+}

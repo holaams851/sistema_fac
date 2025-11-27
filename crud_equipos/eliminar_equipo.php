@@ -9,17 +9,19 @@ $res = $conn->query($sql_check);
 $row = $res->fetch_assoc();
 
 if ($row['total'] > 0) {
-    echo "<script>
-        alert('No se puede eliminar este equipo porque está asociado a facturas.');
-        window.location.href = '../equipos.php';
-    </script>";
+    // Si está asociado, redirige con un mensaje de error
+    header("Location: ../equipos.php?error=asociado");
     exit;
 }
 
+// Si no está en uso, procede a la eliminación
+// 1. Eliminar de Detalle_Compra (depende de la tabla Equipos)
+$conn->query("DELETE FROM Detalle_Compra WHERE id_equipo = $id");
+
+// 2. Eliminar de Equipos
 $conn->query("DELETE FROM Equipos WHERE id_equipo = $id");
 
-echo "<script>
-    alert('Equipo eliminado correctamente.');
-    window.location.href = '../equipos.php';
-</script>";
+// Redirección instantánea sin alerta JS
+header("Location: ../equipos.php?msg=eliminado");
+exit;
 ?>

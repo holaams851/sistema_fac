@@ -4,13 +4,13 @@ include("funciones.php");
 
 // --- Ventas por mes ---
 $sql_mes = "
-    SELECT 
-        MONTH(f.fecha) AS mes,
-        SUM(d.subtotal) AS total_ventas
-    FROM Facturas f
-    INNER JOIN Detalle_Factura d ON f.id_factura = d.id_factura
-    GROUP BY MONTH(f.fecha)
-    ORDER BY mes ASC    
+     SELECT 
+         MONTH(f.fecha) AS mes,
+         SUM(d.subtotal) AS total_ventas
+     FROM Facturas f
+     INNER JOIN Detalle_Factura d ON f.id_factura = d.id_factura
+     GROUP BY MONTH(f.fecha)
+     ORDER BY mes ASC     
 ";
 $res_mes = $conn->query($sql_mes);
 
@@ -18,8 +18,8 @@ $meses = [];
 $totales = [];
 
 while ($row = $res_mes->fetch_assoc()) {
-    $meses[] = date("F", mktime(0, 0, 0, $row['mes'], 1));
-    $totales[] = $row['total_ventas'];
+     $meses[] = date("F", mktime(0, 0, 0, $row['mes'], 1));
+     $totales[] = $row['total_ventas'];
 }
 ?>
 
@@ -35,17 +35,19 @@ while ($row = $res_mes->fetch_assoc()) {
     <title>Sistema de Facturación: Toner & Más</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <link href="/sistema_fac/dashboard.css?v=3" rel="stylesheet">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <link href="dashboard.css?v=7" rel="stylesheet"> <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
   </head>
 
   <body>
     <div class="container-fluid">
       <div class="row">
-        <nav class="col-md-2 d-none d-md-block sidebar">
+        
+        <nav class="sidebar"> 
           <div class="sidebar-sticky">
+            <a class="sidebar-title" href="index.php">Toner & Más</a> 
+            
             <ul class="nav flex-column">
+              
               <li class="nav-item">
                 <a class="nav-link active" href="index.php">
                   <span data-feather="home"></span>
@@ -58,12 +60,14 @@ while ($row = $res_mes->fetch_assoc()) {
                   Clientes
                 </a>
               </li>
+              
               <li class="nav-item">
-                <a class="nav-link" href="proveedores.php">
+                <a class="nav-link" href="proveedores.php"> 
                   <span data-feather="truck"></span>
                   Proveedores
                 </a>
               </li>
+              
               <li class="nav-item">
                 <a class="nav-link" href="equipos.php">
                   <span data-feather="shopping-cart"></span>
@@ -98,12 +102,15 @@ while ($row = $res_mes->fetch_assoc()) {
           </div>
         </nav>
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <main role="main" class="main-content px-4"> 
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
             <h1 class="h2">Dashboard</h1>
-            <div class="btn-toolbar mb-2 mb-md-0">
+            
+            <div class="profile-area">
+                <span class="user-name">Usuario Admin</span>
+                <img src="user_profile.jpg" alt="Foto de Perfil" class="profile-pic"> 
             </div>
-          </div>
+            </div>
 
           <?php if (empty($meses)) { ?>
               <p style="color:red; text-align:center;">No hay datos para mostrar. Asegúrate de tener facturas con detalles y totales.</p>
@@ -113,7 +120,8 @@ while ($row = $res_mes->fetch_assoc()) {
 
           <h2>Facturas Recientes</h2>
             <?php
-            $sql = "SELECT * FROM Detalle_Factura ORDER BY id_detalle DESC"; // DESC = descendente
+            // Se asume que mostrarTabla está en funciones.php
+            $sql = "SELECT * FROM Detalle_Factura ORDER BY id_detalle DESC LIMIT 5"; 
             $result = $conn->query($sql);
             mostrarTabla($result, ['id_factura','nombre_equipo','cantidad','total']);
             ?>
