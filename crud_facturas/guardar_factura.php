@@ -1,5 +1,4 @@
 <?php
-// Incluye conexión y funciones.
 include '../conexion.php'; 
 include '../funciones.php'; 
 
@@ -13,7 +12,7 @@ $no_equipos = empty($_POST['equipos']['id']) || count(array_filter($_POST['equip
 
 // 1. Manejo de errores de datos faltantes (Redirección)
 if ($id_cliente <= 0 || empty($fecha)) {
-    header("Location: crud_facturas/crear_factura.php?error=datos_faltantes");
+    header("Location: crear_factura.php?error=datos_faltantes");
     exit;
 }
 
@@ -27,7 +26,7 @@ if ($result_nombre && $result_nombre->num_rows > 0) {
 
 // 3. Manejo de error de equipos faltantes
 if ($no_equipos) {
-    header("Location: crud_facturas/crear_factura.php?error=no_equipos");
+    header("Location: crear_factura.php?error=no_equipos");
     exit;
 }
 
@@ -35,7 +34,7 @@ if ($no_equipos) {
 $sql_factura = "INSERT INTO Facturas (id_cliente, nombre, fecha) VALUES ($id_cliente, '$nombre_cliente', '$fecha')";
 if (!$conn->query($sql_factura)) {
     // Si falla la inserción, redirigimos con error
-    header("Location: crud_facturas/crear_factura.php?error=db_factura");
+    header("Location: crear_factura.php?error=db_factura");
     exit;
 }   
 
