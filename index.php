@@ -113,7 +113,7 @@ while ($row = $res_mes->fetch_assoc()) {
             </div>
 
           <?php if (empty($meses)) { ?>
-              <p style="color:red; text-align:center;">Huele a culo para mostrar. Asegúrate de tener facturas con detalles y totales.</p>
+              <p style="color:red; text-align:center;">No hay facturas para mostrar. Asegúrate de tener facturas con detalles y totales.</p>
           <?php } else { ?>
             <canvas class="my-4" id="ventasMes" width="800" height="300"></canvas>
           <?php } ?>
