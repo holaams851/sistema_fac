@@ -20,3 +20,8 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./
         server-dir: /htdocs/
+        exclude: |
+        **/.git*
+        **/.github/*
+        **/.vscode/*
+        deploy.yml
