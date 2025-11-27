@@ -2,7 +2,11 @@
 include '../conexion.php'; 
 include '../funciones.php'; 
 
-// --- Lógica de Procesamiento ---
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header("Location: crear_factura.php?error=no_post");
+    exit;
+}
 
 $id_cliente = (int)($_POST['id_cliente'] ?? 0);
 $fecha = $conn->real_escape_string($_POST['fecha'] ?? '');
