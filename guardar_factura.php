@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 // Incluye conexión y funciones.
 include 'conexion.php'; 
 include 'funciones.php'; 
@@ -61,15 +64,10 @@ if (!empty($_POST['equipos']['id'])) {
 
         if ($id_equipo > 0) {
             $sql_detalle = "INSERT INTO Detalle_Factura (id_factura, cantidad, precio, id_equipo, nombre_equipo, total, subtotal, mano_de_obra)
-                             VALUES ('$id_factura', '$cantidad', '$precio', '$id_equipo', '$nombre', '$subtotal', '$subtotal', '$mano_de_obra')";
+                             VALUES ('$id_factura', '$cantidad', '$precio', '$id_equipo', '$nombre', '$total', '$subtotal', '$mano_de_obra')";
             $conn->query($sql_detalle);
         }
     }
-    
-    // 6. Eliminamos la línea que causaba el error de columna 'total'
-    // La columna 'total' debe ser agregada a la base de datos si se va a usar.
-    // $sql_update_total = "UPDATE Facturas SET total = '$total_final' WHERE id_factura = $id_factura";
-    // $conn->query($sql_update_total);
 }
     
 $conn->close();
