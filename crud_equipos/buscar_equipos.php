@@ -1,5 +1,5 @@
 <?php
-include 'conexion.php';
+include '../conexion.php';
 
 $q = $_GET['term'] ?? '';
 $q = $conn->real_escape_string($q);
