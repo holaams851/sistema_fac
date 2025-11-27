@@ -53,7 +53,7 @@ $totales = [];
                     f.id_factura,
                     f.nombre,
                     f.fecha,
-                    SUM(df.subtotal) AS total
+                    df.total AS total
                 FROM Facturas f
                 LEFT JOIN Detalle_Factura df ON df.id_factura = f.id_factura
                 GROUP BY f.id_factura, f.nombre, f.fecha
