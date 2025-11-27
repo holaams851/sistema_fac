@@ -10,6 +10,7 @@ include 'funciones.php';
 
 $id_cliente = (int)($_POST['id_cliente'] ?? 0);
 $fecha = $conn->real_escape_string($_POST['fecha'] ?? '');
+$mano_de_obra = isset($_POST['mano_de_obra']) ? (float)$_POST['mano_de_obra'] : 0.0;
 
 $no_equipos = empty($_POST['equipos']['id']) || count(array_filter($_POST['equipos']['id'])) == 0;
 
@@ -70,7 +71,7 @@ if (!empty($_POST['equipos']['id'])) {
         $total_final += $subtotal;
 
         if ($id_equipo > 0) {
-            $sql_detalle = "INSERT INTO Detalle_Factura (id_factura, cantidad, precio, id_equipo, nombre_equipo, total, subtotal)
+            $sql_detalle = "INSERT INTO Detalle_Factura (id_factura, cantidad, precio_unitario, id_equipo, nombre_equipo, total, subtotal)
                              VALUES ('$id_factura', '$cantidad', '$precio', '$id_equipo', '$nombre', '$total_final', '$subtotal')";
             $conn->query($sql_detalle);
         }
