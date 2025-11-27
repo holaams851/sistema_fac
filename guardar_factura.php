@@ -39,6 +39,13 @@ if (!$conn->query($sql_factura)) {
     // Si falla la inserción, redirigimos con error
     header("Location: crud_facturas/crear_factura.php?error=db_factura");
     exit;
+}   
+
+$sql_mano_obra = "INSERT INTO Detalle_Factura (mano_de_obra) VALUES ('$mano_de_obra')";
+if (!$conn->query($sql_mano_obra)) {
+    // Si falla la inserción, redirigimos con error
+    header("Location: crud_facturas/crear_factura.php?error=db_factura");
+    exit;
 }
 
 $id_factura = $conn->insert_id;
@@ -63,8 +70,8 @@ if (!empty($_POST['equipos']['id'])) {
         $total_final += $subtotal;
 
         if ($id_equipo > 0) {
-            $sql_detalle = "INSERT INTO Detalle_Factura (id_factura, cantidad, precio, id_equipo, nombre_equipo, total, subtotal, mano_de_obra)
-                             VALUES ('$id_factura', '$cantidad', '$precio', '$id_equipo', '$nombre', '$total', '$subtotal', '$mano_de_obra')";
+            $sql_detalle = "INSERT INTO Detalle_Factura (id_factura, cantidad, precio, id_equipo, nombre_equipo, total, subtotal)
+                             VALUES ('$id_factura', '$cantidad', '$precio', '$id_equipo', '$nombre', '$total_final', '$subtotal')";
             $conn->query($sql_detalle);
         }
     }
