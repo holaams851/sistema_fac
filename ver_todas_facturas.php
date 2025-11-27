@@ -115,7 +115,7 @@ $totales = [];
                         </tbody>
                         <tfoot>
                             <tr style="background-color: var(--bg-dark);">
-                                <th colspan="3" class="text-end">Total:</th>
+                                <th colspan="4" class="text-end">Total:</th>
                                 <th>$<?= number_format($factura['total'],2) ?></th>
                             </tr>
                         </tfoot>
