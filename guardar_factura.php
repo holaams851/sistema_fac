@@ -60,8 +60,8 @@ if (!empty($_POST['equipos']['id'])) {
         $total_final += $subtotal;
 
         if ($id_equipo > 0) {
-            $sql_detalle = "INSERT INTO Detalle_Factura (id_factura, id_equipo, nombre_equipo, cantidad, precio_unitario, subtotal)
-                             VALUES ('$id_factura', '$id_equipo', '$nombre', '$cantidad', '$precio', '$subtotal')";
+            $sql_detalle = "INSERT INTO Detalle_Factura (id_factura, cantidad, precio, id_equipo, nombre_equipo, total, subtotal, mano_de_obra)
+                             VALUES ('$id_factura', '$cantidad', '$precio', '$id_equipo', '$nombre', '$subtotal', '$subtotal', '$mano_de_obra')";
             $conn->query($sql_detalle);
         }
     }

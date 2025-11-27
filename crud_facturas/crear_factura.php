@@ -79,7 +79,14 @@ $totales = [];
                     </table>
                     <button type="button" class="btn btn-outline-primary mb-3" id="agregarEquipo">+ Agregar equipo</button>
 
-                    <div class="text-end">
+                    <div class="row mt-4">
+                        <div class="col-md-4 offset-md-8">
+                            <label>Mano de obra:</label>
+                            <input type="number" step="0.01" class="form-control" id="manoObra" name="mano_de_obra" value="0">
+                        </div>
+                    </div>
+
+                    <div class="text-end mt-3">
                         <h4>Total: $<span id="total">0.00</span></h4>
                     </div>
 
@@ -120,6 +127,10 @@ $totales = [];
 
         $("#agregarEquipo").click(function() {
             $("#tablaEquipos tbody").append(filaEquipo());
+        });
+
+        $("#manoObra").on("input", function() {
+            actualizarTotal();
         });
 
         $(document).on("click", ".eliminar", function() {

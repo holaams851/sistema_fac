@@ -106,9 +106,9 @@ while ($row = $res_mes->fetch_assoc()) {
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
             <h1 class="h2">Dashboard</h1>
             
-            <div class="logo">
-                <span class="logo">Edwin Aragón</span>
-                <img src="logo.jpeg" alt="Foto de Perfil" class="logo"> 
+            <div class="profile-area">
+                <span class="user-name">Admin</span>
+                <img src="logo.jpeg" alt="Foto de Perfil" class="profile-pic"> 
             </div>
             </div>
 
