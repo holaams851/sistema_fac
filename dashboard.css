@@ -13,8 +13,6 @@ body {
   font-size: .875rem;
   background-color: var(--bg-main); 
   color: var(--text-light); 
-  font-weight: 500;
-  line-height: 1;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -180,78 +178,3 @@ main {
   color: #ffcdd2; 
   border-color: #8c001a;
 }
-
-p {
-  font-size: .875rem;
-  margin-bottom: .5rem;
-  line-height: 1.3rem;
-}
-
-h1 {
-  font-size: 3.125rem;
-}
-
-h2 {
-  font-size: 2.5rem;
-}
-
-@media(max-width: 767px) {
-  h2 {
-    font-size: 1.9rem;
-  }
-}
-
-h3 {
-  font-size: 1.875rem;
-}
-
-h4 {
-  font-size: 1.45rem;
-}
-
-h5 {
-  font-size: 1rem;
-}
-
-h6 {
-  font-size: .9375rem;
-}
-
-.card {
-  margin-bottom: 1.2rem;
-}
-
-.card-body {
-  padding: 2rem;
-}
-
-@media (max-width: 991px) {
-  .card-body {
-    padding: 1.875rem 1.25rem;
-  }
-}
-
-.grid-margin {
-  margin-bottom: 20px;
-}
-
-.CodeMirror {
-  font-size: .875rem;
-  height: auto;
-  text-align: left;
-  min-height: auto;
-  font-family: 'Roboto', sans-serif;
-  line-height: 1.40em;
-  padding: 10px;
-  font-weight: 100;
-  letter-spacing: .9px;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-.CodeMirror-scroll {
-  min-height: auto;
-}
-
-
-
