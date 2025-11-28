@@ -2,12 +2,6 @@
 include '../conexion.php'; 
 include '../funciones.php'; 
 
-
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header("Location: crear_factura.php?error=no_post");
-    exit;
-}
-
 $id_cliente = (int)($_POST['id_cliente'] ?? 0);
 $fecha = $conn->real_escape_string($_POST['fecha'] ?? '');
 $mano_de_obra = isset($_POST['mano_de_obra']) ? (float)$_POST['mano_de_obra'] : 0.0;
@@ -75,6 +69,6 @@ if (!empty($_POST['equipos']['id'])) {
 $conn->close();
 
 // --- REDIRECCIÓN INMEDIATA AL DASHBOARD ---
-header("Location: index.php?msg=factura_guardada");
+header("Location: ../index.php?msg=factura_guardada");
 exit;
 ?>
