@@ -178,3 +178,21 @@ main {
   color: #ffcdd2; 
   border-color: #8c001a;
 }
+
+.card {
+  margin-bottom: 1.2rem;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+@media (max-width: 991px) {
+  .card-body {
+    padding: 1.875rem 1.25rem;
+  }
+}
+
+.grid-margin {
+  margin-bottom: 20px;
+}
