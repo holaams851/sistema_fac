@@ -86,7 +86,7 @@ $totales_dummy = $totales;
             <?php if (empty($meses)) { ?>
               <p style="color:red; text-align:center;">No hay facturas para mostrar. Asegúrate de tener facturas con detalles y totales.</p>
             <?php } else { ?>
-            <canvas class="my-4" id="ventasMes" width="800" height="300"></canvas>
+            <canvas class="my-4" id="ventasMes" width="500" height="300"></canvas>
             <?php } ?>
             
             <h2>Total de Ventas por Cliente</h2>
@@ -116,35 +116,35 @@ $totales_dummy = $totales;
 </script>
 
 <script>
-      const ctx = document.getElementById('ventasMes')?.getContext('2d');
-        if (ctx) {
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: <?= json_encode($meses) ?>,
-                    datasets: [{
-                    label: 'Total de Ventas (C$)',
-                    data: <?= json_encode($totales) ?>,
-                    lineTension: 0,
-                    backgroundColor: 'transparent',
-                    borderColor: '#007bff',
-                    borderWidth: 4,
-                    pointBackgroundColor: '#007bff'
-                }]
+const ctx = document.getElementById('ventasMes')?.getContext('2d');
+if (ctx) {
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: <?= json_encode($meses_dummy) ?>,
+            datasets: [{
+                label: 'Total de Ventas (C$)',
+                data: <?= json_encode($totales_dummy) ?>,
+                backgroundColor: 'rgba(0, 123, 255, 0.6)', 
+                borderColor: 'rgba(0, 123, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            maintainAspectRatio: false, 
+            responsive: true,
+            scales: {
+                y: { 
+                    beginAtZero: true,
+                    ticks: { color: 'var(--text-light)' } 
                 },
-                options: {
-                scales: {
-                    yAxes: [{
-                    ticks: {
-                        beginAtZero: false
-                    }
-                    }]
-                },
-                legend: {
-                    display: false,
+                x: {
+                    ticks: { color: 'var(--text-light)' }
                 }
             }
-          })};
+        }
+    });
+}
 </script>
 
 </body>
