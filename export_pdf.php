@@ -37,12 +37,9 @@ while ($row = $items->fetch_assoc()) {
         <td>$' . $row['precio_unitario'] . '</td>
         <td>$' . $row['mano_de_obra'] . '</td>
         <td>$' . $row['subtotal'] . '</td>
-    </tr>';
+    </tr>
+    <h3>Total: $' . $row['total'] . '</h3>';
 }
-
-$html .= '</table>
-<h3>Total: $' . $items['total'] . '</h3>
-';
 
 // Generate PDF
 $dompdf = new Dompdf();
