@@ -22,9 +22,9 @@ th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
 h1 { text-align: center; }
 </style>
 
-<h1>Factura #' . $factura['id_factura'] . '</h1>
+<h2>Factura #' . $factura['id_factura'] . '</h2>
 <p><strong>Fecha:</strong> ' . $factura['fecha'] . '</p>
-<p><strong>Cliente:</strong> ' . $factura['cliente'] . '</p>
+<p><strong>Cliente:</strong> ' . $factura['nombre'] . '</p>
 
 <table>
 <tr><th>Equipo</th><th>Cant.</th><th>Precio Unitario</th><th>Mano de Obra</th><th>Subtotal</th></tr>';
@@ -41,7 +41,7 @@ while ($row = $items->fetch_assoc()) {
 }
 
 $html .= '</table>
-<h3>Total: $' . $factura['total'] . '</h3>
+<h3>Total: $' . $items['total'] . '</h3>
 ';
 
 // Generate PDF
