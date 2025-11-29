@@ -38,9 +38,9 @@ while ($row = $items->fetch_assoc()) {
         <td>$' . $row['mano_de_obra'] . '</td>
         <td>$' . $row['subtotal'] . '</td>
     </tr>
+    </table>
     <h3>Total: $' . $row['total'] . '</h3>';
 }
-
 // Generate PDF
 $dompdf = new Dompdf();
 $dompdf->loadHtml($html);
