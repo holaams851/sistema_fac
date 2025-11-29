@@ -110,7 +110,7 @@ while ($row = $res_mes->fetch_assoc()) {
                 <span class="user-name">Admin</span>
                 <img src="logo.jpeg" alt="Foto de Perfil" class="profile-pic"> 
             </div>
-            </div>
+          </div>
 
           <?php if (empty($meses)) { ?>
               <p style="color:red; text-align:center;">No hay facturas para mostrar. Asegúrate de tener facturas con detalles y totales.</p>

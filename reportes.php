@@ -144,7 +144,7 @@ if (ctx) {
                     ticks: { color: 'var(--text-light)' }
                 }
             },
-            barThickness: 20 // Sets a fixed bar width of 20 pixels
+            barThickness: 50 // Sets a fixed bar width
         }
     });
 }
