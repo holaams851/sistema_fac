@@ -46,4 +46,4 @@ $dompdf = new Dompdf();
 $dompdf->loadHtml($html);
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
-$dompdf->stream("factura_$id_factura.pdf", ["Attachment" => true]);
+$dompdf->stream("factura_$id_factura.pdf", ["Attachment" => false]);
