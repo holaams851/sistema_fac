@@ -87,10 +87,6 @@ $totales = [];
                     <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
                         <h4 class="text-white">Factura #<?= $factura['id_factura'] ?> - Cliente: <?= $factura['nombre'] ?: "<i>Cliente eliminado</i>" ?> (<?= $factura['fecha'] ?>)</h4>
                         
-                        <a class="btn btn-warning" href="export_pdf.php?id=<?= $row['id_factura'] ?>" target="_blank">
-                            Exportar PDF
-                        </a>
-
                         <a href="crud_facturas/eliminar_factura.php?id=<?= $factura['id_factura'] ?>" 
                             class="btn btn-danger btn-sm"
                             onclick="return confirm('¿Estás seguro de eliminar esta factura?');">Eliminar</a>
@@ -124,6 +120,9 @@ $totales = [];
                             </tr>
                         </tfoot>
                     </table>
+                    <a class="btn btn-warning" href="export_pdf.php?id=<?= $factura['id_factura'] ?>" target="_blank">
+                            Exportar PDF
+                    </a>
                 </div>
 
             <?php endwhile; ?>
