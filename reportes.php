@@ -75,21 +75,19 @@ $totales_dummy = $totales;
         <main role="main" class="main-content px-4"> 
             
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">📊 Reportes de Ventas</h1>
+                <h1 class="h2">Reportes de Ventas</h1>
                 <div class="profile-area">
-                    <span class="user-name">Usuario Admin</span>
-                    <img src="user_profile.jpg" alt="Foto de Perfil" class="profile-pic"> 
+                    <span class="user-name">Admin</span>
+                    <img src="logo.jpeg" alt="Foto de Perfil" class="profile-pic"> 
                 </div>
             </div>
 
             <h2>Ventas por Mes</h2>
-            <div class="chart-container" style="position: relative; height:40vh; width:100%; max-width: 900px; margin-bottom: 30px;">
-                <?php if (empty($meses_dummy)) { ?>
-                    <p style="color:red; text-align:center;">No hay datos para mostrar. Asegúrate de tener facturas con detalles y totales.</p>
-                <?php } else { ?>
-                    <canvas id="ventasMes"></canvas>
-                <?php } ?>
-            </div>
+            <?php if (empty($meses)) { ?>
+              <p style="color:red; text-align:center;">No hay facturas para mostrar. Asegúrate de tener facturas con detalles y totales.</p>
+            <?php } else { ?>
+            <canvas class="my-4" id="ventasMes" width="800" height="300"></canvas>
+            <?php } ?>
             
             <h2>Total de Ventas por Cliente</h2>
             <table class="table table-bordered table-striped">

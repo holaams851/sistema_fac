@@ -80,10 +80,10 @@ $totales = [];
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
           <h1 class="h2">Proveedores</h1>
           <div class="profile-area">
-              <span class="user-name">Usuario Admin</span>
-              <img src="user_profile.jpg" alt="Foto de Perfil" class="profile-pic"> 
+                <span class="user-name">Admin</span>
+                <img src="logo.jpeg" alt="Foto de Perfil" class="profile-pic"> 
+            </div>
           </div>
-        </div>
         
         <h3 class="mb-3">Aquí puede registrar, editar y eliminar sus proveedores.</h3>
         <a href="crud_proveedores/agregar_proveedor.php" class="btn btn-success mb-3">Agregar Proveedor</a>
