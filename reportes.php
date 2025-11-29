@@ -83,7 +83,7 @@ $totales_dummy = $totales;
             </div>
 
             <h2>Ventas por Mes</h2>
-            <div class="chart-container" style="position: relative; height:40vh; width:100%; max-width: 500px; margin-bottom: 30px;">
+            <div class="chart-container" style="position: relative; height:40vh; width:100%; max-width: 900px; margin-bottom: 30px;">
                 <?php if (empty($meses_dummy)) { ?>
                     <p style="color:red; text-align:center;">No hay datos para mostrar. Asegúrate de tener facturas con detalles y totales.</p>
                 <?php } else { ?>
@@ -143,7 +143,8 @@ if (ctx) {
                 x: {
                     ticks: { color: 'var(--text-light)' }
                 }
-            }
+            },
+            barThickness: 20 // Sets a fixed bar width of 20 pixels
         }
     });
 }
