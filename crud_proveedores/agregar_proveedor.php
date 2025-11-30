@@ -49,10 +49,10 @@ $totales = [];
         
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
           <h1 class="h2">Agregar Proveedor</h1>
-          <div class="profile-area">
-              <span class="user-name">Usuario Admin</span>
-              <img src="../user_profile.jpg" alt="Foto de Perfil" class="profile-pic"> 
-          </div>
+            <div class="profile-area">
+              <span class="user-name">Admin</span>
+              <img src="../logo.jpeg" alt="Foto de Perfil" class="profile-pic"> 
+            </div>
         </div>
 
         <form action="agregar_proveedor.php" method="POST" class="mt-5">
