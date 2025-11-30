@@ -25,7 +25,7 @@ while ($row = $res_mes->fetch_assoc()) {
 $sql_cliente = "
     SELECT 
         c.nombre,
-        SUM(d.subtotal) AS total_gastado
+        SUM(d.total) AS total_gastado
     FROM Facturas f
     INNER JOIN Detalle_Factura d ON f.id_factura = d.id_factura
     INNER JOIN Clientes c ON f.id_cliente = c.id_cliente
