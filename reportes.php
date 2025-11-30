@@ -5,7 +5,7 @@ include 'conexion.php';
 $sql_mes = "
     SELECT 
         MONTH(f.fecha) AS mes,
-        SUM(d.subtotal) AS total_ventas
+        SUM(d.total) AS total_ventas
     FROM Facturas f
     INNER JOIN Detalle_Factura d ON f.id_factura = d.id_factura
     GROUP BY MONTH(f.fecha)
@@ -96,7 +96,7 @@ $totales_dummy = $totales;
                 <thead>
                     <tr>
                         <th>Cliente</th>
-                        <th>Total Gastado ($)</th>
+                        <th>Total Gastado (C$)</th>
                     </tr>
                 </thead>
                 <tbody>
