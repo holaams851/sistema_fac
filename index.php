@@ -6,7 +6,7 @@ include("funciones.php");
 $sql_mes = "
      SELECT 
          MONTH(f.fecha) AS mes,
-         SUM(d.subtotal) AS total_ventas
+         SUM(d.total) AS total_ventas
      FROM Facturas f
      INNER JOIN Detalle_Factura d ON f.id_factura = d.id_factura
      GROUP BY MONTH(f.fecha)
