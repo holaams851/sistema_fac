@@ -29,18 +29,26 @@ h1 { text-align: center; }
 <table>
 <tr><th>Equipo</th><th>Cant.</th><th>Precio Unitario</th><th>Mano de Obra</th><th>Subtotal</th></tr>';
 
-while ($row = $items->fetch_assoc()) {
+// AGREGAR FILAS
+
+$row = $items->fetch_assoc();
+while ($row) {
     $html .= '
     <tr>
         <td>' . $row['nombre_equipo'] . '</td>
         <td>' . $row['cantidad'] . '</td>
-        <td>$' . $row['precio_unitario'] . '</td>
-        <td>$' . $row['mano_de_obra'] . '</td>
-        <td>$' . $row['subtotal'] . '</td>
-    </tr>
-    </table>
-    <h3>Total: $' . $row['total'] . '</h3>';
+        <td>C$ ' . number_format($row['precio_unitario'], 2) . '</td>
+        <td>C$ ' . number_format($row['subtotal'], 2) . '</td>
+    </tr>';
 }
+
+$html .= '
+</table>
+
+<h3>Mano de Obra: C$ ' . number_format($row['mano_de_obra'], 2) . '</h3>
+<h2>Total: C$ ' . number_format($row['total'], 2) . '</h2>
+';
+
 // Generate PDF
 $dompdf = new Dompdf();
 $dompdf->loadHtml($html);
