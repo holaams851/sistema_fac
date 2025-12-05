@@ -30,9 +30,8 @@ h1 { text-align: center; }
 <tr><th>Equipo</th><th>Cant.</th><th>Precio Unitario</th><th>Mano de Obra</th><th>Subtotal</th></tr>';
 
 // AGREGAR FILAS
-
-$row = $items->fetch_assoc();
-while ($row) {
+$end = $items->fetch_assoc();
+while ($row = $items->fetch_assoc()) {
     $html .= '
     <tr>
         <td>' . $row['nombre_equipo'] . '</td>
@@ -45,8 +44,8 @@ while ($row) {
 $html .= '
 </table>
 
-<h3>Mano de Obra: C$ ' . number_format($row['mano_de_obra'], 2) . '</h3>
-<h2>Total: C$ ' . number_format($row['total'], 2) . '</h2>
+<h3>Mano de Obra: C$ ' . number_format($end['mano_de_obra'], 2) . '</h3>
+<h2>Total: C$ ' . number_format($end['total'], 2) . '</h2>
 ';
 
 // Generate PDF
