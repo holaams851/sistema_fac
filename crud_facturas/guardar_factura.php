@@ -29,7 +29,7 @@ if ($no_equipos) {
 }
 
 // 4. Insertar Factura (Cabecera)
-$sql_factura = "INSERT INTO Factura (id_cliente, fecha) VALUES ($id_cliente, $fecha)";
+$sql_factura = "INSERT INTO Facturas (id_cliente, fecha) VALUES ($id_cliente, $fecha)";
 if (!$conn->query($sql_factura)) {
     // Si falla la inserción, redirigimos con error
     header("Location: crear_factura.php?error=db_factura");
