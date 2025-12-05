@@ -6,58 +6,81 @@ $id_cliente = (int)($_POST['id_cliente'] ?? 0);
 $fecha = $conn->real_escape_string($_POST['fecha'] ?? '');
 $mano_de_obra = isset($_POST['mano_de_obra']) ? (float)$_POST['mano_de_obra'] : 0.0;
 
-// Validación
+$no_equipos = empty($_POST['equipos']['id']) || count(array_filter($_POST['equipos']['id'])) == 0;
+
+// 1. Manejo de errores de datos faltantes (Redirección)
 if ($id_cliente <= 0 || empty($fecha)) {
     header("Location: crear_factura.php?error=datos_faltantes");
     exit;
 }
 
-if (empty($_POST['equipos']['id']) || count(array_filter($_POST['equipos']['id'])) == 0) {
+// 2. Obtención del nombre del cliente
+$result_nombre = $conn->query("SELECT nombre FROM Clientes WHERE id_cliente = $id_cliente");
+if ($result_nombre && $result_nombre->num_rows > 0) {
+    $nombre_cliente = $conn->real_escape_string($result_nombre->fetch_assoc()['nombre'] ?? 'Cliente Desconocido');
+} else {
+    $nombre_cliente = 'Cliente no encontrado';
+}
+
+// 3. Manejo de error de equipos faltantes
+if ($no_equipos) {
     header("Location: crear_factura.php?error=no_equipos");
     exit;
 }
 
-// Insertamos factura (cabecera)
-$sql_factura = "INSERT INTO Facturas (id_cliente, fecha) VALUES ($id_cliente, $fecha)";
+// 4. Insertar Factura (Cabecera)
+$sql_factura = "INSERT INTO Factura (id_cliente, fecha) VALUES ($id_cliente, $fecha)";
 if (!$conn->query($sql_factura)) {
+    // Si falla la inserción, redirigimos con error
     header("Location: crear_factura.php?error=db_factura");
     exit;
-}
+}   
 
 $id_factura = $conn->insert_id;
 
-// INSERTAR DETALLES
-$ids = $_POST['equipos']['id'];
-$nombres = $_POST['equipos']['nombre'];
-$cantidades = $_POST['equipos']['cantidad'];
-$precios = $_POST['equipos']['precio'];
-$subtotales = $_POST['equipos']['subtotal'];
+// Contadores
+$total_final = 0;
 
-for ($i = 0; $i < count($ids); $i++) {
+// 2. INSERTAR DETALLES
+if (!empty($_POST['equipos']['id'])) {
 
-    $id_equipo = (int)$ids[$i];
+    $ids = $_POST['equipos']['id'];
+    $nombres = $_POST['equipos']['nombre'];
+    $cantidades = $_POST['equipos']['cantidad'];
+    $precios = $_POST['equipos']['precio'];
+    $subtotales = $_POST['equipos']['subtotal'];
 
-    if ($id_equipo <= 0) continue;
+    for ($i = 0; $i < count($ids); $i++) {
 
-    $nombre = $conn->real_escape_string($nombres[$i]);
-    $cantidad = (float)$cantidades[$i];
-    $precio = (float)$precios[$i];
-    $subtotal = (float)$subtotales[$i];
+        $id_equipo  = (int)$ids[$i];
+        $nombre     = $conn->real_escape_string($nombres[$i]);
+        $cantidad   = (float)$cantidades[$i];
+        $precio     = (float)$precios[$i];
+        $subtotal   = (float)$subtotales[$i];
 
-    // Insertar línea individual
-    $sql_detalle = "
-        INSERT INTO Detalle_Factura 
-        (id_factura, cantidad, precio_unitario, id_equipo, nombre_equipo, subtotal, mano_de_obra)
-        VALUES 
-        ($id_factura, $cantidad, $precio, $id_equipo, '$nombre', $subtotal, $mano_de_obra)
-    ";
+        if ($id_equipo <= 0) continue;
 
-    $conn->query($sql_detalle);
+        // Se acumula para total final
+        $total_final += $subtotal;
+
+        // INSERT detalle correcto: el total de la fila = subtotal (NO el acumulado)
+        $sql_detalle = "
+            INSERT INTO Detalle_Factura (id_factura, cantidad, precio_unitario, id_equipo, nombre_equipo, subtotal)
+            VALUES ($id_factura, $cantidad, $precio, $id_equipo, '$nombre', $subtotal)
+        ";
+        $conn->query($sql_detalle);
+    }
 }
+
+// 3. Total final = suma detalles + mano de obra
+$total_final += $mano_de_obra;
+
+// 4. Actualizar detalle factura con total final
+$conn->query("UPDATE Detalle_Factura SET total = $total_final, mano_de_obra = $mano_de_obra WHERE id_factura = $id_factura");
 
 $conn->close();
 
-// Redirigir
+// --- REDIRECCIÓN INMEDIATA AL DASHBOARD ---
 header("Location: ../index.php?msg=factura_guardada");
 exit;
 ?>
