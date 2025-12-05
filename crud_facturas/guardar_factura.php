@@ -18,7 +18,7 @@ if (empty($_POST['equipos']['id']) || count(array_filter($_POST['equipos']['id']
 }
 
 // Insertamos factura (cabecera)
-$sql_factura = "INSERT INTO Factura (id_cliente, fecha) VALUES ($id_cliente, $fecha)";
+$sql_factura = "INSERT INTO Facturas (id_cliente, fecha) VALUES ($id_cliente, $fecha)";
 if (!$conn->query($sql_factura)) {
     header("Location: crear_factura.php?error=db_factura");
     exit;
