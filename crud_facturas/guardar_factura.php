@@ -29,7 +29,7 @@ if ($no_equipos) {
 }
 
 // 4. Insertar Factura (Cabecera)
-$sql_factura = "INSERT INTO Facturas (id_cliente, nombre, fecha) VALUES ($id_cliente, $nombre_cliente, '$fecha')";
+$sql_factura = "INSERT INTO Facturas (id_cliente, nombre, fecha) VALUES ($id_cliente, '$nombre_cliente', '$fecha')";
 if (!$conn->query($sql_factura)) {
     // Si falla la inserción, redirigimos con error
     header("Location: crear_factura.php?error=db_factura");
@@ -38,46 +38,34 @@ if (!$conn->query($sql_factura)) {
 
 $id_factura = $conn->insert_id;
 
-// Contadores
-$total_final = 0;
-
-// 2. INSERTAR DETALLES
+// 5. Insertar Detalle de Factura
 if (!empty($_POST['equipos']['id'])) {
-
     $ids = $_POST['equipos']['id'];
-    $nombres = $_POST['equipos']['nombre'];
+    $nombres= $_POST['equipos']['nombre'];
     $cantidades = $_POST['equipos']['cantidad'];
     $precios = $_POST['equipos']['precio'];
     $subtotales = $_POST['equipos']['subtotal'];
+    
+    $total_final = 0;
 
     for ($i = 0; $i < count($ids); $i++) {
-
-        $id_equipo  = (int)$ids[$i];
-        $nombre     = $conn->real_escape_string($nombres[$i]);
-        $cantidad   = (float)$cantidades[$i];
-        $precio     = (float)$precios[$i];
-        $subtotal   = (float)$subtotales[$i];
-
-        if ($id_equipo <= 0) continue;
-
-        // Se acumula para total final
+        $id_equipo = (int)$ids[$i];
+        $nombre = $conn->real_escape_string($nombres[$i]);
+        $cantidad = (float)$cantidades[$i];
+        $precio = (float)$precios[$i];
+        $subtotal = (float)$subtotales[$i];
+        
         $total_final += $subtotal;
+        $total_final += $mano_de_obra;
 
-        // INSERT detalle correcto: el total de la fila = subtotal (NO el acumulado)
-        $sql_detalle = "
-            INSERT INTO Detalle_Factura (id_factura, cantidad, precio_unitario, id_equipo, nombre_equipo, subtotal)
-            VALUES ($id_factura, $cantidad, $precio, $id_equipo, '$nombre', $subtotal)
-        ";
-        $conn->query($sql_detalle);
+        if ($id_equipo > 0) {
+            $sql_detalle = "INSERT INTO Detalle_Factura (id_factura, cantidad, precio_unitario, id_equipo, nombre_equipo, total, subtotal, mano_de_obra)
+                             VALUES ('$id_factura', '$cantidad', '$precio', '$id_equipo', '$nombre', '$total_final', '$subtotal', '$mano_de_obra')";
+            $conn->query($sql_detalle);
+        }
     }
 }
-
-// 3. Total final = suma detalles + mano de obra
-$total_final += $mano_de_obra;
-
-// 4. Actualizar detalle factura con total final
-$conn->query("UPDATE Detalle_Factura SET total = $total_final, mano_de_obra = $mano_de_obra WHERE id_factura = $id_factura");
-
+    
 $conn->close();
 
 // --- REDIRECCIÓN INMEDIATA AL DASHBOARD ---
