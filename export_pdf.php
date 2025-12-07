@@ -27,10 +27,12 @@ h1 { text-align: center; }
 <p><strong>Cliente:</strong> ' . $factura['nombre'] . '</p>
 
 <table>
-<tr><th>Equipo</th><th>Cant.</th><th>Precio Unitario</th><th>Mano de Obra</th><th>Subtotal</th></tr>';
+<tr><th>Equipo</th><th>Cant.</th><th>Precio Unitario</th><th>Subtotal</th></tr>';
 
 // AGREGAR FILAS
-$end = $items->fetch_assoc();
+$manoObra = 0;
+$totalFactura = 0;
+
 while ($row = $items->fetch_assoc()) {
     $html .= '
     <tr>
@@ -39,14 +41,24 @@ while ($row = $items->fetch_assoc()) {
         <td>C$ ' . number_format($row['precio_unitario'], 2) . '</td>
         <td>C$ ' . number_format($row['subtotal'], 2) . '</td>
     </tr>';
+
+    if ($manoObra == 0 && isset($row['mano_de_obra'])) {
+        $manoObra = $row['mano_de_obra'];
+    }
+
+    if ($totalFactura == 0 && isset($row['total'])) {
+        $totalFactura = $row['total'];
+    }
 }
 
-$html .= '
+
+$html .= "
 </table>
 
-<h3>Mano de Obra: C$ ' . number_format($end['mano_de_obra'], 2) . '</h3>
-<h2>Total: C$ ' . number_format($end['total'], 2) . '</h2>
-';
+<h3>Mano de Obra: C$ " . number_format($manoObra, 2) . "</h3>
+<h2>Total: C$ " . number_format($totalFactura, 2) . "</h2>
+";
+
 
 // Generate PDF
 $dompdf = new Dompdf();
