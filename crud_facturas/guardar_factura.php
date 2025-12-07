@@ -7,7 +7,6 @@ $fecha = $conn->real_escape_string($_POST['fecha'] ?? '');
 $mano_de_obra = isset($_POST['mano_de_obra']) ? (float)$_POST['mano_de_obra'] : 0.0;
 $total = isset($_POST['total']) ? (float)$_POST['total'] : 0.0;
 
-
 $no_equipos = empty($_POST['equipos']['id']) || count(array_filter($_POST['equipos']['id'])) == 0;
 
 // 1. Manejo de errores de datos faltantes (Redirección)
@@ -47,8 +46,6 @@ if (!empty($_POST['equipos']['id'])) {
     $cantidades = $_POST['equipos']['cantidad'];
     $precios = $_POST['equipos']['precio'];
     $subtotales = $_POST['equipos']['subtotal'];
-    
-    $total_final = 0;
 
     for ($i = 0; $i < count($ids); $i++) {
         $id_equipo = (int)$ids[$i];

@@ -87,7 +87,8 @@ $totales = [];
                     </div>
 
                     <div class="text-end mt-3">
-                        <h4>Total: C$<span id="total" name="total">0.00</span></h4>
+                        <h4>Total: C$<span id="totalVista">0.00</span></h4>
+                         <input type="hidden" name="total" id="total">
                     </div>
 
                     <button type="submit" class="btn btn-success">Guardar Factura</button>
@@ -115,6 +116,7 @@ $totales = [];
             let manoObra = parseFloat($("#manoObra").val() || 0);
             total += manoObra;
 
+            $("#totalVista").text(total.toFixed(2)); // mostrado
             $("#total").text(total.toFixed(2));
         }
 
