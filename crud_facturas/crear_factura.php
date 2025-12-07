@@ -117,7 +117,7 @@ $totales = [];
             total += manoObra;
 
             $("#totalVista").text(total.toFixed(2)); // mostrado
-            $("#total").text(total.toFixed(2));
+            $("#total").val(total.toFixed(2));
         }
 
         function filaEquipo() {
