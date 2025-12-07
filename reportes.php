@@ -21,6 +21,18 @@ while ($row = $res_mes->fetch_assoc()) {
     $totales[] = $row['total_ventas'];
 }
 
+// --- Ventas por equipo ---
+$sql_equipo = "
+    SELECT 
+        e.nombre,
+        SUM(d.subtotal) AS total_gastado
+    FROM Equipos e
+    INNER JOIN Detalle_Factura d ON e.id_equipo = d.id_equipo
+    GROUP BY e.nombre
+    ORDER BY total_gastado DESC
+";
+$res_equipo = $conn->query($sql_equipo);
+
 // --- Ventas por cliente ---
 $sql_cliente = "
     SELECT 
@@ -89,6 +101,24 @@ $totales_dummy = $totales;
                     <canvas id="ventasMes"></canvas>
                 <?php } ?>
             </div>
+
+            <h2>Total de Ventas por Equipo</h2>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Equipo</th>
+                        <th>Total Vendido (C$)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php while ($row = $res_equipo->fetch_assoc()) { ?>
+                    <tr>
+                        <td><?= htmlspecialchars($row['nombre']) ?></td>
+                        <td><?= number_format($row['total_gastado'], 2) ?></td>
+                    </tr>
+                <?php } ?>
+                </tbody>
+            </table>
             
             <h2>Total de Ventas por Cliente</h2>
             <table class="table table-bordered table-striped">
