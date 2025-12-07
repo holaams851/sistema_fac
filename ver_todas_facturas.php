@@ -109,13 +109,13 @@ $totales = [];
                                 <td>C$<?= number_format($d['precio_unitario'], 2) ?></td>
                                 <td>C$<?= number_format($d['subtotal'], 2) ?></td>
                             </tr>
+                        <?php endwhile; ?>
                         </tbody>
                         <tfoot>
                             <tr style="background-color: var(--bg-dark);">
                                 <th colspan="3" class="text-end">Mano de Obra:</th>
-                                <th>C$<?= number_format($d['mano_de_obra'], 2) ?></th>
+                                <th>C$<?= number_format($factura['mano_de_obra'], 2) ?></th>
                             </tr>
-                        <?php endwhile; ?>
                             <tr style="background-color: var(--bg-dark);">
                                 <th colspan="3" class="text-end">Total:</th>
                                 <th>C$<?= number_format($factura['total'], 2) ?></th>
