@@ -3,17 +3,13 @@ require 'vendor/autoload.php';
 include 'conexion.php';
 use Dompdf\Dompdf;
 
-// Get invoice ID from URL
 $id_factura = (int)$_GET['id'];
 
-// Load invoice from DB
 $sql = $conn->query("SELECT * FROM Facturas WHERE id_factura = $id_factura");
 $factura = $sql->fetch_assoc();
 
-// load items
 $items = $conn->query("SELECT * FROM Detalle_Factura WHERE id_factura = $id_factura");
 
-// HTML template
 $html = '
 <style>
 body { font-family: sans-serif; }
