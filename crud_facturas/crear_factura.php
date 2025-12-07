@@ -1,6 +1,7 @@
 <?php include '../conexion.php'; 
 // Obtener clientes
 $clientes = $conn->query("SELECT id_cliente, nombre FROM Clientes");
+$today = date('Y-m-d');
 
 // Variables dummy para el layout
 $meses = [];
@@ -59,7 +60,7 @@ $totales = [];
                         </div>
                         <div class="col-md-6">
                             <label>Fecha:</label>
-                            <input type="date" name="fecha" class="form-control" required>
+                            <input type="date" name="fecha" class="form-control" max="<?php echo $today; ?>" required>
                         </div>
                     </div>
 
