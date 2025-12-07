@@ -113,12 +113,12 @@ $totales = [];
                         </tbody>
                         <tfoot>
                             <tr style="background-color: var(--bg-dark);">
-                                <th colspan="4" class="text-end">Mano de Obra:</th>
+                                <th colspan="3" class="text-end">Mano de Obra:</th>
                                 <th>C$<?= number_format($d['mano_de_obra'], 2) ?></th>
                             </tr>
                             <tr style="background-color: var(--bg-dark);">
-                                <th colspan="4" class="text-end">Total:</th>
-                                <th>C$<?= number_format($factura['total'],2) ?></th>
+                                <th colspan="3" class="text-end">Total:</th>
+                                <th>C$<?= number_format($factura['total'], 2) ?></th>
                             </tr>
                         </tfoot>
                     </table>
