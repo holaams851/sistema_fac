@@ -5,7 +5,8 @@ include '../funciones.php';
 $id_cliente = (int)($_POST['id_cliente'] ?? 0);
 $fecha = $conn->real_escape_string($_POST['fecha'] ?? '');
 $mano_de_obra = isset($_POST['mano_de_obra']) ? (float)$_POST['mano_de_obra'] : 0.0;
-$total = isset($_POST['total']) ? (float)$_POST['total'] : 0.0;
+$total = isset($_POST['total']) ? str_replace(',', '', $_POST['total']) : 0;
+$total = (float)$total; 
 
 $no_equipos = empty($_POST['equipos']['id']) || count(array_filter($_POST['equipos']['id'])) == 0;
 
