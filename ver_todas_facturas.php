@@ -98,7 +98,6 @@ $totales = [];
                                 <th>Equipo</th>
                                 <th>Cantidad</th>
                                 <th>Precio unitario</th>
-                                <th>Mano de Obra</th>
                                 <th>Subtotal</th>
                             </tr>
                         </thead>
@@ -108,12 +107,15 @@ $totales = [];
                                 <td><?= $d['nombre_equipo']?></td>
                                 <td><?= $d['cantidad'] ?></td>
                                 <td>C$<?= number_format($d['precio_unitario'], 2) ?></td>
-                                <td>C$<?= number_format($d['mano_de_obra'], 2) ?></td>
                                 <td>C$<?= number_format($d['subtotal'], 2) ?></td>
                             </tr>
                         <?php endwhile; ?>
                         </tbody>
                         <tfoot>
+                            <tr style="background-color: var(--bg-dark);">
+                                <th colspan="4" class="text-end">Mano de Obra:</th>
+                                <th>C$<?= number_format($d['mano_de_obra'], 2) ?></th>
+                            </tr>
                             <tr style="background-color: var(--bg-dark);">
                                 <th colspan="4" class="text-end">Total:</th>
                                 <th>C$<?= number_format($factura['total'],2) ?></th>
