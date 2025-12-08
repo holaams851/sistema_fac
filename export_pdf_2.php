@@ -10,6 +10,11 @@ $factura = $sql->fetch_assoc();
 
 $items = $conn->query("SELECT * FROM Detalle_Factura WHERE id_factura = $id_factura");
 
+// Load image as base64
+$imgPath = $_SERVER['DOCUMENT_ROOT'] . "/invoice.png";
+$imgData = base64_encode(file_get_contents($imgPath));
+$imgSrc = 'data:image/png;base64,' . $imgData;
+
 $html = '
 <style>
 @page { 
@@ -19,7 +24,7 @@ $html = '
 body {
     margin: 0;
     padding: 0;
-    background-image: url("http://sistema-facturacion.infinityfree.me/invoice.png");
+    background-image: url("'.$imgSrc.'");
     background-size: 612pt 522pt;
     font-family: sans-serif;
 }
@@ -30,13 +35,9 @@ body {
     color: #000;
 }
 
-/* You set positions here */
 #invoice_number { top: 120px; left: 420px; }
 #date           { top: 150px; left: 420px; }
 #customer       { top: 200px; left: 120px; }
-
-/* Example for item rows */
-.item-row { position: absolute; left: 100px; font-size: 12px; }
 </style>
 
 <div id="invoice_number" class="field">'.$factura['id_factura'].'</div>
@@ -44,9 +45,8 @@ body {
 <div id="customer" class="field">'.$factura['cliente'].'</div>
 ';
 
-
-// Generate PDF
 $dompdf = new Dompdf();
+$dompdf->set_option("isRemoteEnabled", true);
 $dompdf->loadHtml($html);
 $customPaper = array(0, 0, 612, 522); 
 $dompdf->setPaper($customPaper, 'landscape');
