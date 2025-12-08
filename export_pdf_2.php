@@ -63,10 +63,53 @@ body {
 <div id="number" class="field">'.$cliente['telefono'].'</div>
 ';
 
+$startY = 320; // first row vertical position
+$rowHeight = 25; // space between rows
+
+// AGREGAR FILAS
+$manoObra = 0;
+$totalFactura = 0;
+
+while($row = $items->fetch_assoc()) {
+    $html .= '
+    <div class="field" style="top: '.$startY.'px; left: 90px;">
+        '.$row['cantidad'].'
+    </div>
+    <div class="field" style="top: '.$startY.'px; left: 125px;">
+        '.$row['nombre_equipo'].'
+    </div>
+    <div class="field" style="top: '.$startY.'px; left: 640px;">
+        '.$row['precio_unitario'].'
+    </div>
+    <div class="field" style="top: '.$startY.'px; left: 730px;">
+        '.($row['subtotal']).'
+    </div>
+    ';
+    if ($manoObra == 0 && isset($row['mano_de_obra'])) {
+        $manoObra = $row['mano_de_obra'];
+    }
+    if ($totalFactura == 0 && isset($row['total'])) {
+        $totalFactura = $row['total'];
+    }
+    $startY += $rowHeight;
+}
+
+$html .= '
+    <div class="field" style="top: '.$startY.'px; left: 125px;">
+        Mano de Obra
+    </div>
+    <div class="field" style="top: '.$startY.'px; left: 730px;">
+        '.($manoObra).'
+    </div>
+    <div class="field" style="top: 583px; left: 730px;">
+        '.($totalFactura).'
+    </div>
+';
+
 $dompdf = new Dompdf();
 $dompdf->set_option("isRemoteEnabled", true);
 $dompdf->loadHtml($html);
-$customPaper = array(0, 0, 612, 522); 
+$customPaper = array(0, 0, 612, 552); 
 $dompdf->setPaper($customPaper, 'landscape');
 $dompdf->render();
 $dompdf->stream("factura_$id_factura.pdf", ["Attachment" => false]);
