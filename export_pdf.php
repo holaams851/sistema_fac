@@ -25,7 +25,7 @@ h1 { text-align: center; }
 <table>
 <tr><th>Equipo</th><th>Cant.</th><th>Precio Unitario</th><th>Subtotal</th></tr>';
 
-// AGREGAR FILAS
+// AGREGAR FILAS 
 $manoObra = 0;
 $totalFactura = 0;
 
