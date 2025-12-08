@@ -10,17 +10,17 @@ $factura = $sql->fetch_assoc();
 
 $items = $conn->query("SELECT * FROM Detalle_Factura WHERE id_factura = $id_factura");
 
-$customPaper = array(0, 0, 612, 522); 
-$dompdf->setPaper($customPaper, 'landscape');
-
 $html = '
 <style>
-@page { margin: 0; }
+@page { 
+    margin: 0;
+    size: 612pt 522pt;
+}
 body {
     margin: 0;
     padding: 0;
     background-image: url("http://sistema-facturacion.infinityfree.me/invoice.png");
-    background-size: cover; /* or 100% 100% */
+    background-size: 612pt 522pt;
     font-family: sans-serif;
 }
 
@@ -48,6 +48,7 @@ body {
 // Generate PDF
 $dompdf = new Dompdf();
 $dompdf->loadHtml($html);
-$dompdf->setPaper('A4', 'portrait');
+$customPaper = array(0, 0, 612, 522); 
+$dompdf->setPaper($customPaper, 'landscape');
 $dompdf->render();
 $dompdf->stream("factura_$id_factura.pdf", ["Attachment" => false]);
