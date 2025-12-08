@@ -132,6 +132,7 @@ $totales = [];
                     </a>
                     <a class="btn btn-warning" href="export_pdf_3.php?id=<?= $factura['id_factura'] ?>" target="_blank">
                             Exportar PDF (Solo datos)
+                    </a>
                 </div>
 
             <?php endwhile; ?>
