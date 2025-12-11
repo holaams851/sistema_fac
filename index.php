@@ -12,22 +12,20 @@ include("funciones.php");
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Login</title>
+    <title>Ingreso</title>
 
     <!-- Bootstrap core CSS -->
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">
   </head>
 
   <body class="text-center">
-    <form class="form-signin">
-      <h1 class="h3 mb-3 font-weight-normal">Ingreso</h1>
-      <label for="inputEmail" class="sr-only">Username</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <form class="form-signin" action="login.php" method="POST">
+      <h1 class="h3 mb-3 font-weight-normal">Ingresar a Toner & Más </h1>
+      <input type="text" name="usuario" class="form-control" placeholder="Usuario" required autofocus>
+      <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
     </form>
   </body>
