@@ -17,7 +17,7 @@ if ($result->num_rows === 1) {
     if (password_verify($password, $row['password'])) {
         // login OK
         $_SESSION['usuario'] = $usuario;
-        header("Location: index.php");  // redirect to your dashboard
+        header("Location: dashboard.php");  // redirect to your dashboard
         exit;
     } else {
         echo "Contraseña incorrecta";
