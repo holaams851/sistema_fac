@@ -23,7 +23,7 @@ include("funciones.php");
 
   <body class="text-center">
     <form class="form-signin" action="login.php" method="POST">
-      <h1 class="h3 mb-3 font-weight-normal">Ingresar a Toner & Más </h1>
+      <h1 class="h3 mb-3 font-weight-normal">Ingresar a ProService </h1>
       <input type="text" name="usuario" class="form-control" placeholder="Usuario" required autofocus>
       <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
