@@ -1,16 +1,17 @@
 :root {
   --bg-dark: #4C4890; /* Fondo muy oscuro, casi negro */
   --bg-main: #CAC8E2; /* Área principal de contenido */
-  --bg-sidebar: #6764A5; 
-  --text-light:  #282828; 
+  --bg-sidebar: #4C4890; 
+  --text-dark:  #282828; 
+  --text-white: #FFFFFF;
   --color-active: #A8A6CF; 
-  --border-color: #CAC8E2; /* Color de borde oscuro */
+  --border-color: #4C4890; 
 }
 
 body {
   font-size: .875rem;
   background-color: var(--bg-main); 
-  color: var(--text-light); 
+  color: var(--text-dark); 
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -34,12 +35,12 @@ h1, h2, h3, h4, h5, h6 {
   width: 200px; /* Ancho fijo para el sidebar */
   background-color: var(--bg-sidebar) !important; 
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, .5);
-  color: var(--text-light);
+  color: var(--text-dark);
 }
 
 /* Título 'ProService' dentro del sidebar (ENCABEZADO FIJO) */
 .sidebar-title {
-    color: var(--text-light);
+    color: var(--text-dark);
     font-size: 1.2rem;
     font-weight: bold;
     display: block;
@@ -87,7 +88,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .sidebar .nav-link {
   font-weight: 500;
-  color: var(--text-light) !important; 
+  color: var(--text-dark) !important; 
   text-align: left; 
   padding: 10px 15px; 
 }
@@ -95,7 +96,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Color de los iconos */
 .sidebar .nav-link .feather {
   margin-right: 4px;
-  color: var(--text-light) !important; 
+  color: var(--text-dark) !important; 
 }
 
 /* Hover y Activo */
@@ -118,7 +119,7 @@ h1, h2, h3, h4, h5, h6 {
 .sidebar-heading {
   font-size: .75rem;
   text-transform: uppercase;
-  color: var(--text-light) !important;
+  color: var(--text-dark) !important;
 }
 
 /* Main Content Area */
@@ -127,7 +128,7 @@ main {
   margin-left: 200px !important; 
   width: calc(100% - 200px); 
   background-color: var(--bg-main);
-  color: var(--text-light);
+  color: var(--text-dark);
   padding-top: 20px !important;
 }
 
@@ -147,7 +148,7 @@ main {
 }
 
 .user-name {
-    color: var(--text-light);
+    color: var(--text-dark);
     font-weight: 600;
 }
 
@@ -157,12 +158,12 @@ main {
 }
 
 .table {
-  color: var(--text-light); 
-  background-color: var(--bg-main);
+  color: var(--text-white); 
+  background-color: var(--bg-sidebar);
 }
 .table thead th {
   border-bottom: 2px solid var(--border-color);
-  color: var(--text-light);
+  color: var(--text-dark);
 }
 .table tbody tr {
   background-color: var(--bg-main); 
