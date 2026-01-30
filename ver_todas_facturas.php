@@ -114,11 +114,11 @@ $totales = [];
                         <?php endwhile; ?>
                         </tbody>
                         <tfoot>
-                            <tr style="background-color: var(--bg-dark);">
+                            <tr style="color: var(--text-white); background-color: var(--bg-dark);">
                                 <th colspan="3" class="text-end">Mano de Obra:</th>
                                 <th>C$<?= number_format($mano_de_obra, 2) ?></th>
                             </tr>
-                            <tr style="background-color: var(--bg-dark);">
+                            <tr style="color: var(--text-white); background-color: var(--bg-dark);">
                                 <th colspan="3" class="text-end">Total:</th>
                                 <th>C$<?= number_format($factura['total'], 2) ?></th>
                             </tr>

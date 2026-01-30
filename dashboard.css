@@ -161,7 +161,8 @@ main {
   color: var(--text-dark); 
   background-color: var(--bg-main);
 }
-.table thead th {
+.table thead th {  
+  background-color: var(--bg-dark);
   border-bottom: 2px solid var(--color-active);
   color: var(--text-white);
 }
