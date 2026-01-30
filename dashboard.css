@@ -2,10 +2,9 @@
   --bg-dark: #4C4890; /* Fondo muy oscuro, casi negro */
   --bg-main: #CAC8E2; /* Área principal de contenido */
   --bg-sidebar: #6764A5; 
-  --text-light:  #444444; 
-  --text-muted: #999999;
+  --text-light:  #282828; 
   --color-active: #A8A6CF; 
-  --border-color: #6764A5; /* Color de borde oscuro */
+  --border-color: #CAC8E2; /* Color de borde oscuro */
 }
 
 body {
@@ -38,9 +37,9 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-light);
 }
 
-/* Título 'Toner & Más' dentro del sidebar (ENCABEZADO FIJO) */
+/* Título 'ProService' dentro del sidebar (ENCABEZADO FIJO) */
 .sidebar-title {
-    color: var(--text-white);
+    color: var(--text-light);
     font-size: 1.2rem;
     font-weight: bold;
     display: block;
@@ -96,7 +95,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Color de los iconos */
 .sidebar .nav-link .feather {
   margin-right: 4px;
-  color: var(--text-muted) !important; 
+  color: var(--text-light) !important; 
 }
 
 /* Hover y Activo */
@@ -119,7 +118,7 @@ h1, h2, h3, h4, h5, h6 {
 .sidebar-heading {
   font-size: .75rem;
   text-transform: uppercase;
-  color: var(--text-muted) !important;
+  color: var(--text-light) !important;
 }
 
 /* Main Content Area */
@@ -148,7 +147,7 @@ main {
 }
 
 .user-name {
-    color: var(--text-white);
+    color: var(--text-light);
     font-weight: 600;
 }
 
@@ -163,10 +162,10 @@ main {
 }
 .table thead th {
   border-bottom: 2px solid var(--border-color);
-  color: var(--text-white);
+  color: var(--text-light);
 }
 .table tbody tr {
-  background-color: var(--bg-sidebar); 
+  background-color: var(--bg-main); 
 }
 .table-hover tbody tr:hover {
   background-color: #444444; 
