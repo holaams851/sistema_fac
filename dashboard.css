@@ -1,12 +1,12 @@
 :root {
-  --bg-dark: #1f1f1f; /* Fondo muy oscuro, casi negro */
-  --bg-main: #2a2a2a; /* Área principal de contenido */
-  --bg-sidebar: #1f1f1f; /* Mismo que el fondo para uniformidad */
-  --text-light: #E0E0E0; /* Gris claro para el texto normal */
-  --text-white: #FFFFFF; /* Blanco para texto activo */
+  --bg-dark: #4C4890; /* Fondo muy oscuro, casi negro */
+  --bg-main: #CAC8E2; /* Área principal de contenido */
+  --bg-sidebar: #6764A5; 
+  --text-light: #999999; 
+  --text-base: #444444; 
   --text-muted: #999999; /* Gris oscuro para iconos no activos */
-  --color-active: #007bff; /* Azul para el color activo/resaltado */
-  --border-color: #444444; /* Color de borde oscuro */
+  --color-active: #A8A6CF; /* Azul para el color activo/resaltado */
+  --border-color: #6764A5; /* Color de borde oscuro */
 }
 
 body {
