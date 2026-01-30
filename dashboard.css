@@ -2,10 +2,9 @@
   --bg-dark: #4C4890; /* Fondo muy oscuro, casi negro */
   --bg-main: #CAC8E2; /* Área principal de contenido */
   --bg-sidebar: #6764A5; 
-  --text-light: #999999; 
-  --text-base: #444444; 
-  --text-muted: #999999; /* Gris oscuro para iconos no activos */
-  --color-active: #A8A6CF; /* Azul para el color activo/resaltado */
+  --text-light:  #444444; 
+  --text-muted: #999999;
+  --color-active: #A8A6CF; 
   --border-color: #6764A5; /* Color de borde oscuro */
 }
 

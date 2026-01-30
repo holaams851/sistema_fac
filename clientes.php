@@ -13,7 +13,7 @@ $totales = [];
   <meta charset="UTF-8">
   <title>Clientes</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link href="dashboard.css" rel="stylesheet"> 
+  <link rel="stylesheet" href="dashboard.css?v=<?php echo filemtime('dashboard.css'); ?>">
 </head>
 <body>
   
@@ -27,7 +27,7 @@ $totales = [];
           <ul class="nav flex-column">
             
             <li class="nav-item">
-              <a class="nav-link" href="index.php">
+              <a class="nav-link" href="dashboard.php">
                 <span data-feather="home"></span>
                 Dashboard
               </a>
