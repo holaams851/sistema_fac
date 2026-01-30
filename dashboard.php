@@ -45,7 +45,7 @@ while ($row = $res_mes->fetch_assoc()) {
         
         <nav class="sidebar"> 
           <div class="sidebar-sticky">
-            <a class="sidebar-title" href="index.php">ProService</a> 
+            <a class="sidebar-title" href="dashboard.php">ProService</a> 
             
             <ul class="nav flex-column">
               

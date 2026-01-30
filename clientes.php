@@ -22,7 +22,7 @@ $totales = [];
       
       <nav class="sidebar"> 
         <div class="sidebar-sticky">
-          <a class="sidebar-title" href="index.php">Toner & Más</a> 
+          <a class="sidebar-title" href="dashboard.php">ProService</a>
           
           <ul class="nav flex-column">
             
@@ -79,7 +79,7 @@ $totales = [];
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
           <h1 class="h2">Clientes</h1>
          <div class="profile-area">
-                <span class="user-name">Admin</span>
+                <a class="user-name" href="index.php">Admin</a> 
                 <img src="logo.jpeg" alt="Foto de Perfil" class="profile-pic"> 
             </div>
           </div>
