@@ -27,7 +27,7 @@ $totales = [];
           <ul class="nav flex-column">
             
             <li class="nav-item">
-              <a class="nav-link" href="index.php">
+              <a class="nav-link" href="dashboard.php">
                 <span data-feather="home"></span>
                 Dashboard
               </a>
