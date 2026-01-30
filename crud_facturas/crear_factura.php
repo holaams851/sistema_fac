@@ -23,7 +23,7 @@ $totales = [];
 
         <nav class="sidebar"> 
             <div class="sidebar-sticky">
-                <a class="sidebar-title" href="../index.php">Toner & Más</a> 
+                <a class="sidebar-title" href="../dashboard.php">ProService</a> 
                 <ul class="nav flex-column">
                     <li class="nav-item"><a class="nav-link" href="../index.php"><span data-feather="home"></span> Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="../clientes.php"><span data-feather="users"></span> Clientes</a></li>
@@ -41,7 +41,7 @@ $totales = [];
 
                 <h1 class="h2">Crear Factura</h1>
                 <div class="profile-area">
-                    <span class="user-name">Admin</span>
+                <a class="user-name" href="index.php">Admin</a> 
                     <img src="../logo.jpeg" alt="Foto de Perfil" class="profile-pic"> 
                 </div>
             </div>
