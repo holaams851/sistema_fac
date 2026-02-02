@@ -87,6 +87,11 @@ $totales = [];
                         </div>
                     </div>
 
+                     <div class="text-end mt-3">
+                        <h4>Comisión Equipos: C$<span id="extraVista">0.00</span></h4>
+                         <input type="hidden" name="extra" id="extra">
+                    </div>
+
                     <div class="text-end mt-3">
                         <h4>Total: C$<span id="totalVista">0.00</span></h4>
                          <input type="hidden" name="total" id="total">
@@ -115,7 +120,12 @@ $totales = [];
             });
             // mano de obra
             let manoObra = parseFloat($("#manoObra").val() || 0);
+            let extra = 0.30 * total; // 30% extra
             total += manoObra;
+            total += extra;
+
+            $("#extraVista").text(extra.toFixed(2)); // mostrado
+            $("#extra").val(extra.toFixed(2));
 
             $("#totalVista").text(total.toFixed(2)); // mostrado
             $("#total").val(total.toFixed(2));
