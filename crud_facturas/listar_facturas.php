@@ -26,9 +26,9 @@ $totales = [];
 
         <nav class="sidebar"> 
             <div class="sidebar-sticky">
-                <a class="sidebar-title" href="../index.php">Toner & Más</a> 
+                <a class="sidebar-title" href="../dashboard.php">ProService</a> 
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link" href="../index.php"><span data-feather="home"></span> Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../dashboard.php"><span data-feather="home"></span> Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="../clientes.php"><span data-feather="users"></span> Clientes</a></li>
                     <li class="nav-item"><a class="nav-link" href="../proveedores.php"><span data-feather="truck"></span> Proveedores</a></li>
                     <li class="nav-item"><a class="nav-link" href="../equipos.php"><span data-feather="shopping-cart"></span> Equipos</a></li>
