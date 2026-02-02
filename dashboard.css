@@ -139,6 +139,19 @@ main {
     gap: 10px;
 }
 
+/* Contenedor del logo */
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+} 
+
+.logo-pic {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
 .profile-pic {
     width: 35px;
     height: 35px;
