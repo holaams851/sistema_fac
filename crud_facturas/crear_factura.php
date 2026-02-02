@@ -88,8 +88,13 @@ $totales = [];
                     </div>
 
                      <div class="text-end mt-3">
-                        <h4>Comisión Equipos: C$<span id="extraVista">0.00</span></h4>
+                        <h6>Comisión Equipos: C$<span id="extraVista">0.00</span></h6>
                          <input type="hidden" name="extra" id="extra">
+                    </div>
+
+                    <div class="text-end mt-3">
+                        <h6>Margen de Ganancias: C$<span id="margenVista">0.00</span></h6>
+                         <input type="hidden" name="margen" id="margen">
                     </div>
 
                     <div class="text-end mt-3">
@@ -123,6 +128,11 @@ $totales = [];
             let extra = 0.30 * total; // 30% extra
             total += manoObra;
             total += extra;
+
+            let margen = manoObra + extra;
+            
+            $("#margenVista").text(margen.toFixed(2)); // mostrado
+            $("#margen").val(margen.toFixed(2));
 
             $("#extraVista").text(extra.toFixed(2)); // mostrado
             $("#extra").val(extra.toFixed(2));
