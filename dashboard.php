@@ -113,6 +113,7 @@ while ($row = $res_mes->fetch_assoc()) {
             </div>
           </div>
 
+          <h2>Ventas por Mes</h2>
           <?php if (empty($meses)) { ?>
               <p style="color:red; text-align:center;">No hay facturas para mostrar. Asegúrate de tener facturas con detalles y totales.</p>
           <?php } else { ?>
