@@ -82,7 +82,7 @@ $totales = [];
             </div>
             <div class="col-lg-6 mb-4">
               <label>Precio Unitario</label>
-              <input type="number" step="0.1" name="precio_unitario" class="form-control" required>
+              <input type="number" min="1" step="0.1" name="precio_unitario" class="form-control" required>
             </div>
             <div class="col-lg-6 mb-4">
               <label>Proveedor</label>
