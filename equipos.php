@@ -11,88 +11,201 @@ $totales = [];
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Equipos</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="stylesheet" href="dashboard.css?v=<?php echo filemtime('dashboard.css'); ?>">
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="vendors/base/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="images/favicon.png" />
 </head>
 <body>
-  
-  <div class="container-fluid">
-    <div class="row">
-      
-      <nav class="sidebar"> 
-        <div class="sidebar-sticky">
-          <a class="sidebar-title" href="dashboard.php">ProService</a>
-          
-          <ul class="nav flex-column">
-            <li class="nav-item"><a class="nav-link" href="dashboard.php"><span data-feather="home"></span> Dashboard</a></li>
-            <li class="nav-item"><a class="nav-link" href="clientes.php"><span data-feather="users"></span> Clientes</a></li>
-            <li class="nav-item"><a class="nav-link" href="proveedores.php"><span data-feather="truck"></span> Proveedores</a></li>
-            <li class="nav-item"><a class="nav-link active" href="equipos.php"><span data-feather="shopping-cart"></span> Equipos <span class="sr-only">(current)</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="crud_facturas/crear_factura.php"><span data-feather="plus-circle"></span> Crear Factura</a></li>
-            <li class="nav-item"><a class="nav-link" href="ver_todas_facturas.php"><span data-feather="file"></span> Facturas</a></li>
-            <li class="nav-item"><a class="nav-link" href="reportes.php"><span data-feather="bar-chart-2"></span> Reportes</a></li>
-          </ul>
-        </div>
-      </nav>
-
-      <main role="main" class="main-content px-4"> 
-        
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2">Equipos</h1>
-          <div class="profile-area">
-                <a class="user-name" href="index.php">Admin</a> 
-                <img src="logo.jpeg" alt="Foto de Perfil" class="profile-pic"> 
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo me-5" href="dashboard.php">ProService</a>
+        <a class="navbar-brand brand-logo-mini" href="dashboard.php"><img src="logo.jpeg" class="me-2" alt="logo"></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="ti-view-list"></span>
+        </button>
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
+              <img src="user.png" alt="profile"/>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              <a class="dropdown-item">
+                <i class="ti-power-off text-primary"></i>
+                Cerrar Sesión
+              </a>
             </div>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="ti-view-list"></span>
+        </button>
+      </div>
+    </nav>
+     <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="dashboard.php">
+              <i class="ti-home menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+             <a class="nav-link" href="clientes.php">
+              <i class="ti-user menu-icon"></i>
+              <span class="menu-title">Clientes</span>
+            </a>
+          <li class="nav-item">
+              <a class="nav-link" href="proveedores.php">
+              <i class="ti-truck menu-icon"></i>
+              <span class="menu-title">Proveedores</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="equipos.php">
+              <i class="ti-desktop menu-icon"></i>
+              <span class="menu-title">Equipos</span>
+            </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="crud_facturas/crear_factura.php">
+              <i class="ti-pencil-alt menu-icon"></i>
+              <span class="menu-title">Crear Factura</span>
+            </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="ver_todas_facturas.php">
+              <i class="ti-file menu-icon"></i>
+              <span class="menu-title">Factura</span>
+            </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="reportes.php">
+              <i class="ti-bar-chart menu-icon"></i>
+              <span class="menu-title">Reportes</span>
+            </a>
+        </ul>
+      </nav>
+      <!-- partial -->
+       <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-md-10 grid-margin">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h4 class="font-weight-bold mb-0">Equipos</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+               	 <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center"> 
+                    <i class="ti-desktop icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+                  <p class="card-title text-md-center text-xl-left">Aquí puede registrar, editar y eliminar sus equipos.</p>
+                    <a href="crud_equipos/agregar_equipo.php" class="btn btn-success mb-3">Agregar Equipo</a>
+                  </div>  
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-md-10 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Precio Unitario</th>
+                                <th>Proveedor</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                            $sql = "SELECT 
+                                e.*,
+                                p.nombre AS proveedor,
+                                dc.precio_unitario
+                                FROM Detalle_Compra dc
+                                INNER JOIN Equipos e 
+                                    ON dc.id_equipo = e.id_equipo
+                                INNER JOIN Proveedores p 
+                                    ON dc.id_proveedor = p.id_proveedor";
+                            $result = $conn->query($sql);
+                            while($row = $result->fetch_assoc()): ?>
+                                <tr>
+                                    <td><?= $row['id_equipo'] ?></td>
+                                    <td><?= $row['nombre'] ?></td>
+                                    <td>C$<?= $row['precio_unitario'] ?></td>
+                                     <td><?=$row['proveedor']?></td>
+                                    <td>
+                                        <a href="crud_equipos/editar_equipo.php?id=<?= $row['id_equipo'] ?>" class="btn btn-sm btn-warning">Editar</a>
+                                        <a href="crud_equipos/eliminar_equipo.php?id=<?= $row['id_equipo'] ?>" class="btn btn-sm btn-danger">Eliminar</a>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                  </div>  
+                </div>
+              </div>
+            </div>
+            
+        <!-- content-wrapper ends -->
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+                </div>
+              </div>
+            </div>
+          </div>
+              </div>
+            </div>
+          </div>
         </div>
-        
-        <h3 class="mb-3">Aquí puede registrar, editar y eliminar sus equipos.</h3>
-        <a href="crud_equipos/agregar_equipo.php" class="btn btn-success mb-3">Agregar Equipo</a>
-
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Precio Unitario</th>
-                    <th>Proveedor</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php 
-                $sql = "SELECT 
-                    e.*,
-                    p.nombre AS proveedor,
-                    dc.precio_unitario
-                    FROM Detalle_Compra dc
-                    INNER JOIN Equipos e 
-                        ON dc.id_equipo = e.id_equipo
-                    INNER JOIN Proveedores p 
-                        ON dc.id_proveedor = p.id_proveedor";
-                $result = $conn->query($sql);
-                while($row = $result->fetch_assoc()): ?>
-                    <tr>
-                        <td><?= $row['id_equipo'] ?></td>
-                        <td><?= $row['nombre'] ?></td>
-                        <td>C$<?= $row['precio_unitario'] ?></td>
-                         <td><?=$row['proveedor']?></td>
-                        <td>
-                            <a href="crud_equipos/editar_equipo.php?id=<?= $row['id_equipo'] ?>" class="btn btn-sm btn-warning">Editar</a>
-                            <a href="crud_equipos/eliminar_equipo.php?id=<?= $row['id_equipo'] ?>" class="btn btn-sm btn-danger">Eliminar</a>
-                        </td>
-                    </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
-      </main>
+        <!-- content-wrapper ends -->
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
     </div>
+    <!-- page-body-wrapper ends -->
   </div>
+  <!-- container-scroller -->
 
-  <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-  <script>
-    feather.replace();
-  </script>
+  <!-- plugins:js -->
+  <script src="vendors/base/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <script src="vendors/chart.js/Chart.min.js"></script>
+  <script src="js/jquery.cookie.js" type="text/javascript"></script>
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="js/off-canvas.js"></script>
+  <script src="js/hoverable-collapse.js"></script>
+  <script src="js/template.js"></script>
+  <script src="js/todolist.js"></script>
+  <!-- endinject -->
 </body>
 </html>

@@ -8,107 +8,201 @@ $meses = [];
 $totales = [];
 ?>
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Crear Factura</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="../dashboard.css?v=<?php echo filemtime('../dashboard.css'); ?>"> 
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Crear Factura</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="../vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="../vendors/base/vendor.bundle.base.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="../css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="../images/favicon.png" />
 </head>
 <body>
-<div class="container-fluid">
-    <div class="row">
-
-        <nav class="sidebar"> 
-            <div class="sidebar-sticky">
-                <a class="sidebar-title" href="../dashboard.php">ProService</a> 
-                <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link" href="../dashboard.php"><span data-feather="home"></span> Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../clientes.php"><span data-feather="users"></span> Clientes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../proveedores.php"><span data-feather="truck"></span> Proveedores</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../equipos.php"><span data-feather="shopping-cart"></span> Equipos</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="crear_factura.php"><span data-feather="plus-circle"></span> Crear Factura <span class="sr-only">(current)</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="../ver_todas_facturas.php"><span data-feather="file"></span> Facturas</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../reportes.php"><span data-feather="bar-chart-2"></span> Reportes</a></li>
-                </ul>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo me-5" href="../dashboard.php">ProService</a>
+        <a class="navbar-brand brand-logo-mini" href="../dashboard.php"><img src="logo.jpeg" class="me-2" alt="logo"></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="ti-view-list"></span>
+        </button>
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
+              <img src="../user.png" alt="profile"/>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              <a class="dropdown-item">
+                <i class="ti-power-off text-primary"></i>
+                Cerrar Sesión
+              </a>
             </div>
-        </nav>
-
-        <main role="main" class="main-content px-4"> 
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-
-                <h1 class="h2">Crear Factura</h1>
-                <div class="profile-area">
-                <a class="user-name" href="index.php">Admin</a> 
-                    <img src="../logo.jpeg" alt="Foto de Perfil" class="profile-pic"> 
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="ti-view-list"></span>
+        </button>
+      </div>
+    </nav>
+     <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="../dashboard.php">
+              <i class="ti-home menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+             <a class="nav-link" href="../clientes.php">
+              <i class="ti-user menu-icon"></i>
+              <span class="menu-title">Clientes</span>
+            </a>
+          <li class="nav-item">
+              <a class="nav-link" href="../proveedores.php">
+              <i class="ti-truck menu-icon"></i>
+              <span class="menu-title">Proveedores</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../equipos.php">
+              <i class="ti-desktop menu-icon"></i>
+              <span class="menu-title">Equipos</span>
+            </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="crear_factura.php">
+              <i class="ti-pencil-alt menu-icon"></i>
+              <span class="menu-title">Crear Factura</span>
+            </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="../ver_todas_facturas.php">
+              <i class="ti-file menu-icon"></i>
+              <span class="menu-title">Factura</span>
+            </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="../reportes.php">
+              <i class="ti-bar-chart menu-icon"></i>
+              <span class="menu-title">Reportes</span>
+            </a>
+        </ul>
+      </nav>
+      <!-- partial -->
+       <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-md-10 grid-margin">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h4 class="font-weight-bold mb-0">Crear Factura</h4>
                 </div>
+              </div>
             </div>
-
-            <div class="container p-4 rounded shadow-sm">
-                <form id="facturaForm" method="POST" action="guardar_factura.php">
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label>Cliente:</label>
-                            <select name="id_cliente" class="form-select form-control" required>
-                                <option value="">Seleccionar cliente</option>
-                                <?php while($c = $clientes->fetch_assoc()){ ?>
-                                    <option value="<?= $c['id_cliente'] ?>"><?= $c['nombre'] ?></option>
-                                <?php } ?>
-                            </select>
+          </div>
+            <div class="row">
+            <div class="col-md-10 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                     <form id="facturaForm" method="POST" action="guardar_factura.php">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <h5>Cliente:</h5>
+                                <select name="id_cliente" class="form-select form-control" required>
+                                    <option value="">Seleccionar cliente</option>
+                                    <?php while($c = $clientes->fetch_assoc()){ ?>
+                                        <option value="<?= $c['id_cliente'] ?>"><?= $c['nombre'] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Fecha:</h5>
+                                <input type="date" name="fecha" class="form-control" max="<?php echo $today; ?>" required>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <label>Fecha:</label>
-                            <input type="date" name="fecha" class="form-control" max="<?php echo $today; ?>" required>
+
+                        <hr>
+                        <h5>Equipos</h5>
+                        <table class="table table-bordered" id="tablaEquipos">
+                            <thead>
+                                <tr>
+                                    <th>Equipo</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio</th>
+                                    <th>Subtotal</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <button type="button" class="btn btn-outline-primary mb-3" id="agregarEquipo">+ Agregar equipo</button>
+
+                        <div class="row mt-4">
+                            <div class="col-md-4 offset-md-8">
+                                <label>Mano de obra:</label>
+                                <input type="number" step="0.01" class="form-control" id="manoObra" name="mano_de_obra" value="0">
+                            </div>
                         </div>
-                    </div>
 
-                    <hr>
-                    <h5>Equipos</h5>
-                    <table class="table table-bordered" id="tablaEquipos">
-                        <thead>
-                            <tr>
-                                <th>Equipo</th>
-                                <th>Cantidad</th>
-                                <th>Precio</th>
-                                <th>Subtotal</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                    <button type="button" class="btn btn-outline-primary mb-3" id="agregarEquipo">+ Agregar equipo</button>
-
-                    <div class="row mt-4">
-                        <div class="col-md-4 offset-md-8">
-                            <label>Mano de obra:</label>
-                            <input type="number" step="0.01" class="form-control" id="manoObra" name="mano_de_obra" value="0">
+                         <div class="text-end mt-3">
+                            <h6>Comisión Equipos: C$<span id="extraVista">0.00</span></h6>
+                             <input type="hidden" name="extra" id="extra">
                         </div>
-                    </div>
 
-                     <div class="text-end mt-3">
-                        <h6>Comisión Equipos: C$<span id="extraVista">0.00</span></h6>
-                         <input type="hidden" name="extra" id="extra">
-                    </div>
+                        <div class="text-end mt-3">
+                            <h6>Margen de Ganancias: C$<span id="margenVista">0.00</span></h6>
+                             <input type="hidden" name="margen" id="margen">
+                        </div>
 
-                    <div class="text-end mt-3">
-                        <h6>Margen de Ganancias: C$<span id="margenVista">0.00</span></h6>
-                         <input type="hidden" name="margen" id="margen">
-                    </div>
+                        <div class="text-end mt-3">
+                            <h4>Total: C$<span id="totalVista">0.00</span></h4>
+                             <input type="hidden" name="total" id="total">
+                        </div>
 
-                    <div class="text-end mt-3">
-                        <h4>Total: C$<span id="totalVista">0.00</span></h4>
-                         <input type="hidden" name="total" id="total">
-                    </div>
-
-                    <button type="submit" class="btn btn-success">Guardar Factura</button>
-                </form>
+                        <button type="submit" class="btn btn-success">Guardar Factura</button>
+                    </form>
+                  </div>  
+                </div>
+              </div>
             </div>
-        </main>
+            
+        <!-- content-wrapper ends -->
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+                </div>
+              </div>
+            </div>
+          </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
     </div>
-</div>
-
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
@@ -191,5 +285,16 @@ $totales = [];
         });
     });
 </script>
+  <!-- plugins:js -->
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <script src="../vendors/chart.js/Chart.min.js"></script>
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="../js/off-canvas.js"></script>
+  <script src="../js/hoverable-collapse.js"></script>
+  <script src="../js/template.js"></script>
+  <script src="../js/todolist.js"></script>
+  <!-- endinject -->
 </body>
 </html>
