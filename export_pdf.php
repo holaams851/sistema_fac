@@ -1,6 +1,12 @@
 <?php
-require 'vendor/autoload.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 include 'conexion.php';
+require 'vendor/autoload.php';
+
+var_dump(class_exists('Dompdf\Dompdf'));
 use Dompdf\Dompdf;
 
 $id_factura = (int)$_GET['id'];
