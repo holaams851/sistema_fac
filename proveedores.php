@@ -109,7 +109,7 @@ $totales = [];
             <div class="col-md-10 grid-margin">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h4 class="font-weight-bold mb-0">Clientes</h4>
+                  <h4 class="font-weight-bold mb-0">Proveedores</h4>
                 </div>
               </div>
             </div>
