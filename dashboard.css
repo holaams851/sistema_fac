@@ -147,8 +147,8 @@ main {
 } 
 
 .logo-pic {
-    width: 100px;
-    height: 100px;
+    width: 128px;
+    height: 120px;
     object-fit: cover;
 }
 
