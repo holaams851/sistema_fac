@@ -31,39 +31,39 @@ $html = '
 <style>
 @page { 
     margin: 0;
-    size: 612pt 522pt;
+    size: 700pt 522pt;
 }
 body {
     margin: 0;
     padding: 0;
     background-image: url("'.$imgSrc.'");
-    background-size: 612pt 522pt;
+    background-size: 700pt 522pt;
     font-family: sans-serif;
 }
 
 .field {
     position: absolute;
-    font-size: 14px;
+    font-size: 20px;
     color: #000;
 }
 
-#day            { top: 220px; left: 625px; }
-#month          { top: 220px; left: 695px; }
-#year           { top: 220px; left: 765px; }
-#name           { top: 215px; left: 105px; }
-#address        { top: 240px; left: 115px; }
-#number         { top: 267px; left: 115px; }
+#id				{ top: 155px; left: 540px; }
+#day            { top: 180px; left: 740px; }
+#month          { top: 180px; left: 795px; }
+#year           { top: 180px; left: 850px; }
+#name           { top: 225px; left: 115px; }
+#address        { top: 265px; left: 130px; }
 </style>
 
+<div id="id" class="field">'.$id_factura.'</div>
 <div id="day" class="field">'.$day.'</div>
 <div id="month" class="field">'.$month.'</div>
 <div id="year" class="field">'.$year.'</div>
 <div id="name" class="field">'.$factura['nombre'].'</div>
 <div id="address" class="field">'.$cliente['direccion'].'</div>
-<div id="number" class="field">'.$cliente['telefono'].'</div>
 ';
 
-$startY = 320; // first row vertical position
+$startY = 340; // first row vertical position
 $rowHeight = 25; // space between rows
 
 // AGREGAR FILAS
@@ -72,16 +72,16 @@ $totalFactura = 0;
 
 while($row = $items->fetch_assoc()) {
     $html .= '
-    <div class="field" style="top: '.$startY.'px; left: 90px;">
+    <div class="field" style="top: '.$startY.'px; left: 80px;">
         '.$row['cantidad'].'
     </div>
     <div class="field" style="top: '.$startY.'px; left: 125px;">
         '.$row['nombre_equipo'].'
     </div>
-    <div class="field" style="top: '.$startY.'px; left: 640px;">
+    <div class="field" style="top: '.$startY.'px; left: 710px;">
         '.$row['precio_unitario'].'
     </div>
-    <div class="field" style="top: '.$startY.'px; left: 730px;">
+    <div class="field" style="top: '.$startY.'px; left: 790px;">
         '.($row['subtotal']).'
     </div>
     ';
@@ -98,10 +98,10 @@ $html .= '
     <div class="field" style="top: '.$startY.'px; left: 125px;">
         Mano de Obra
     </div>
-    <div class="field" style="top: '.$startY.'px; left: 730px;">
+    <div class="field" style="top: '.$startY.'px; left: 790px;">
         '.($manoObra).'
     </div>
-    <div class="field" style="top: 583px; left: 730px;">
+    <div class="field" style="top: 575px; left: 790px;">
         '.($totalFactura).'
     </div>
 ';
@@ -109,7 +109,7 @@ $html .= '
 $dompdf = new Dompdf();
 $dompdf->set_option("isRemoteEnabled", true);
 $dompdf->loadHtml($html);
-$customPaper = array(0, 0, 612, 552); 
+$customPaper = array(0, 0, 700, 552); 
 $dompdf->setPaper($customPaper, 'landscape');
 $dompdf->render();
 $dompdf->stream("factura_$id_factura.pdf", ["Attachment" => false]);
