@@ -1,4 +1,5 @@
-<?php include '../conexion.php'; 
+<?php 
+include '../conexion.php'; 
 // Obtener clientes
 $clientes = $conn->query("SELECT id_cliente, nombre FROM Clientes");
 $today = date('Y-m-d');
@@ -291,9 +292,11 @@ $totales = [];
     });
 </script>
   <!-- plugins:js -->
+  <script src="../vendors/base/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page-->
   <script src="../vendors/chart.js/Chart.min.js"></script>
+  <script src="../js/jquery.cookie.js" type="text/javascript"></script>
   <!-- End plugin js for this page-->
   <!-- inject:js -->
   <script src="../js/off-canvas.js"></script>
