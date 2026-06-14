@@ -181,7 +181,7 @@ $totales = [];
                              <input type="hidden" name="total" id="total">
                         </div>
 
-                        <button type="submit" class="btn btn-success">Guardar Factura</button>
+                        <button type="submit" class="btn btn-primary me-2">Guardar Factura</button>
                     </form>
                   </div>  
                 </div>

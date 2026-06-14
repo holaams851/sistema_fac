@@ -49,7 +49,7 @@ $totales = [];
               <img src="user.png" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item">
+              <a class="dropdown-item" href="index.php">
                 <i class="ti-power-off text-primary"></i>
                 Cerrar Sesión
               </a>
@@ -127,7 +127,7 @@ $totales = [];
                	 <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center"> 
                     <i class="ti-desktop icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
                   <p class="card-title text-md-center text-xl-left">Aquí puede registrar, editar y eliminar sus equipos.</p>
-                    <a href="crud_equipos/agregar_equipo.php" class="btn btn-success mb-3">Agregar Equipo</a>
+                    <a href="crud_equipos/agregar_equipo.php" class="btn btn-primary me-2">Agregar Equipo</a>
                   </div>  
                 </div>
               </div>
