@@ -14,7 +14,12 @@ $totales = [];
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Equipos</title>
+  <title>ProService</title>
+  <style>
+      html {
+          font-size: 125%; /* Increases the default base font size */
+      }
+  </style>
   <!-- plugins:css -->
   <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
   <link rel="stylesheet" href="vendors/base/vendor.bundle.base.css">
