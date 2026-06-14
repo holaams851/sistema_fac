@@ -38,8 +38,8 @@ $totales = [];
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo me-5" href="../dashboard.php"><img src="logoCut.png" class="me-5" alt="logo">ProService</a>
-        <a class="navbar-brand brand-logo-mini" href="../dashboard.php"><img src="logo.png" class="me-2" alt="logo"></a>
+        <a class="navbar-brand brand-logo me-5" href="../dashboard.php"><img src="../logoCut.png" class="me-5" alt="logo">ProService</a>
+        <a class="navbar-brand brand-logo-mini" href="../dashboard.php"><img src="../logo.png" class="me-2" alt="logo"></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -51,7 +51,7 @@ $totales = [];
               <img src="../user.png" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item">
+              <a class="dropdown-item" href="../index.php">
                 <i class="ti-power-off text-primary"></i>
                 Cerrar Sesión
               </a>
