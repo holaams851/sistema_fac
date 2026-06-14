@@ -36,7 +36,7 @@ include("funciones.php");
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo">
-                <img src="logo.jpeg" alt="logo">
+                <img src="logo.png" alt="logo">
               </div>
               <h4>Bienvenido al Sistema de Facturación ProService</h4>
               <h6 class="font-weight-light">Inicia Sesión para entrar</h6>

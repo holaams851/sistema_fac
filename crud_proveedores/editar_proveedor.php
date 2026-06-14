@@ -56,7 +56,7 @@ $totales = [];
           <h1 class="h2">Editar Proveedor</h1>
             <div class="profile-area">
               <span class="user-name">Admin</span>
-              <img src="../logo.jpeg" alt="Foto de Perfil" class="profile-pic"> 
+              <img src="../logo.png" alt="Foto de Perfil" class="profile-pic"> 
             </div>
         </div>
 
