@@ -32,7 +32,6 @@ $html = '
 body {
     margin: 0;
     padding: 0;
-    background-image: url("'.$imgSrc.'");
     background-size: 612pt 522pt;
     font-family: sans-serif;
 }

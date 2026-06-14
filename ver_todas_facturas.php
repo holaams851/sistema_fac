@@ -216,6 +216,9 @@ $totales = [];
                         <a class="btn btn-warning" href="export_pdf.php?id=<?= $factura['id_factura'] ?>" target="_blank">
                                 Exportar PDF (Tabla)
                         </a>
+                        <a class="btn btn-warning" href="export_pdf_2.php?id=<?= $factura['id_factura'] ?>" target="_blank">
+                                Vista Previa Formato
+                        </a>
                         <a class="btn btn-warning" href="export_pdf_3.php?id=<?= $factura['id_factura'] ?>" target="_blank">
                                 Exportar PDF (Solo datos)
                         </a>
