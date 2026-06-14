@@ -39,7 +39,7 @@ include("funciones.php");
                 <img src="logo.png" alt="logo">
               </div>
               <h4>Bienvenido al Sistema de Facturación ProService</h4>
-              <h6 class="font-weight-light">Inicia Sesión para entrar</h6>
+                <pre></pre>
               <form class="form-signin" action="login.php" method="POST">
                 <div class="form-group">
                   <input type="text" name="usuario" class="form-control" placeholder="Usuario" required autofocus>
@@ -48,7 +48,7 @@ include("funciones.php");
                   <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
                 </div>
                 <div class="mt-3">
-                  <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+                  <button class="btn btn-primary me-2" type="submit">Entrar</button>
                 </div>
                 <div class="my-2 d-flex justify-content-between align-items-center">
                   <a href="#" class="auth-link text-black">Olvidé mi contraseña</a>

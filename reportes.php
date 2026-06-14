@@ -225,7 +225,7 @@ $totales_dummy = $totales;
           <li class="nav-item">
               <a class="nav-link" href="ver_todas_facturas.php">
               <i class="ti-file menu-icon"></i>
-              <span class="menu-title">Factura</span>
+              <span class="menu-title">Facturas</span>
             </a>
           </li>
           <li class="nav-item">

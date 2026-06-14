@@ -96,7 +96,7 @@ $totales = [];
           <li class="nav-item">
               <a class="nav-link" href="ver_todas_facturas.php">
               <i class="ti-file menu-icon"></i>
-              <span class="menu-title">Factura</span>
+              <span class="menu-title">Facturas</span>
             </a>
           </li>
           <li class="nav-item">
@@ -251,7 +251,18 @@ $totales = [];
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
-  <script src="js/template.js"></script>
+   <!-- plugins:js -->
+  <script src="../vendors/base/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <script src="../vendors/chart.js/Chart.min.js"></script>
+  <script src="../js/jquery.cookie.js" type="text/javascript"></script>
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="../js/off-canvas.js"></script>
+  <script src="../js/hoverable-collapse.js"></script>
+  <script src="../js/template.js"></script>
+  <script src="../js/todolist.js"></script>
   <!-- endinject -->
 </body>
 </html>
