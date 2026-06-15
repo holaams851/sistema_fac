@@ -212,6 +212,19 @@ $totales = [];
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<!-- plugins:js -->
+ <!-- <script src="../vendors/base/vendor.bundle.base.js"></script> -->
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <script src="../vendors/chart.js/Chart.min.js"></script>
+  <script src="../js/jquery.cookie.js" type="text/javascript"></script>
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="../js/off-canvas.js"></script>
+  <script src="../js/hoverable-collapse.js"></script>
+  <script src="../js/template.js"></script>
+  <script src="../js/todolist.js"></script>
+  <!-- endinject -->
 <script>
     feather.replace();
 
@@ -291,18 +304,6 @@ $totales = [];
         });
     });
 </script>
-  <!-- plugins:js -->
-  <script src="../vendors/base/vendor.bundle.base.js"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page-->
-  <script src="../vendors/chart.js/Chart.min.js"></script>
-  <script src="../js/jquery.cookie.js" type="text/javascript"></script>
-  <!-- End plugin js for this page-->
-  <!-- inject:js -->
-  <script src="../js/off-canvas.js"></script>
-  <script src="../js/hoverable-collapse.js"></script>
-  <script src="../js/template.js"></script>
-  <script src="../js/todolist.js"></script>
-  <!-- endinject -->
+  
 </body>
 </html>
