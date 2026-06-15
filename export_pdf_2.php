@@ -19,9 +19,9 @@ $result = $conn->query($sql_datos);
 $cliente = $result->fetch_assoc();
 
 // Load image as base64
-$imgPath = $_SERVER['DOCUMENT_ROOT'] . "/invoice.png";
+$imgPath = $_SERVER['DOCUMENT_ROOT'] . "/invoice.jpeg";
 $imgData = base64_encode(file_get_contents($imgPath));
-$imgSrc = 'data:image/png;base64,' . $imgData;
+$imgSrc = 'data:image/jpeg;base64,' . $imgData;
 
 $day = date("d", strtotime($factura['fecha']));
 $month = date("n", strtotime($factura['fecha']));
@@ -106,10 +106,11 @@ $html .= '
     </div>
 ';
 
+
 $dompdf = new Dompdf();
 $dompdf->set_option("isRemoteEnabled", true);
 $dompdf->loadHtml($html);
-$customPaper = array(0, 0, 700, 552); 
+$customPaper = array(0, 0, 700, 522); 
 $dompdf->setPaper($customPaper, 'landscape');
 $dompdf->render();
 $dompdf->stream("factura_$id_factura.pdf", ["Attachment" => false]);
