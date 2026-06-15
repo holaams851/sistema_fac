@@ -210,25 +210,3 @@ $totales = [];
   <!-- endinject -->
 </body>
 </html>
- 
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2">Proveedores</h1>
-          <div class="profile-area">
-                <a class="user-name" href="index.php">Admin</a> 
-                <img src="logo.png" alt="Foto de Perfil" class="profile-pic"> 
-            </div>
-          </div>
-        
-        
-
-       
-      </main>
-    </div>
-  </div>
-
-  <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-  <script>
-    feather.replace();
-  </script>
-</body>
-</html>
