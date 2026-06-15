@@ -142,7 +142,7 @@ $totales = [];
                         <label for="exampleInputPhone1">Teléfono</label>
                         <input type="tel" name="telefono" class="form-control" value="<?= $proveedor['telefono'] ?>" pattern="[0-9]{8,8}" required placeholder="Solo números">
                       </div>
-                      <button type="submit" name="actualizar" class="btn btn-success">Actualizar</button>
+                      <button type="submit" name="actualizar" class="btn btn-primary me-2">Actualizar</button>
                       <a href="../proveedores.php" class="btn btn-light">Cancelar</a>
                     </form>
   

@@ -172,7 +172,7 @@ $totales = [];
                         <label for="exampleInputSerie">No. Serie</label>
                         <input type="text" name="num_serie" class="form-control" value="<?= $equipo['num_serie'] ?>" placeholder="Ingrese el número de serie">
                       </div>
-                      <button type="submit" name="actualizar" class="btn btn-success">Actualizar</button>
+                      <button type="submit" name="actualizar" class="btn btn-primary me-2">Actualizar</button>
                       <a href="../equipos.php" class="btn btn-light">Cancelar</a>
                     </form>
 
