@@ -163,7 +163,7 @@ $totales = [];
                         <div class="row mt-4">
                             <div class="col-md-4 offset-md-8">
                                 <label>Mano de obra:</label>
-                                <input type="number" step="0.01" class="form-control" id="manoObra" name="mano_de_obra" value="0">
+                                <input type="number" step="10" class="form-control" id="manoObra" name="mano_de_obra" value="1000">
                             </div>
                         </div>
 
@@ -173,12 +173,12 @@ $totales = [];
                         </div>
 
                         <div class="text-end mt-3">
-                            <h6>Margen de Ganancias: C$<span id="margenVista">0.00</span></h6>
+                            <h6>Margen de Ganancias: C$<span id="margenVista">1000.00</span></h6>
                              <input type="hidden" name="margen" id="margen">
                         </div>
 
                         <div class="text-end mt-3">
-                            <h4>Total: C$<span id="totalVista">0.00</span></h4>
+                            <h4>Total: C$<span id="totalVista">1000.00</span></h4>
                              <input type="hidden" name="total" id="total">
                         </div>
 
