@@ -156,7 +156,7 @@ $totales = [];
                       </div>
                       <div class="form-group">
                         <label for="exampleInputPrice1">Precio Unitario</label>
-                        <input type="number" min="1" step="10" name="precio_unitario" class="form-control" value="<?= $equipo['precio_unitario'] ?>" required placeholder="Ingrese el precio unitario">
+                        <input type="number" step="10" name="precio_unitario" class="form-control" value="<?= $equipo['precio_unitario'] ?>" required placeholder="Ingrese el precio unitario">
                       </div>
                       <div class="form-group">
                         <label for="exampleSelectProvider">Proveedor</label>
