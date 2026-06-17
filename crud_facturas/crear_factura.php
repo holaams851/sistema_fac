@@ -232,13 +232,17 @@ $totales = [];
         // ... (Tu código JavaScript para la factura se mantiene igual)
         function actualizarTotal() {
             let total = 0;
-            // suma de equipos
+            let extra = 0;
+           
+            $(".precio").each(function() {
+                extra += parseFloat($(this).val() || 0) * 0.30; // 30% de comisión
+            });
+             // suma de equipos
             $(".subtotal").each(function() {
                 total += parseFloat($(this).val() || 0);
             });
             // mano de obra
             let manoObra = parseFloat($("#manoObra").val() || 0);
-            let extra = 0.30 * total; // 30% extra
             total += manoObra;
 
             let margen = manoObra + extra;
