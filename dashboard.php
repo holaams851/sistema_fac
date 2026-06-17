@@ -4,13 +4,14 @@ include("funciones.php");
 
 // --- Ventas por mes ---
 $sql_mes = "
-     SELECT 
-         MONTH(f.fecha) AS mes,
-         SUM(d.total) AS total_ventas
-     FROM Facturas f
-     INNER JOIN Detalle_Factura d ON f.id_factura = d.id_factura
-     GROUP BY MONTH(f.fecha)
-     ORDER BY mes ASC     
+    SELECT 
+        MONTH(f.fecha) AS mes,
+        SUM(d.total) AS total_ventas
+    FROM Facturas f
+    INNER JOIN Detalle_Factura d ON f.id_factura = d.id_factura
+    WHERE YEAR(f.fecha) = YEAR(CURDATE())
+    GROUP BY MONTH(f.fecha)
+    ORDER BY mes ASC
 ";
 $res_mes = $conn->query($sql_mes);
 
