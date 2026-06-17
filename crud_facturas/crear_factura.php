@@ -151,7 +151,7 @@ $totales = [];
                                 <tr>
                                     <th>Equipo</th>
                                     <th>Cantidad</th>
-                                    <th>Precio</th>
+                                    <th>Precio + 30% comisión</th>
                                     <th>Subtotal</th>
                                     <th></th>
                                 </tr>
@@ -240,7 +240,6 @@ $totales = [];
             let manoObra = parseFloat($("#manoObra").val() || 0);
             let extra = 0.30 * total; // 30% extra
             total += manoObra;
-            total += extra;
 
             let margen = manoObra + extra;
             
@@ -287,9 +286,9 @@ $totales = [];
                 select: function(event, ui) {
                     let row = $(this).closest("tr");
                     row.find(".id_item").val(ui.item.id_equipo);
-                    row.find(".precio").val(ui.item.precio_unitario);
+                    row.find(".precio").val(parseFloat(ui.item.precio_unitario) + (0.30 * parseFloat(ui.item.precio_unitario)));
                     row.find(".cantidad").val(1);
-                    row.find(".subtotal").val(ui.item.precio_unitario);
+                    row.find(".subtotal").val(parseFloat(ui.item.precio_unitario) + (0.30 * parseFloat(ui.item.precio_unitario)));
                     actualizarTotal();
                 }
             });
