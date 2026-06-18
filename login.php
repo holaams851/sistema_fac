@@ -19,14 +19,11 @@ if ($result->num_rows === 1) {
         $_SESSION['usuario'] = $usuario;
         header("Location: dashboard.php");  // redirect to your dashboard
         exit;
-    } else {
-        echo "Contraseña incorrecta";
-        header("Location: login.php?error=1");
-        exit;
-    }
-} else {
-    echo "Usuario no encontrado";
-    header("Location: login.php?error=1");
-    exit;
+    } 
 }
+
+$_SESSION['error'] = "Usuario o contraseña incorrectos.";
+header("Location: index.php");
+exit;
+
 ?>
