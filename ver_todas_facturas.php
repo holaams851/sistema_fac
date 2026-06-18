@@ -146,7 +146,7 @@ $totales = [];
                             FROM Facturas f
                             LEFT JOIN Detalle_Factura df ON df.id_factura = f.id_factura
                             GROUP BY f.id_factura, f.nombre, f.fecha
-                            ORDER BY f.fecha DESC
+                            ORDER BY f.id_factura DESC
                         ";
 
                         $res_facturas = $conn->query($sql_facturas);
