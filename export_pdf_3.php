@@ -26,12 +26,12 @@ $html = '
 <style>
 @page { 
     margin: 0;
-    size: 700pt 522pt;
+    size: 619pt 360pt;
 }
 body {
     margin: 0;
     padding: 0;
-    background-size: 700pt 522pt;
+    background-size: 619pt 360pt;
     font-family: sans-serif;
 }
 
@@ -103,7 +103,7 @@ $html .= '
 $dompdf = new Dompdf();
 $dompdf->set_option("isRemoteEnabled", true);
 $dompdf->loadHtml($html);
-$customPaper = array(0, 0, 700, 552); 
+$customPaper = array(0, 0, 619, 360); 
 $dompdf->setPaper($customPaper, 'landscape');
 $dompdf->render();
 $dompdf->stream("factura_$id_factura.pdf", ["Attachment" => false]);
