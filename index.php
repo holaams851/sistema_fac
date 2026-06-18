@@ -1,6 +1,12 @@
 <?php
 include("conexion.php");
 include("funciones.php");
+
+if (isset($_GET['error'])) {
+    echo '<div class="alert alert-danger">
+            Usuario o contraseña incorrectos.
+          </div>';
+}
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +20,22 @@ include("funciones.php");
   <style>
       html {
           font-size: 125%; /* Increases the default base font size */
+          height: 100%;
       }
+      body {
+          height: 100%;
+          background-image: url("fondo.png");
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+      }
+
+      #div1, #div2, #div3 {
+          background-color: transparent;
+         
+      }
+      
   </style>
   <!-- plugins:css -->
   <link rel="stylesheet" href="../vendors/ti-icons/css/themify-icons.css">
@@ -29,9 +50,9 @@ include("funciones.php");
 </head>
 
 <body>
-  <div class="container-scroller">
-    <div class="container-fluid page-body-wrapper full-page-wrapper">
-      <div class="content-wrapper d-flex align-items-center auth px-0">
+  <div id="div1" class="container-scroller">
+    <div id="div2" class="container-fluid page-body-wrapper full-page-wrapper">
+      <div id="div3" class="content-wrapper d-flex align-items-center auth px-0">
         <div class="row w-100 mx-0">
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
