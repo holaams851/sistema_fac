@@ -37,7 +37,7 @@ body {
 
 .field {
     position: absolute;
-    font-size: 20px;
+    font-size: 14px;
     color: #000;
 }
 
