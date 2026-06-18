@@ -47,12 +47,12 @@ body {
     color: #000;
 }
 
-#id				{ top: 120px; left: 460px; }
-#day            { top: 130px; left: 640px; }
-#month          { top: 130px; left: 690px; }
-#year           { top: 130px; left: 730px; }
-#name           { top: 175px; left: 115px; }
-#address        { top: 205px; left: 130px; }
+#id				{ top: 150px; left: 460px; }
+#day            { top: 140px; left: 640px; }
+#month          { top: 140px; left: 695px; }
+#year           { top: 140px; left: 740px; }
+#name           { top: 180px; left: 100px; }
+#address        { top: 210px; left: 110px; }
 </style>
 
 <div id="id" class="field">'.$id_factura.'</div>
@@ -63,7 +63,7 @@ body {
 <div id="address" class="field">'.$cliente['direccion'].'</div>
 ';
 
-$startY = 260; // first row vertical position
+$startY = 267; // first row vertical position
 $rowHeight = 20; // space between rows
 
 // AGREGAR FILAS
@@ -75,13 +75,13 @@ while($row = $items->fetch_assoc()) {
     <div class="field" style="top: '.$startY.'px; left: 70px;">
         '.$row['cantidad'].'
     </div>
-    <div class="field" style="top: '.$startY.'px; left: 125px;">
+    <div class="field" style="top: '.$startY.'px; left: 110px;">
         '.$row['nombre_equipo'].'
     </div>
-    <div class="field" style="top: '.$startY.'px; left: 610px;">
+    <div class="field" style="top: '.$startY.'px; left: 620px;">
         '.$row['precio_unitario'].'
     </div>
-    <div class="field" style="top: '.$startY.'px; left: 680px;">
+    <div class="field" style="top: '.$startY.'px; left: 687px;">
         '.($row['subtotal']).'
     </div>
     ';
@@ -95,13 +95,13 @@ while($row = $items->fetch_assoc()) {
 }
 
 $html .= '
-    <div class="field" style="top: '.$startY.'px; left: 125px;">
+    <div class="field" style="top: '.$startY.'px; left: 110px;">
         Mano de Obra
     </div>
-    <div class="field" style="top: '.$startY.'px; left: 680px;">
+    <div class="field" style="top: '.$startY.'px; left: 687px;">
         '.($manoObra).'
     </div>
-    <div class="field" style="top: 440px; left: 680px;">
+    <div class="field" style="top: 450px; left: 687px;">
         '.($totalFactura).'
     </div>
 ';
