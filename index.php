@@ -1,12 +1,6 @@
 <?php
 include("conexion.php");
 include("funciones.php");
-
-if (isset($_GET['error'])) {
-    echo '<div class="alert alert-danger">
-            Usuario o contraseña incorrectos.
-          </div>';
-}
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +29,7 @@ if (isset($_GET['error'])) {
           background-color: transparent;
          
       }
-      
+
   </style>
   <!-- plugins:css -->
   <link rel="stylesheet" href="../vendors/ti-icons/css/themify-icons.css">
@@ -68,6 +62,11 @@ if (isset($_GET['error'])) {
                 <div class="form-group">
                   <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
                 </div>
+               <?php if (isset($_GET['error'])): ?>
+                    <div class="alert alert-danger mt-2">
+                        Usuario o contraseña incorrectos.
+                    </div>
+                <?php endif; ?>
                 <div class="mt-3">
                   <button class="btn btn-primary me-2" type="submit">Entrar</button>
                 </div>

@@ -22,8 +22,6 @@ if ($result->num_rows === 1) {
     } 
 }
 
-$_SESSION['error'] = "Usuario o contraseña incorrectos.";
-header("Location: index.php");
+header("Location: index.php?error=1");  // redirect back to login with error
 exit;
-
 ?>
