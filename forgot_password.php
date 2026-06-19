@@ -11,6 +11,18 @@ require 'vendor/autoload.php';
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
+$email = 'andreaaragon851@gmail.com';
+$mail->isSMTP();
+$mail->Host       = 'smtp.gmail.com';
+$mail->SMTPAuth   = true;
+$mail->CharSet = 'UTF-8';
+$mail->Encoding = 'base64';
+$mail->Username   = 'andreaaragon851@gmail.com';
+$mail->Password   = 'mfug hqbq ckup qgjp';
+$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+$mail->Port       = 587;
+
+$mail->setFrom('andreaaragon851@gmail.com');
 
 $token = bin2hex(random_bytes(32));
 $expires = date('Y-m-d H:i:s', strtotime('+1 hour'));
@@ -24,14 +36,11 @@ $stmt->execute();
 $link = "https://sistema-facturacion.infinityfree.me/reset_password.php?token=$token";
 
 $mail->addAddress($email);
-$mail->Subject = "Password Reset";
-$mail->Body = "Click here to reset your password:\n$link";
+$mail->Subject = "Cambiar Contraseña";
+$mail->Body = "Haz clic en el siguiente enlace para restablecer tu contraseña:\n$link";
 
 $mail->send();
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,6 +48,7 @@ $mail->send();
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="refresh" content="0;url=https://sistema-facturacion.infinityfree.me/" />
   <title>ProService Admin</title>
   <style>
       html {
@@ -68,7 +78,7 @@ $mail->send();
                 <img src="logo.png" alt="logo">
               </div>
               <h4>Ahora le va a llegar un correo con las instrucciones para restablecer su contraseña.</h4>
-              <h4>Revise su bandeja de correo: .</h4>
+              <h4>Revise su bandeja de correo: andreaaragon851@gmail.com</h4>
                 </div>
             </div>
           </div>
