@@ -71,7 +71,7 @@ include("funciones.php");
                   <button class="btn btn-primary me-2" type="submit">Entrar</button>
                 </div>
                 <div class="my-2 d-flex justify-content-between align-items-center">
-                  <a href="#" class="auth-link text-black">Olvidé mi contraseña</a>
+                  <a href="forgot_password.php" class="auth-link text-black">Olvidé mi contraseña</a>
                 </div>
               </form>
             </div>
