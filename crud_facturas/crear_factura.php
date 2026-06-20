@@ -129,6 +129,12 @@ $totales = [];
                 <div class="card-body">
                      <form id="facturaForm" method="POST" action="guardar_factura.php">
                         <div class="row mb-3">
+                            <div class="col-md-2">
+                                <h5>ID:</h5>
+                                <input type="text" name="id_factura" class="form-control" value="0001" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
                             <div class="col-md-6">
                                 <h5>Cliente:</h5>
                                 <select name="id_cliente" class="form-select form-control" required>

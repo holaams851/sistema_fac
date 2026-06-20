@@ -2,6 +2,7 @@
 include '../conexion.php'; 
 include '../funciones.php'; 
 
+$id_factura = (int)($_POST['id_factura'] ?? 0);
 $id_cliente = (int)($_POST['id_cliente'] ?? 0);
 $fecha = $conn->real_escape_string($_POST['fecha'] ?? '');
 $mano_de_obra = isset($_POST['mano_de_obra']) ? (float)$_POST['mano_de_obra'] : 0.0;
@@ -30,14 +31,14 @@ if ($no_equipos) {
 }
 
 // 4. Insertar Factura (Cabecera)
-$sql_factura = "INSERT INTO Facturas (id_cliente, nombre, fecha) VALUES ($id_cliente, '$nombre_cliente', '$fecha')";
+$sql_factura = "INSERT INTO Facturas (id_factura, id_cliente, nombre, fecha) VALUES ($id_factura, $id_cliente, '$nombre_cliente', '$fecha')";
 if (!$conn->query($sql_factura)) {
     // Si falla la inserción, redirigimos con error
     header("Location: crear_factura.php?error=db_factura");
     exit;
 }   
 
-$id_factura = $conn->insert_id;
+
 
 // 5. Insertar Detalle de Factura
 if (!empty($_POST['equipos']['id'])) {
