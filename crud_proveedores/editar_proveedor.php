@@ -11,10 +11,15 @@ if(isset($_POST['actualizar'])) {
     $telefono = $_POST['telefono'];
 
     // Asegurarse de que las columnas coinciden con el SQL corregido: 'telefono'
+    try{
     $sql = "UPDATE Proveedores SET nombre='$nombre', telefono='$telefono' WHERE id_proveedor=$id";
     $conn->query($sql);
     header("Location: ../proveedores.php");
     exit;
+    } catch (mysqli_sql_exception $e) {
+       header("Location: editar_proveedor.php?id=$id&error=1");
+       exit;
+    }
 }
 
 // Variables dummy para el layout
@@ -142,6 +147,11 @@ $totales = [];
                         <label for="exampleInputPhone1">Teléfono</label>
                         <input type="tel" name="telefono" class="form-control" value="<?= $proveedor['telefono'] ?>" pattern="[0-9]{8,8}" required placeholder="Solo números">
                       </div>
+                      <?php if (isset($_GET['error'])): ?>
+                        <div class="alert alert-danger mt-2">
+                            El proveedor ya existe o el teléfono ya está registrado.
+                        </div>
+                      <?php endif; ?>
                       <button type="submit" name="actualizar" class="btn btn-primary me-2">Actualizar</button>
                       <a href="../proveedores.php" class="btn btn-light">Cancelar</a>
                     </form>

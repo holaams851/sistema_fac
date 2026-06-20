@@ -20,6 +20,7 @@ if(isset($_POST['actualizar'])) {
     $id_proveedor = $_POST['id_proveedor'];
 
     // 1. Actualizar Equipos
+    try{
     $sql_equipo = "UPDATE Equipos SET nombre='$nombre', num_serie = $num_serie WHERE id_equipo=$id";
     $conn->query($sql_equipo);
 
@@ -31,7 +32,11 @@ if(isset($_POST['actualizar'])) {
     $conn->query($sql_compra);
     
     header("Location: ../equipos.php");
-    exit();
+    exit;
+    } catch (mysqli_sql_exception $e) {
+       header("Location: editar_equipo.php?id=$id&error=1");
+       exit;
+    }
 }
 
 // Variables dummy para el layout
@@ -172,6 +177,11 @@ $totales = [];
                         <label for="exampleInputSerie">No. Serie</label>
                         <input type="text" name="num_serie" class="form-control" value="<?= $equipo['num_serie'] ?>" placeholder="Ingrese el número de serie">
                       </div>
+                      <?php if (isset($_GET['error'])): ?>
+                        <div class="alert alert-danger mt-2">
+                            El equipo ya existe.
+                        </div>
+                      <?php endif; ?>
                       <button type="submit" name="actualizar" class="btn btn-primary me-2">Actualizar</button>
                       <a href="../equipos.php" class="btn btn-light">Cancelar</a>
                     </form>

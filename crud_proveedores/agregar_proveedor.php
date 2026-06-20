@@ -6,10 +6,15 @@ if(isset($_POST['guardar'])) {
     $telefono = $_POST['telefono'];
 
     // Asegurarse de que las columnas coinciden con el SQL corregido: 'telefono'
+    try{
     $sql = "INSERT INTO Proveedores (nombre, telefono) VALUES ('$nombre', '$telefono')";
     $conn->query($sql);
     header("Location: ../proveedores.php"); // volver al listado
     exit;
+    } catch (mysqli_sql_exception $e) {
+        header("Location: agregar_proveedor.php?error=1");
+        exit;
+    }
 }
 
 // Variables dummy para el layout
@@ -137,6 +142,11 @@ $totales = [];
                         <label for="exampleInputPhone1">Teléfono</label>
                         <input type="tel" name="telefono" class="form-control" pattern="[0-9]{8,8}" required placeholder="Solo números">
                       </div>
+                      <?php if (isset($_GET['error'])): ?>
+                        <div class="alert alert-danger mt-2">
+                            El proveedor ya existe o el teléfono ya está registrado.
+                        </div>
+                      <?php endif; ?>
                       <button type="submit" name="guardar" class="btn btn-primary me-2">Guardar</button>
                       <a href="../proveedores.php" class="btn btn-light">Cancelar</a>
                     </form>

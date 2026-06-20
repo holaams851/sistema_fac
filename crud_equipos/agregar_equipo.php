@@ -11,6 +11,7 @@ if(isset($_POST['guardar'])) {
     $precio_unitario = $_POST['precio_unitario'];
     $id_proveedor = $_POST['id_proveedor'];
 
+    try {
     // 1. Insertar en Equipos
     $sql_equipo = "INSERT INTO Equipos (nombre, num_serie) VALUES ('$nombre', " . ($num_serie === NULL ? 'NULL' : "'$num_serie'") . ")";
     $conn->query($sql_equipo);
@@ -25,6 +26,11 @@ if(isset($_POST['guardar'])) {
 
     header("Location: ../equipos.php");
     exit();
+    } catch (mysqli_sql_exception $e) {
+       header("Location: agregar_equipo.php?error=1");
+       exit;
+    }
+
 }
 
 // Variables dummy para el layout
@@ -169,6 +175,11 @@ $totales = [];
                         <label for="exampleInputSerie">No. Serie</label>
                         <input type="text" name="num_serie" class="form-control" placeholder="Ingrese el número de serie">
                       </div>
+                      <?php if (isset($_GET['error'])): ?>
+                        <div class="alert alert-danger mt-2">
+                            El equipo ya existe.
+                        </div>
+                      <?php endif; ?>
                       <button type="submit" name="guardar" class="btn btn-primary me-2">Guardar</button>
                       <a href="../equipos.php" class="btn btn-light">Cancelar</a>
                     </form>
