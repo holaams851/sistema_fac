@@ -1,6 +1,15 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 include("../conexion.php");
 
+  $id = $_GET['id'];
+  $sql = "SELECT * FROM Clientes WHERE id_cliente=$id";
+  $result = $conn->query($sql);
+  $cliente = $result->fetch_assoc(); 
+  
 if(isset($_POST['actualizar'])) {
     $id = $_GET['id'];
     $sql = "SELECT * FROM Clientes WHERE id_cliente=$id";
@@ -16,7 +25,7 @@ if(isset($_POST['actualizar'])) {
         $conn->query($sql);
         header("Location: ../clientes.php");
     } catch (mysqli_sql_exception $e) {
-       header("Location: editar_cliente.php?error=1");
+       header("Location: editar_cliente.php?id=$id&error=1");
        exit;
     }
 }
