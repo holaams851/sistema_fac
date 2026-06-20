@@ -1,20 +1,24 @@
 <?php
 include("../conexion.php");
-$id = $_GET['id'];
-
-$sql = "SELECT * FROM Clientes WHERE id_cliente=$id";
-$result = $conn->query($sql);
-$cliente = $result->fetch_assoc();
 
 if(isset($_POST['actualizar'])) {
+    $id = $_GET['id'];
+    $sql = "SELECT * FROM Clientes WHERE id_cliente=$id";
+    $result = $conn->query($sql);
+    $cliente = $result->fetch_assoc(); 
     $nombre = $_POST['nombre'];
     $telefono = $_POST['telefono'];
     $direccion = $_POST['direccion'];
 
     // Asegurarse de que las columnas coinciden con el SQL corregido: 'telefono' y 'direccion'
-    $sql = "UPDATE Clientes SET nombre='$nombre', telefono='$telefono', direccion='$direccion' WHERE id_cliente=$id";
-    $conn->query($sql);
-    header("Location: ../clientes.php");
+    try {
+        $sql = "UPDATE Clientes SET nombre='$nombre', telefono='$telefono', direccion='$direccion' WHERE id_cliente=$id";
+        $conn->query($sql);
+        header("Location: ../clientes.php");
+    } catch (mysqli_sql_exception $e) {
+       header("Location: editar_cliente.php?error=1");
+       exit;
+    }
 }
 
 // Variables para el menú lateral (pueden dejarse vacías si no se usan)
@@ -146,6 +150,11 @@ $totales = [];
                         <label for="exampleTextarea1">Dirección</label>
                         <input type="text" name="direccion" class="form-control" value="<?= $cliente['direccion'] ?>" placeholder="Ingrese la dirección del cliente">
                       </div>
+                      <?php if (isset($_GET['error'])): ?>
+                        <div class="alert alert-danger mt-2">
+                            El cliente ya existe o el teléfono ya está registrado.
+                        </div>
+                      <?php endif; ?>
                       <button type="submit" name="actualizar" class="btn btn-primary me-2">Actualizar</button>
                       <a href="../clientes.php" class="btn btn-light">Cancelar</a>
                     </form>

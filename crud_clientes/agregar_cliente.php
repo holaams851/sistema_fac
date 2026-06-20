@@ -7,9 +7,14 @@ if(isset($_POST['guardar'])) {
     $direccion = $_POST['direccion'];
 
     // Asegurarse de que las columnas coinciden con el SQL corregido: 'telefono' y 'direccion'
-    $sql = "INSERT INTO Clientes (nombre, telefono, direccion) VALUES ('$nombre', '$telefono', '$direccion')";
-    $conn->query($sql);
-    header("Location: ../clientes.php"); // volver al listado
+    try {
+        $sql = "INSERT INTO Clientes (nombre, telefono, direccion) VALUES ('$nombre', '$telefono', '$direccion')";
+        $conn->query($sql);
+        header("Location: ../clientes.php"); // volver al listado
+    } catch (mysqli_sql_exception $e) {
+       header("Location: agregar_cliente.php?error=1");
+       exit;
+    }
 }
 
 // Variables para el menú lateral (pueden dejarse vacías si no se usan)
@@ -141,6 +146,11 @@ $totales = [];
                         <label for="exampleTextarea1">Dirección</label>
                         <input type="text" name="direccion" class="form-control" placeholder="Ingrese la dirección del cliente">
                       </div>
+                      <?php if (isset($_GET['error'])): ?>
+                        <div class="alert alert-danger mt-2">
+                            El cliente ya existe o el teléfono ya está registrado.
+                        </div>
+                      <?php endif; ?>
                       <button type="submit" name="guardar" class="btn btn-primary me-2">Guardar</button>
                       <a href="../clientes.php" class="btn btn-light">Cancelar</a>
                     </form>
