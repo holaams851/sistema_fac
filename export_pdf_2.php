@@ -47,7 +47,6 @@ body {
     color: #000;
 }
 
-#id				{ top: 150px; left: 460px; }
 #day            { top: 140px; left: 640px; }
 #month          { top: 140px; left: 695px; }
 #year           { top: 140px; left: 740px; }
@@ -55,7 +54,6 @@ body {
 #address        { top: 210px; left: 110px; }
 </style>
 
-<div id="id" class="field">'.$id_factura.'</div>
 <div id="day" class="field">'.$day.'</div>
 <div id="month" class="field">'.$month.'</div>
 <div id="year" class="field">'.$year.'</div>
