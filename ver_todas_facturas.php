@@ -164,7 +164,8 @@ $totales = [];
                                     df.cantidad,
                                     df.precio_unitario,
                                     df.subtotal,
-                                    df.mano_de_obra
+                                    df.mano_de_obra,
+                                    df.descripcion
                                 FROM Detalle_Factura df 
                                 JOIN Facturas f ON f.id_factura = df.id_factura
                                 WHERE df.id_factura = $id_factura
@@ -199,14 +200,16 @@ $totales = [];
                                     <td>C$<?= number_format($d['precio_unitario'], 2) ?></td>
                                     <td>C$<?= number_format($d['subtotal'], 2) ?></td>
                                     <? $mano_de_obra = $d['mano_de_obra'] ?>
+                                    <? $descripcion = $d['descripcion'] ?>
                                 </tr>
-                            <?php endwhile; ?>
+                                <tr>
+                                    <td colspan="1" class="text-end">Mano de Obra:</td>
+                                    <td colspan="2"><? echo $descripcion; ?></td>
+                                    <td>C$<?= number_format($mano_de_obra, 2) ?></td>
+                                </tr>
+                             <?php endwhile; ?>
                             </tbody>
                             <tfoot>
-                                <tr>
-                                    <th colspan="3" class="text-end">Mano de Obra:</th>
-                                    <th>C$<?= number_format($mano_de_obra, 2) ?></th>
-                                </tr>
                                 <tr >
                                     <th colspan="3" class="text-end">Total:</th>
                                     <th>C$<?= number_format($factura['total'], 2) ?></th>

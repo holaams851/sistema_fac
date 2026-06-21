@@ -12,6 +12,7 @@ $id_cliente = (int)($_POST['id_cliente'] ?? 0);
 $fecha = $conn->real_escape_string($_POST['fecha'] ?? '');
 $mano_de_obra = isset($_POST['mano_de_obra']) ? (float)$_POST['mano_de_obra'] : 0.0;
 $total = isset($_POST['total']) ? (float)$_POST['total'] : 0.0;
+$desc = $conn->real_escape_string($_POST['descripcion'] ?? ''); // Descripción de la mano de obra
 
 $no_equipos = empty($_POST['equipos']['id']) || count(array_filter($_POST['equipos']['id'])) == 0;
 
@@ -73,7 +74,7 @@ if (!empty($_POST['equipos']['id'])) {
     }
 }
 
-$conn->query("UPDATE Detalle_Factura SET total = $total, mano_de_obra = $mano_de_obra WHERE id_factura = '$id_factura'");
+$conn->query("UPDATE Detalle_Factura SET total = $total, mano_de_obra = $mano_de_obra, descripcion = '$desc' WHERE id_factura = '$id_factura'");
 $conn->close();
 
 // --- REDIRECCIÓN INMEDIATA AL DASHBOARD ---

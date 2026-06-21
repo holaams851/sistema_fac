@@ -180,7 +180,7 @@ $totales = [];
                                 <tr>
                                     <th>Equipo</th>
                                     <th>Cantidad</th>
-                                    <th>Precio + 30% comisión</th>
+                                    <th>Precio</th>
                                     <th>Subtotal</th>
                                     <th></th>
                                 </tr>
@@ -189,12 +189,19 @@ $totales = [];
                         </table>
                         <button type="button" class="btn btn-outline-primary mb-3" id="agregarEquipo">+ Agregar equipo</button>
 
-                        <div class="row mt-4">
-                            <div class="col-md-4 offset-md-8">
-                                <label>Mano de obra:</label>
-                                <input type="number" step="10" class="form-control" id="manoObra" name="mano_de_obra" value="1000">
-                            </div>
-                        </div>
+                        <hr>
+                        <h5>Servicios</h5>
+                        <table class="table table-bordered" id="tablaServicios">
+                            <thead>
+                                <tr>
+                                    <th>Servicio</th>
+                                    <th>Precio</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <button type="button" class="btn btn-outline-primary mb-3" id="agregarServicio">+ Agregar servicio</button>
 
                          <div class="text-end mt-3">
                             <h6>Comisión Equipos: C$<span id="extraVista">0.00</span></h6>
@@ -202,12 +209,12 @@ $totales = [];
                         </div>
 
                         <div class="text-end mt-3">
-                            <h6>Margen de Ganancias: C$<span id="margenVista">1000.00</span></h6>
+                            <h6>Margen de Ganancias: C$<span id="margenVista">0.00</span></h6>
                              <input type="hidden" name="margen" id="margen">
                         </div>
 
                         <div class="text-end mt-3">
-                            <h4>Total: C$<span id="totalVista">1000.00</span></h4>
+                            <h4>Total: C$<span id="totalVista">0.00</span></h4>
                              <input type="hidden" name="total" id="total">
                         </div>
 
@@ -260,18 +267,17 @@ $totales = [];
     $(document).ready(function() {
         // ... (Tu código JavaScript para la factura se mantiene igual)
         function actualizarTotal() {
-            let total = 0;
-            let extra = 0;
-           
-            $(".precio").each(function() {
-                extra += parseFloat($(this).val() || 0) * 0.30; // 30% de comisión
-            });
-             // suma de equipos
+             let total = 0;
+            // suma de equipos
             $(".subtotal").each(function() {
                 total += parseFloat($(this).val() || 0);
             });
             // mano de obra
-            let manoObra = parseFloat($("#manoObra").val() || 0);
+            let manoObra = 0;
+            $(".manoObra").each(function() {
+                manoObra += parseFloat($(this).val() || 0);
+            });
+            let extra = 0.30 * total; // 30% extra
             total += manoObra;
 
             let margen = manoObra + extra;
@@ -298,11 +304,25 @@ $totales = [];
                 </tr>`;
         }
 
+        function filaServicio() {
+            return `
+                <tr>
+                    <td><textarea class="form-control desc" name="descripcion" rows="4" cols="50"> Describe la mano de obra realizada...</textarea></td>
+                    <td><input type="number" step="10" class="form-control manoObra" name="mano_de_obra" value="1000"></td>
+                    <td><button type="button" class="btn btn-danger btn-sm eliminar">X</button></td>
+                </tr>`;
+        }
+
         $("#agregarEquipo").click(function() {
             $("#tablaEquipos tbody").append(filaEquipo());
         });
 
-        $("#manoObra").on("input", function() {
+        $("#agregarServicio").click(function() {
+            $("#tablaServicios tbody").append(filaServicio());
+            actualizarTotal();
+        });
+
+        $(document).on("input", ".manoObra", function() {
             actualizarTotal();
         });
 
@@ -319,9 +339,9 @@ $totales = [];
                 select: function(event, ui) {
                     let row = $(this).closest("tr");
                     row.find(".id_item").val(ui.item.id_equipo);
-                    row.find(".precio").val(parseFloat(ui.item.precio_unitario) + (0.30 * parseFloat(ui.item.precio_unitario)));
+                    row.find(".precio").val(parseFloat(ui.item.precio_unitario));
                     row.find(".cantidad").val(1);
-                    row.find(".subtotal").val(parseFloat(ui.item.precio_unitario) + (0.30 * parseFloat(ui.item.precio_unitario)));
+                    row.find(".subtotal").val(parseFloat(ui.item.precio_unitario));
                     actualizarTotal();
                 }
             });
