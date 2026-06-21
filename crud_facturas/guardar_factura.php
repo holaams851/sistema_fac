@@ -4,6 +4,10 @@ include '../funciones.php';
 
 $id_factura = ($_POST['id_factura'] ?? '');
 $id_factura = sprintf("%04d", $id_factura); // Formatear a 4 dígitos con ceros a la izquierda
+if($id_factura === '0000' || !is_numeric($id_factura) || (int)$id_factura <= 0 || (int)$id_factura > 9999) {
+    header("Location: crear_factura.php?error=invalid_id");
+    exit;
+}
 $id_cliente = (int)($_POST['id_cliente'] ?? 0);
 $fecha = $conn->real_escape_string($_POST['fecha'] ?? '');
 $mano_de_obra = isset($_POST['mano_de_obra']) ? (float)$_POST['mano_de_obra'] : 0.0;

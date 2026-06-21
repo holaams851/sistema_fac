@@ -21,6 +21,12 @@ $totales = [];
       html {
           font-size: 125%; /* Increases the default base font size */
       }
+
+      #topDiv {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+      }
   </style>
   <!-- plugins:css -->
   <link rel="stylesheet" href="../vendors/ti-icons/css/themify-icons.css">
@@ -128,18 +134,20 @@ $totales = [];
               <div class="card">
                 <div class="card-body">
                      <form id="facturaForm" method="POST" action="guardar_factura.php">
-                        <div class="row mb-3">
+                        <div id="topDiv" class="row mb-3">
                             <div class="col-md-2">
                                 <h5>ID:</h5>
-                                <input type="text" name="id_factura" class="form-control" value="0001" min="0001" max="9999" required>
+                                <input type="text" inputmode="numeric" pattern="[0-9]*" name="id_factura" class="form-control" value="0001" required>
                             </div>
                             <?php if (isset($_GET['error'])): ?>
-                            <div class="alert alert-danger mt-2">
+                            <div class="alert alert-danger col-md-6">
                                 <?php 
                                     if ($_GET['error'] == 'datos_faltantes') {
                                         echo "Error: Por favor complete todos los campos obligatorios.";
                                     } elseif ($_GET['error'] == 'no_equipos') {
                                         echo "Error: Debe agregar al menos un equipo a la factura.";
+                                    } elseif ($_GET['error'] == 'invalid_id') {
+                                        echo "Error: El ID de la factura debe ser un número entre 0001 y 9999.";
                                     } elseif ($_GET['error'] == 'db_factura') {
                                         echo "Error: El ID de la factura ya existe.";
                                     } else {
