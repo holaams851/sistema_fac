@@ -131,8 +131,23 @@ $totales = [];
                         <div class="row mb-3">
                             <div class="col-md-2">
                                 <h5>ID:</h5>
-                                <input type="text" name="id_factura" class="form-control" value="0001" required>
+                                <input type="text" name="id_factura" class="form-control" value="0001" min="0001" max="9999" required>
                             </div>
+                            <?php if (isset($_GET['error'])): ?>
+                            <div class="alert alert-danger mt-2">
+                                <?php 
+                                    if ($_GET['error'] == 'datos_faltantes') {
+                                        echo "Error: Por favor complete todos los campos obligatorios.";
+                                    } elseif ($_GET['error'] == 'no_equipos') {
+                                        echo "Error: Debe agregar al menos un equipo a la factura.";
+                                    } elseif ($_GET['error'] == 'db_factura') {
+                                        echo "Error: El ID de la factura ya existe.";
+                                    } else {
+                                        echo "Error desconocido.";
+                                    }
+                                ?>
+                            </div>
+                          <?php endif; ?>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">

@@ -2,7 +2,8 @@
 include '../conexion.php'; 
 include '../funciones.php'; 
 
-$id_factura = (int)($_POST['id_factura'] ?? 0);
+$id_factura = ($_POST['id_factura'] ?? '');
+$id_factura = sprintf("%04d", $id_factura); // Formatear a 4 dígitos con ceros a la izquierda
 $id_cliente = (int)($_POST['id_cliente'] ?? 0);
 $fecha = $conn->real_escape_string($_POST['fecha'] ?? '');
 $mano_de_obra = isset($_POST['mano_de_obra']) ? (float)$_POST['mano_de_obra'] : 0.0;
@@ -31,13 +32,17 @@ if ($no_equipos) {
 }
 
 // 4. Insertar Factura (Cabecera)
-$sql_factura = "INSERT INTO Facturas (id_factura, id_cliente, nombre, fecha) VALUES ($id_factura, $id_cliente, '$nombre_cliente', '$fecha')";
-if (!$conn->query($sql_factura)) {
-    // Si falla la inserción, redirigimos con error
+try {
+    $sql_factura = "INSERT INTO Facturas (id_factura, id_cliente, nombre, fecha) VALUES ('$id_factura', $id_cliente, '$nombre_cliente', '$fecha')";
+    if (!$conn->query($sql_factura)) {
+        // Si falla la inserción, redirigimos con error
+        header("Location: crear_factura.php?error=db_factura");
+        exit;
+    }   
+} catch (mysqli_sql_exception $e) {
     header("Location: crear_factura.php?error=db_factura");
     exit;
-}   
-
+}
 
 
 // 5. Insertar Detalle de Factura
@@ -64,7 +69,7 @@ if (!empty($_POST['equipos']['id'])) {
     }
 }
 
-$conn->query("UPDATE Detalle_Factura SET total = $total, mano_de_obra = $mano_de_obra WHERE id_factura = $id_factura");
+$conn->query("UPDATE Detalle_Factura SET total = $total, mano_de_obra = $mano_de_obra WHERE id_factura = '$id_factura'");
 $conn->close();
 
 // --- REDIRECCIÓN INMEDIATA AL DASHBOARD ---
