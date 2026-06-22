@@ -82,10 +82,14 @@ while($row = $items->fetch_assoc()) {
     <div class="field" style="top: '.$startY.'px; left: 687px;">
         '.($row['subtotal']).'
     </div>
+    
+    <div class="field" style="top: '.$startY.'px; left: 110px;">
+        '.($row['descripcion']).'
+    </div>
+    <div class="field" style="top: '.$startY.'px; left: 687px;">
+        '.($row['mano_de_obra']).'
+    </div>
     ';
-    if ($manoObra == 0 && isset($row['mano_de_obra'])) {
-        $manoObra = $row['mano_de_obra'];
-    }
     if ($totalFactura == 0 && isset($row['total'])) {
         $totalFactura = $row['total'];
     }
@@ -93,12 +97,6 @@ while($row = $items->fetch_assoc()) {
 }
 
 $html .= '
-    <div class="field" style="top: '.$startY.'px; left: 110px;">
-        Mano de Obra
-    </div>
-    <div class="field" style="top: '.$startY.'px; left: 687px;">
-        '.($manoObra).'
-    </div>
     <div class="field" style="top: 450px; left: 687px;">
         '.($totalFactura).'
     </div>

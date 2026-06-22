@@ -173,7 +173,6 @@ $totales = [];
 
                             $res_detalle = $conn->query($sql_detalle);
                         ?>
-                    
 					
                         <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
                             <h4>Factura #<?= $factura['id_factura'] ?> - Cliente: <?= $factura['nombre'] ?: "<i>Cliente eliminado</i>" ?> (<?= $factura['fecha'] ?>)</h4>
@@ -193,10 +192,10 @@ $totales = [];
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php while ($d = $res_detalle->fetch_assoc()): ?>
+                             <?php while ($d = $res_detalle->fetch_assoc()): ?>
                                 <tr>
-                                    <td><?= $d['nombre_equipo']?></td>
-                                    <td><?= $d['cantidad'] ?></td>
+                                    <td><?= $d['nombre_equipo'] ?: "Sin equipos" ?></td>
+                                    <td><?= $d['cantidad'] ?: 0 ?></td>
                                     <td>C$<?= number_format($d['precio_unitario'], 2) ?></td>
                                     <td>C$<?= number_format($d['subtotal'], 2) ?></td>
                                     <? $mano_de_obra = $d['mano_de_obra'] ?>

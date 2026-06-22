@@ -10,12 +10,9 @@ if($id_factura === '0000' || !is_numeric($id_factura) || (int)$id_factura <= 0 |
 }
 $id_cliente = (int)($_POST['id_cliente'] ?? 0);
 $fecha = $conn->real_escape_string($_POST['fecha'] ?? '');
-$mano_de_obra = isset($_POST['mano_de_obra']) ? (float)$_POST['mano_de_obra'] : 0.0;
 $total = isset($_POST['total']) ? (float)$_POST['total'] : 0.0;
-$desc = $conn->real_escape_string($_POST['descripcion'] ?? ''); // Descripción de la mano de obra
-
 $no_equipos = empty($_POST['equipos']['id']) || count(array_filter($_POST['equipos']['id'])) == 0;
-$no_desc = empty($_POST['descripcion']) || trim($_POST['descripcion']) === '';
+$no_desc = empty($_POST['descripciones']['descripcion']) || count(array_filter($_POST['descripciones']['descripcion'])) == 0;
 
 // 1. Manejo de errores de datos faltantes (Redirección)
 if ($id_cliente <= 0 || empty($fecha)) {
@@ -52,12 +49,14 @@ try {
 
 
 // 5. Insertar Detalle de Factura
-if (!empty($_POST['equipos']['id'])) {
+if (!empty($_POST['equipos']['id']) && !empty($_POST['descripciones']['descripcion'])) {
     $ids = $_POST['equipos']['id'];
     $nombres= $_POST['equipos']['nombre'];
     $cantidades = $_POST['equipos']['cantidad'];
     $precios = $_POST['equipos']['precio'];
     $subtotales = $_POST['equipos']['subtotal'];
+    $descripciones = $_POST['descripciones']['descripcion'];
+    $manos_de_obra = $_POST['descripciones']['mano_de_obra'];
 
 
     for ($i = 0; $i < count($ids); $i++) {
@@ -66,16 +65,32 @@ if (!empty($_POST['equipos']['id'])) {
         $cantidad = (float)$cantidades[$i];
         $precio = (float)$precios[$i];
         $subtotal = (float)$subtotales[$i];
+        $descripcion= $conn->real_escape_string($descripciones[$i]);
+        $mano_de_obra = isset($manos_de_obra[$i]) ? (float)$manos_de_obra[$i] : 0.0;
 
         if ($id_equipo > 0) {
-            $sql_detalle = "INSERT INTO Detalle_Factura (id_factura, cantidad, precio_unitario, id_equipo, nombre_equipo, subtotal)
-                             VALUES ('$id_factura', '$cantidad', '$precio', '$id_equipo', '$nombre', '$subtotal')";
+            $sql_detalle = "INSERT INTO Detalle_Factura (id_factura, cantidad, precio_unitario, id_equipo, nombre_equipo, subtotal, mano_de_obra, descripcion)
+                             VALUES ('$id_factura', '$cantidad', '$precio', '$id_equipo', '$nombre', '$subtotal', '$mano_de_obra', '$descripcion')";
+            $conn->query($sql_detalle);
+        }
+    }
+} if (!empty($_POST['descripciones']['descripcion'])) {
+    $descripciones = $_POST['descripciones']['descripcion'];
+    $manos_de_obra = $_POST['descripciones']['mano_de_obra'];
+
+    for ($i = 0; $i < count($descripciones); $i++) {
+        $descripcion = $conn->real_escape_string($descripciones[$i]);
+        $mano_de_obra = isset($manos_de_obra[$i]) ? (float)$manos_de_obra[$i] : 0.0;
+
+        if (!empty($descripcion)) {
+            $sql_detalle = "INSERT INTO Detalle_Factura (id_factura, cantidad, precio_unitario, id_equipo, nombre_equipo, subtotal, mano_de_obra, descripcion)
+                             VALUES ('$id_factura', 0, 0, NULL, NULL, 0, '$mano_de_obra', '$descripcion')";
             $conn->query($sql_detalle);
         }
     }
 }
 
-$conn->query("UPDATE Detalle_Factura SET total = $total, mano_de_obra = $mano_de_obra, descripcion = '$desc' WHERE id_factura = '$id_factura'");
+$conn->query("UPDATE Detalle_Factura SET total = $total WHERE id_factura = '$id_factura'");
 $conn->close();
 
 // --- REDIRECCIÓN INMEDIATA AL DASHBOARD ---

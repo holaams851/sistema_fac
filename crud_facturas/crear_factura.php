@@ -273,14 +273,14 @@ $totales = [];
                 total += parseFloat($(this).val() || 0);
             });
             // mano de obra
-            let manoObra = 0;
-            $(".manoObra").each(function() {
-                manoObra += parseFloat($(this).val() || 0);
+            let mano_de_obra = 0;
+            $(".mano_de_obra").each(function() {
+                mano_de_obra += parseFloat($(this).val() || 0);
             });
             let extra = 0.30 * total; // 30% extra
-            total += manoObra;
+            total += mano_de_obra;
 
-            let margen = manoObra + extra;
+            let margen = mano_de_obra + extra;
             
             $("#margenVista").text(margen.toFixed(2)); // mostrado
             $("#margen").val(margen.toFixed(2));
@@ -307,8 +307,8 @@ $totales = [];
         function filaServicio() {
             return `
                 <tr>
-                    <td><textarea class="form-control desc" name="descripcion" rows="4" cols="50"> Describe la mano de obra realizada...</textarea></td>
-                    <td><input type="number" step="10" class="form-control manoObra" name="mano_de_obra" value="1000"></td>
+                    <td><textarea class="form-control descripcion" name="descripciones[descripcion][]" rows="4" cols="50"> Describe la mano de obra realizada...</textarea></td>
+                    <td><input type="number" step="10" class="form-control mano_de_obra" name="descripciones[mano_de_obra][]" value="1000"></td>
                     <td><button type="button" class="btn btn-danger btn-sm eliminar">X</button></td>
                 </tr>`;
         }
@@ -322,7 +322,7 @@ $totales = [];
             actualizarTotal();
         });
 
-        $(document).on("input", ".manoObra", function() {
+        $(document).on("input", ".mano_de_obra", function() {
             actualizarTotal();
         });
 
