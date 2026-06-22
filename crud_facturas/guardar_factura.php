@@ -32,7 +32,7 @@ if ($result_nombre && $result_nombre->num_rows > 0) {
 }
 
 // 3. Manejo de error de equipos faltantes
-if ($no_equipos || $no_desc) {
+if ($no_equipos && $no_desc) {
     header("Location: crear_factura.php?error=no_equipos_desc");
     exit;
 }
