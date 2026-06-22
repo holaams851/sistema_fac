@@ -15,6 +15,7 @@ $total = isset($_POST['total']) ? (float)$_POST['total'] : 0.0;
 $desc = $conn->real_escape_string($_POST['descripcion'] ?? ''); // Descripción de la mano de obra
 
 $no_equipos = empty($_POST['equipos']['id']) || count(array_filter($_POST['equipos']['id'])) == 0;
+$no_desc = empty($_POST['descripcion']) || trim($_POST['descripcion']) === '';
 
 // 1. Manejo de errores de datos faltantes (Redirección)
 if ($id_cliente <= 0 || empty($fecha)) {
@@ -31,8 +32,8 @@ if ($result_nombre && $result_nombre->num_rows > 0) {
 }
 
 // 3. Manejo de error de equipos faltantes
-if ($no_equipos) {
-    header("Location: crear_factura.php?error=no_equipos");
+if ($no_equipos || $no_desc) {
+    header("Location: crear_factura.php?error=no_equipos_desc");
     exit;
 }
 

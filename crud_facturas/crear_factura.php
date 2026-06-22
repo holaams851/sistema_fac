@@ -144,8 +144,8 @@ $totales = [];
                                 <?php 
                                     if ($_GET['error'] == 'datos_faltantes') {
                                         echo "Error: Por favor complete todos los campos obligatorios.";
-                                    } elseif ($_GET['error'] == 'no_equipos') {
-                                        echo "Error: Debe agregar al menos un equipo a la factura.";
+                                    } elseif ($_GET['error'] == 'no_equipos_desc') {
+                                        echo "Error: Debe agregar al menos un equipo o servicio.";
                                     } elseif ($_GET['error'] == 'invalid_id') {
                                         echo "Error: El ID de la factura debe ser un número entre 0001 y 9999.";
                                     } elseif ($_GET['error'] == 'db_factura') {
