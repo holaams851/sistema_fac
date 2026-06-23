@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 require 'vendor/autoload.php';
 include 'conexion.php';
 use Dompdf\Dompdf;
@@ -21,11 +23,12 @@ $cliente = $result->fetch_assoc();
 // Load image as base64
 $imgPath = $_SERVER['DOCUMENT_ROOT'] . "/invoice.jpeg";
 $imgData = base64_encode(file_get_contents($imgPath));
-$imgSrc = 'data:image/jpeg;base64,' . $imgData;
+$imgSrc = 'data:image/jpeg;base64,' . $imgData . '?v=' . time();
 
 $day = date("d", strtotime($factura['fecha']));
 $month = date("n", strtotime($factura['fecha']));
 $year = date("y", strtotime($factura['fecha']));
+
 
 $html = '
 <style>
@@ -82,14 +85,10 @@ while($row = $items->fetch_assoc()) {
     <div class="field" style="top: '.$startY.'px; left: 687px;">
         '.($row['subtotal']).'
     </div>
-    
-    <div class="field" style="top: '.$startY.'px; left: 110px;">
-        '.($row['descripcion']).'
-    </div>
-    <div class="field" style="top: '.$startY.'px; left: 687px;">
-        '.($row['mano_de_obra']).'
-    </div>
     ';
+    if ($manoObra == 0 && isset($row['mano_de_obra'])) {
+        $manoObra = $row['mano_de_obra'];
+    }
     if ($totalFactura == 0 && isset($row['total'])) {
         $totalFactura = $row['total'];
     }
@@ -97,6 +96,12 @@ while($row = $items->fetch_assoc()) {
 }
 
 $html .= '
+    <div class="field" style="top: '.$startY.'px; left: 110px;">
+        Mano de Obra
+    </div>
+    <div class="field" style="top: '.$startY.'px; left: 687px;">
+        '.($manoObra).'
+    </div>
     <div class="field" style="top: 450px; left: 687px;">
         '.($totalFactura).'
     </div>
@@ -109,4 +114,4 @@ $dompdf->loadHtml($html);
 $customPaper = array(0, 0, 604, 396); 
 $dompdf->setPaper($customPaper, 'landscape');
 $dompdf->render();
-$dompdf->stream("factura_$id_factura.pdf", ["Attachment" => false]);
+$dompdf->stream("factura_{$id_factura}_" . time() . ".pdf", ["Attachment" => false]);

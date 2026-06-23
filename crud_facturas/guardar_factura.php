@@ -74,7 +74,7 @@ if (!empty($_POST['equipos']['id']) && !empty($_POST['descripciones']['descripci
             $conn->query($sql_detalle);
         }
     }
-} if (!empty($_POST['descripciones']['descripcion'])) {
+} else if (!empty($_POST['descripciones']['descripcion'])) {
     $descripciones = $_POST['descripciones']['descripcion'];
     $manos_de_obra = $_POST['descripciones']['mano_de_obra'];
 
@@ -85,6 +85,26 @@ if (!empty($_POST['equipos']['id']) && !empty($_POST['descripciones']['descripci
         if (!empty($descripcion)) {
             $sql_detalle = "INSERT INTO Detalle_Factura (id_factura, cantidad, precio_unitario, id_equipo, nombre_equipo, subtotal, mano_de_obra, descripcion)
                              VALUES ('$id_factura', 0, 0, NULL, NULL, 0, '$mano_de_obra', '$descripcion')";
+            $conn->query($sql_detalle);
+        }
+    }
+} else if (!empty($_POST['equipos']['id'])) {
+    $ids = $_POST['equipos']['id'];
+    $nombres= $_POST['equipos']['nombre'];
+    $cantidades = $_POST['equipos']['cantidad'];
+    $precios = $_POST['equipos']['precio'];
+    $subtotales = $_POST['equipos']['subtotal'];
+
+    for ($i = 0; $i < count($ids); $i++) {
+        $id_equipo = (int)$ids[$i];
+        $nombre = $conn->real_escape_string($nombres[$i]);
+        $cantidad = (float)$cantidades[$i];
+        $precio = (float)$precios[$i];
+        $subtotal = (float)$subtotales[$i];
+
+        if ($id_equipo > 0) {
+            $sql_detalle = "INSERT INTO Detalle_Factura (id_factura, cantidad, precio_unitario, id_equipo, nombre_equipo, subtotal, mano_de_obra, descripcion)
+                             VALUES ('$id_factura', '$cantidad', '$precio', '$id_equipo', '$nombre', '$subtotal', 0, NULL)";
             $conn->query($sql_detalle);
         }
     }
