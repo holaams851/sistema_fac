@@ -127,10 +127,6 @@ while ($row = $details->fetch_assoc()) {
     'UTF-8'
     );
 
-    $descripcion = wordwrap($descripcion, 64, "\r\n", false);
-
-    $lineas = substr_count($descripcion, "\r\n") + 1;
-
     $pdf->MultiCell(390, 14, $descripcion);
 
     $pdf->SetXY(520, $startY);
@@ -140,7 +136,7 @@ while ($row = $details->fetch_assoc()) {
         $totalFactura = $row['total'];
     }
     
-    $startY += $lineas * 14;
+    $startY += $rowHeight;
     
 }
 

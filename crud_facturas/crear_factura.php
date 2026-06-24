@@ -11,18 +11,19 @@ $totales = [];
 $last = $conn->query("SELECT id_factura FROM Detalle_Factura ORDER BY id_factura DESC LIMIT 1");
 $res = $last->fetch_assoc();
 $lastId = $res['id_factura'];
-$number = (int)$lastId;
+$number = (int)$lastId + 1;
 
 if($lastId == NULL){
    $lastId = "0001";
 }
 
-if(strlen($lastId) == 1){
-  $lastId = "000" . "" . $number + 1;
-} else if(strlen($lastId) == 2){
-  $lastId = "00" . "" . $number + 1;
-} else if(strlen($lastId) == 3){
-  $lastId = "0" . "" . $number + 1;
+
+if($number < 10){
+  $lastId = "000" . "" . $number;
+} else if($number > 9 && $number < 100){
+  $lastId = "00" . "" . $number;
+} else if($number > 99 && $number < 1000){
+  $lastId = "0" . "" . $number;
 }
 
 
@@ -339,7 +340,7 @@ if(strlen($lastId) == 1){
                           placeholder="Describe la mano de obra realizada..."></textarea>
                 <small class="contador">0/512 caracteres</small>
             </td>
-            <td><input type="number" step="10" class="form-control mano_de_obra" name="descripciones[mano_de_obra][]" value="1000"></td>
+            <td><input type="number" step="0.01" class="form-control mano_de_obra" name="descripciones[mano_de_obra][]" value="1000"></td>
             <td><button type="button" class="btn btn-danger btn-sm eliminarServicio">X</button></td>
         </tr>`;
 }
