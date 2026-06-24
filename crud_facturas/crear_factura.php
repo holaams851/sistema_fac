@@ -268,8 +268,9 @@ $totales = [];
 
     $(document).ready(function() {
         // ... (Tu código JavaScript para la factura se mantiene igual)
-        let remainingChars = 512;
         let caracteres = 0;
+        let equipos = 0;
+        let totalChar = 0;
 
         function actualizarTotal() {
             let total = 0;
@@ -325,10 +326,12 @@ $totales = [];
 }
 
         $("#agregarEquipo").click(function() {
-          if(remainingChars >= 64) { 
+          equipos += 64;
+          totalChar += 64;
+          if(totalChar <= 448) { 
             $("#tablaEquipos tbody").append(filaEquipo());
             actualizarTotal();
-            remainingChars -= 64;
+            
           } else {
             window.location.href = "https://sistema-facturacion.infinityfree.me/crud_facturas/crear_factura.php?error=factura_llena";
           }
@@ -337,13 +340,11 @@ $totales = [];
         $("#agregarServicio").click(function() {
           $("#agregarServicio").toggle();
           
-          if(remainingChars >= 64) { 
+          if(totalChar <= 448) { 
               $("#tablaServicios tbody").append(filaServicio());
               actualizarTotal();
-
-              remainingChars -= caracteres;
-             
-        
+              caracteres = $("textarea").val().length;
+              
           } else {
               window.location.href = "https://sistema-facturacion.infinityfree.me/crud_facturas/crear_factura.php?error=factura_llena";
           }
@@ -351,16 +352,16 @@ $totales = [];
 
         $(document).on("input", ".descripcion", function() {
           caracteres = $(this).val().length;
-           if(remainingChars === 0){
+          totalChar = equipos + caracteres;
+              console.log("T Caracteres: " + totalChar);
+              console.log("Caracteres: " + caracteres);
+           if(totalChar === 512){
                 window.location.href = "https://sistema-facturacion.infinityfree.me/crud_facturas/crear_factura.php?error=factura_llena";
               }
-          console.log("Caracteres restantes: " + remainingChars);
-          console.log("Caracteres en el textarea: " + caracteres);
-
           $(this)
               .siblings(".contador")
-              .text(caracteres + "/" + remainingChars);
-          $("textarea").attr("maxlength", remainingChars);
+              .text(caracteres + "/" + (512 - equipos));
+          $("textarea").attr("maxlength", (512 - equipos));
         });
 
         $(document).on("input", ".mano_de_obra", function() {
@@ -368,12 +369,15 @@ $totales = [];
         });
 
         $(document).on("click", ".eliminarEquipo", function() {
+          equipos -= 64;
+          totalChar -= 64;
+          
             $(this).closest("tr").remove();
             actualizarTotal();
         });
 
         $(document).on("click", ".eliminarServicio", function() {
-            remainingChars += $("textarea").val().length;
+            totalChar -= caracteres;
             $("#agregarServicio").toggle();
             $(this).closest("tr").remove();
             actualizarTotal();
