@@ -157,7 +157,7 @@ $totales = [];
                     <form action="agregar_equipo.php" method="POST" class="forms-sample">
                       <div class="form-group">
                         <label for="exampleInputUsername1">Nombre</label>
-                        <input type="text" name="nombre" class="form-control" required minlength="3" placeholder="Ingrese el nombre del equipo">
+                        <input type="text" name="nombre" class="form-control" maxlength="64" required minlength="3" placeholder="Ingrese el nombre del equipo">
                       </div>
                       <div class="form-group">
                         <label for="exampleInputPrice1">Precio Unitario</label>

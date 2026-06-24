@@ -150,6 +150,8 @@ $totales = [];
                                         echo "Error: El ID de la factura debe ser un número entre 0001 y 9999.";
                                     } elseif ($_GET['error'] == 'db_factura') {
                                         echo "Error: El ID de la factura ya existe.";
+                                    } elseif ($_GET['error'] == 'factura_llena') {
+                                        echo "Error: Se ha excedido del límite de caracteres.";
                                     } else {
                                         echo "Error desconocido.";
                                     }
@@ -266,8 +268,11 @@ $totales = [];
 
     $(document).ready(function() {
         // ... (Tu código JavaScript para la factura se mantiene igual)
+        let remainingChars = 512;
+        let caracteres = 0;
+
         function actualizarTotal() {
-             let total = 0;
+            let total = 0;
             // suma de equipos
             $(".subtotal").each(function() {
                 total += parseFloat($(this).val() || 0);
@@ -299,34 +304,77 @@ $totales = [];
                     <td><input type="number" class="form-control cantidad" name="equipos[cantidad][]" value="1" min="1"></td>
                     <td><input type="text" class="form-control precio" name="equipos[precio][]" readonly></td>
                     <td><input type="text" class="form-control subtotal" name="equipos[subtotal][]" readonly></td>
-                    <td><button type="button" class="btn btn-danger btn-sm eliminar">X</button></td>
+                    <td><button type="button" class="btn btn-danger btn-sm eliminarEquipo">X</button></td>
                     <input type="hidden" name="equipos[id][]" class="id_item">
                 </tr>`;
         }
 
         function filaServicio() {
-            return `
-                <tr>
-                    <td><textarea class="form-control descripcion" name="descripciones[descripcion][]" rows="4" cols="50"> Describe la mano de obra realizada...</textarea></td>
-                    <td><input type="number" step="10" class="form-control mano_de_obra" name="descripciones[mano_de_obra][]" value="1000"></td>
-                    <td><button type="button" class="btn btn-danger btn-sm eliminar">X</button></td>
-                </tr>`;
-        }
+          return `
+          <tr>
+            <td><textarea class="form-control descripcion"
+                          name="descripciones[descripcion][]"
+                          rows="4"
+                          maxlength="512"
+                          placeholder="Describe la mano de obra realizada..."></textarea>
+                <small class="contador">0/512 caracteres</small>
+            </td>
+            <td><input type="number" step="10" class="form-control mano_de_obra" name="descripciones[mano_de_obra][]" value="1000"></td>
+            <td><button type="button" class="btn btn-danger btn-sm eliminarServicio">X</button></td>
+        </tr>`;
+}
 
         $("#agregarEquipo").click(function() {
+          if(remainingChars >= 64) { 
             $("#tablaEquipos tbody").append(filaEquipo());
+            actualizarTotal();
+            remainingChars -= 64;
+          } else {
+            window.location.href = "https://sistema-facturacion.infinityfree.me/crud_facturas/crear_factura.php?error=factura_llena";
+          }
         });
 
         $("#agregarServicio").click(function() {
-            $("#tablaServicios tbody").append(filaServicio());
-            actualizarTotal();
+          $("#agregarServicio").toggle();
+          
+          if(remainingChars >= 64) { 
+              $("#tablaServicios tbody").append(filaServicio());
+              actualizarTotal();
+
+              remainingChars -= caracteres;
+             
+        
+          } else {
+              window.location.href = "https://sistema-facturacion.infinityfree.me/crud_facturas/crear_factura.php?error=factura_llena";
+          }
+        });
+
+        $(document).on("input", ".descripcion", function() {
+          caracteres = $(this).val().length;
+           if(remainingChars === 0){
+                window.location.href = "https://sistema-facturacion.infinityfree.me/crud_facturas/crear_factura.php?error=factura_llena";
+              }
+          console.log("Caracteres restantes: " + remainingChars);
+          console.log("Caracteres en el textarea: " + caracteres);
+
+          $(this)
+              .siblings(".contador")
+              .text(caracteres + "/" + remainingChars);
+          $("textarea").attr("maxlength", remainingChars);
         });
 
         $(document).on("input", ".mano_de_obra", function() {
             actualizarTotal();
         });
 
-        $(document).on("click", ".eliminar", function() {
+        $(document).on("click", ".eliminarEquipo", function() {
+            $(this).closest("tr").remove();
+            actualizarTotal();
+        });
+
+        $(document).on("click", ".eliminarServicio", function() {
+            remainingChars += $("textarea").val().length;
+            $("#agregarServicio").toggle();
             $(this).closest("tr").remove();
             actualizarTotal();
         });

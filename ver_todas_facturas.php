@@ -172,6 +172,20 @@ $totales = [];
                             ";
 
                             $res_detalle = $conn->query($sql_detalle);
+
+                            $equipos = [];
+                            $manoObra = [];
+
+                            while ($d = $res_detalle->fetch_assoc()) {
+
+                                if (!empty($d['nombre_equipo'])) {
+                                    $equipos[] = $d;
+                                }
+
+                                if (!empty($d['descripcion']) && !empty($d['mano_de_obra'])) {
+                                    $manoObra[] = $d;
+                                }
+                            }
                         ?>
 					
                         <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
@@ -182,32 +196,44 @@ $totales = [];
                                 onclick="return confirm('¿Estás seguro de eliminar esta factura?');">Eliminar</a>
                         </div>
 
-                        <table class="table table-bordered table-striped mt-3">
-                            <thead>
-                                <tr>
-                                    <th>Equipo</th>
-                                    <th>Cantidad</th>
-                                    <th>Precio unitario</th>
-                                    <th>Subtotal</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                             <?php while ($d = $res_detalle->fetch_assoc()): ?>
-                                <tr>
-                                    <td><?= $d['nombre_equipo'] ?: "Sin equipos" ?></td>
-                                    <td><?= $d['cantidad'] ?: 0 ?></td>
-                                    <td>C$<?= number_format($d['precio_unitario'], 2) ?></td>
-                                    <td>C$<?= number_format($d['subtotal'], 2) ?></td>
-                                    <? $mano_de_obra = $d['mano_de_obra'] ?>
-                                    <? $descripcion = $d['descripcion'] ?>
-                                </tr>
-                                <tr>
-                                    <td colspan="1" class="text-end">Mano de Obra:</td>
-                                    <td colspan="2"><? echo $descripcion; ?></td>
-                                    <td>C$<?= number_format($mano_de_obra, 2) ?></td>
-                                </tr>
-                             <?php endwhile; ?>
-                            </tbody>
+                        <?php if (!empty($equipos)): ?>
+                          <table class="table table-bordered">
+                              <thead>
+                                  <tr>
+                                      <th>Equipo</th>
+                                      <th>Cantidad</th>
+                                      <th>Precio unitario</th>
+                                      <th>Subtotal</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <?php foreach ($equipos as $d): ?>
+                                  <tr>
+                                      <td><?= $d['nombre_equipo'] ?></td>
+                                      <td><?= $d['cantidad'] ?></td>
+                                      <td><?= number_format($d['precio_unitario'],2) ?></td>
+                                      <td><?= number_format($d['subtotal'],2) ?></td>
+                                  </tr>
+                                  <?php endforeach; ?>
+                              </tbody>
+                          <?php endif; ?>
+                          <?php if (!empty($manoObra)): ?>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th colspan="3">Descripción</th>
+                                        <th colspan="1">Mano de Obra</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($manoObra as $d): ?>
+                                    <tr>
+                                        <td colspan="3" style="max-width: 300px; white-space: normal; word-wrap: break-word;"><?= $d['descripcion'] ?></td>
+                                        <td colspan="1"><?= number_format($d['mano_de_obra'],2) ?></td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            <?php endif; ?>
                             <tfoot>
                                 <tr >
                                     <th colspan="3" class="text-end">Total:</th>
@@ -215,9 +241,6 @@ $totales = [];
                                 </tr>
                             </tfoot>
                         </table>
-                        <a class="btn btn-warning" href="export_pdf.php?id=<?= $factura['id_factura'] ?>" target="_blank">
-                                Exportar PDF (Tabla)
-                        </a>
                         <a class="btn btn-warning" href="export_pdf_2.php?id=<?= $factura['id_factura'] ?>" target="_blank">
                                 Vista Previa Formato
                         </a>

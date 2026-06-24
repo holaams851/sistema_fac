@@ -48,7 +48,7 @@ $mail->send();
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="refresh" content="0;url=https://sistema-facturacion.infinityfree.me/" />
+  <meta http-equiv="refresh" content="5;url=https://sistema-facturacion.infinityfree.me/" />
   <title>ProService Admin</title>
   <style>
       html {

@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 require 'vendor/autoload.php';
 include 'conexion.php';
 use Dompdf\Dompdf;
@@ -8,7 +10,23 @@ $id_factura = (int)$_GET['id'];
 $sql = $conn->query("SELECT * FROM Facturas WHERE id_factura = $id_factura");
 $factura = $sql->fetch_assoc();
 
-$items = $conn->query("SELECT * FROM Detalle_Factura WHERE id_factura = $id_factura");
+$items = $conn->query("SELECT 
+    df.cantidad,
+    df.nombre_equipo,
+    df.precio_unitario,
+    df.subtotal,
+    df.total
+FROM Detalle_Factura df
+WHERE df.id_factura = $id_factura
+    AND (df.cantidad != 0 OR df.precio_unitario != 0)");
+
+$details = $conn->query("SELECT 
+    df.mano_de_obra,
+    df.descripcion,
+    df.total
+FROM Detalle_Factura df
+WHERE df.id_factura = $id_factura
+    AND (df.mano_de_obra != 0 OR df.descripcion IS NOT NULL)");
 
 $sql_datos = "SELECT c.telefono, c.direccion
         FROM Facturas f
@@ -16,11 +34,13 @@ $sql_datos = "SELECT c.telefono, c.direccion
         WHERE f.id_factura = $id_factura";
 
 $result = $conn->query($sql_datos);
+mysqli_set_charset($conn, "utf8mb4");
 $cliente = $result->fetch_assoc();
 
 $day = date("d", strtotime($factura['fecha']));
 $month = date("n", strtotime($factura['fecha']));
 $year = date("y", strtotime($factura['fecha']));
+
 
 $html = '
 <style>
@@ -56,7 +76,7 @@ body {
 ';
 
 $startY = 267; // first row vertical position
-$rowHeight = 20; // space between rows
+$rowHeight = 21; // space between rows
 
 // AGREGAR FILAS
 $manoObra = 0;
@@ -67,7 +87,7 @@ while($row = $items->fetch_assoc()) {
     <div class="field" style="top: '.$startY.'px; left: 70px;">
         '.$row['cantidad'].'
     </div>
-    <div class="field" style="top: '.$startY.'px; left: 110px;">
+    <div class="field" style="top: '.$startY.'px; left: 90px;">
         '.$row['nombre_equipo'].'
     </div>
     <div class="field" style="top: '.$startY.'px; left: 620px;">
@@ -77,31 +97,46 @@ while($row = $items->fetch_assoc()) {
         '.($row['subtotal']).'
     </div>
     ';
-    if ($manoObra == 0 && isset($row['mano_de_obra'])) {
-        $manoObra = $row['mano_de_obra'];
-    }
     if ($totalFactura == 0 && isset($row['total'])) {
         $totalFactura = $row['total'];
     }
     $startY += $rowHeight;
 }
 
-$html .= '
-    <div class="field" style="top: '.$startY.'px; left: 110px;">
-        Mano de Obra
+while($row = $details->fetch_assoc()) {
+    $html .= '
+    <div class="field" style="
+    top: '.$startY.'px;
+    left: 90px;
+    width: 450px;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+">
+        '.($row['descripcion']).'
     </div>
     <div class="field" style="top: '.$startY.'px; left: 687px;">
-        '.($manoObra).'
+        '.($row['mano_de_obra']).'
     </div>
+    ';
+    if ($totalFactura == 0 && isset($row['total'])) {
+        $totalFactura = $row['total'];
+    }
+    $startY += $rowHeight;
+}
+
+
+$html .= '
     <div class="field" style="top: 450px; left: 687px;">
         '.($totalFactura).'
     </div>
 ';
 
+
 $dompdf = new Dompdf();
 $dompdf->set_option("isRemoteEnabled", true);
-$dompdf->loadHtml($html);
+$dompdf->loadHtml($html, 'UTF-8');
 $customPaper = array(0, 0, 604, 396); 
 $dompdf->setPaper($customPaper, 'landscape');
 $dompdf->render();
-$dompdf->stream("factura_$id_factura.pdf", ["Attachment" => false]);
+$dompdf->stream("factura_{$id_factura}_" . time() . ".pdf", ["Attachment" => false]);
