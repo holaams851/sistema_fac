@@ -178,11 +178,11 @@ $totales = [];
 
                             while ($d = $res_detalle->fetch_assoc()) {
 
-                                if (!empty($d['nombre_equipo'])) {
+                                if (($d['nombre_equipo']) != '-') {
                                     $equipos[] = $d;
                                 }
 
-                                if (!empty($d['descripcion']) && !empty($d['mano_de_obra'])) {
+                                if (($d['descripcion']) != '-') {
                                     $manoObra[] = $d;
                                 }
                             }

@@ -26,7 +26,7 @@ $details = $conn->query("SELECT
     df.total
 FROM Detalle_Factura df
 WHERE df.id_factura = $id_factura
-    AND (df.mano_de_obra != 0 OR df.descripcion != "-")");
+    AND (df.mano_de_obra != 0 OR df.descripcion != '-')");
 
 $sql_datos = "SELECT c.telefono, c.direccion
         FROM Facturas f
@@ -109,6 +109,7 @@ while($row = $details->fetch_assoc()) {
     top: '.$startY.'px;
     left: 90px;
     width: 450px;
+    line-height: 1.4;
     white-space: normal;
     word-wrap: break-word;
     overflow-wrap: break-word;

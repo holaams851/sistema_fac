@@ -68,6 +68,8 @@ if (!empty($_POST['equipos']['id']) && !empty($_POST['descripciones']['descripci
         $descripcion= $conn->real_escape_string($descripciones[$i]);
         $mano_de_obra = isset($manos_de_obra[$i]) ? (float)$manos_de_obra[$i] : 0.0;
 
+        $descripcion = !empty($descripcion) ? $descripcion : '-';
+
         if ($id_equipo > 0) {
             $sql_detalle = "INSERT INTO Detalle_Factura (id_factura, cantidad, precio_unitario, id_equipo, nombre_equipo, subtotal, mano_de_obra, descripcion)
                              VALUES ('$id_factura', '$cantidad', '$precio', '$id_equipo', '$nombre', '$subtotal', '$mano_de_obra', '$descripcion')";

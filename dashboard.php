@@ -312,7 +312,7 @@ $cant_equipos = number_format($cant_equipos);
                       // Se asume que mostrarTabla está en funciones.php
                       $sql = "SELECT * FROM Detalle_Factura ORDER BY id_detalle DESC LIMIT 5"; 
                       $result = $conn->query($sql);
-                      mostrarTabla($result, ['id_factura','nombre_equipo','descripcion','total']);
+                      mostrarTabla($result, ['id_factura','total','nombre_equipo','descripcion']);
                       ?>
 									</div>
 								</div>

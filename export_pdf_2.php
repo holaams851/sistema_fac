@@ -26,7 +26,7 @@ $details = $conn->query("SELECT
     df.total
 FROM Detalle_Factura df
 WHERE df.id_factura = $id_factura
-    AND (df.mano_de_obra != 0 OR df.descripcion != "-")");
+    AND (df.mano_de_obra != 0 OR df.descripcion != '-')");
 
 $sql_datos = "SELECT c.telefono, c.direccion
         FROM Facturas f
@@ -81,8 +81,8 @@ body {
 <div id="address" class="field">'.$cliente['direccion'].'</div>
 ';
 
-$startY = 267; // first row vertical position
-$rowHeight = 21; // space between rows
+$startY = 269; // first row vertical position
+$rowHeight = 19; // space between rows
 
 // AGREGAR FILAS
 $manoObra = 0;
@@ -90,7 +90,7 @@ $totalFactura = 0;
 
 while($row = $items->fetch_assoc()) {
     $html .= '
-    <div class="field" style="top: '.$startY.'px; left: 70px;">
+    <div class="field" style="top: '.$startY.'px; left: 50px;">
         '.$row['cantidad'].'
     </div>
     <div class="field" style="top: '.$startY.'px; left: 90px;">
@@ -115,6 +115,7 @@ while($row = $details->fetch_assoc()) {
     top: '.$startY.'px;
     left: 90px;
     width: 450px;
+    line-height: 1.4;
     white-space: normal;
     word-wrap: break-word;
     overflow-wrap: break-word;

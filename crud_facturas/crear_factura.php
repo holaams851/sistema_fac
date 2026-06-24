@@ -7,6 +7,25 @@ $today = date('Y-m-d');
 // Variables dummy para el layout
 $meses = [];
 $totales = [];
+
+$last = $conn->query("SELECT id_factura FROM Detalle_Factura ORDER BY id_factura DESC LIMIT 1");
+$res = $last->fetch_assoc();
+$lastId = $res['id_factura'];
+$number = (int)$lastId;
+
+if($lastId == NULL){
+   $lastId = "0001";
+}
+
+if(strlen($lastId) == 1){
+  $lastId = "000" . "" . $number + 1;
+} else if(strlen($lastId) == 2){
+  $lastId = "00" . "" . $number + 1;
+} else if(strlen($lastId) == 3){
+  $lastId = "0" . "" . $number + 1;
+}
+
+
 ?>
 
 
@@ -137,7 +156,7 @@ $totales = [];
                         <div id="topDiv" class="row mb-3">
                             <div class="col-md-2">
                                 <h5>ID:</h5>
-                                <input type="text" inputmode="numeric" pattern="[0-9]*" name="id_factura" class="form-control" value="0001" required>
+                                <input type="text" name="id_factura" maxlength="4" pattern="[0-9]{4}" class="form-control" value= "<?= $lastId ?>" required>
                             </div>
                             <?php if (isset($_GET['error'])): ?>
                             <div class="alert alert-danger col-md-6">
