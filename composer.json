@@ -1,6 +1,7 @@
 {
   "require": {
     "dompdf/dompdf": "^3.1",
-    "phpmailer/phpmailer": "^7.1"
+    "phpmailer/phpmailer": "^7.1",
+    "setasign/fpdf": "^1.8"
   }
 }

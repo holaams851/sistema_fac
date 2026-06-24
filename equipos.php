@@ -157,7 +157,8 @@ $totales = [];
                                 INNER JOIN Equipos e 
                                     ON dc.id_equipo = e.id_equipo
                                 INNER JOIN Proveedores p 
-                                    ON dc.id_proveedor = p.id_proveedor";
+                                    ON dc.id_proveedor = p.id_proveedor
+                                ORDER BY id_equipo ASC";
                             $result = $conn->query($sql);
                             while($row = $result->fetch_assoc()): ?>
                                 <tr>

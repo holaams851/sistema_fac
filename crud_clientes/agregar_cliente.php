@@ -143,8 +143,8 @@ $totales = [];
                         <input type="tel" name="telefono" class="form-control" pattern="[0-9]{8,8}" required placeholder="Solo números">
                       </div>
                       <div class="form-group">
-                        <label for="exampleTextarea1">Dirección</label>
-                        <input type="text" name="direccion" class="form-control" placeholder="Ingrese la dirección del cliente">
+                        <label for="exampleTextarea1">Dirección / RUC</label>
+                        <input type="text" name="direccion" class="form-control" placeholder="Ingrese la dirección o RUC del cliente">
                       </div>
                       <?php if (isset($_GET['error'])): ?>
                         <div class="alert alert-danger mt-2">
