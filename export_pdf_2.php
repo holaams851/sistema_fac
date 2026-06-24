@@ -50,6 +50,7 @@ $month = date("n", strtotime($factura['fecha']));
 $year  = date("y", strtotime($factura['fecha']));
 
 $pdf = new FPDF('L', 'pt', [604, 396]);
+$pdf->SetAutoPageBreak(false);
 
 $pdf->AddPage();
 
@@ -65,25 +66,25 @@ $pdf->SetFont('Arial', '', 14);
 
 /* FECHA */
 
-$pdf->SetXY(640, 140);
+$pdf->SetXY(475, 110);
 $pdf->Cell(20, 0, $day);
 
-$pdf->SetXY(695, 140);
+$pdf->SetXY(520, 110);
 $pdf->Cell(20, 0, $month);
 
-$pdf->SetXY(740, 140);
+$pdf->SetXY(550, 110);
 $pdf->Cell(20, 0, $year);
 
 /* CLIENTE */
 
-$pdf->SetXY(100, 180);
+$pdf->SetXY(90, 140);
 $pdf->Cell(
     300,
     0,
     mb_convert_encoding($factura['nombre'], 'ISO-8859-1', 'UTF-8')
 );
 
-$pdf->SetXY(110, 210);
+$pdf->SetXY(90, 165);
 $pdf->Cell(
     400,
     0,
@@ -92,27 +93,27 @@ $pdf->Cell(
 
 /* DETALLE */
 
-$startY = 269;
-$rowHeight = 19;
+$startY = 208;
+$rowHeight = 15;
 
 $totalFactura = 0;
 
 while ($row = $items->fetch_assoc()) {
 
-    $pdf->SetXY(50, $startY);
+    $pdf->SetXY(30, $startY);
     $pdf->Cell(30, 0, $row['cantidad']);
 
-    $pdf->SetXY(90, $startY);
+    $pdf->SetXY(70, $startY);
     $pdf->Cell(
         450,
         0,
         mb_convert_encoding($row['nombre_equipo'], 'ISO-8859-1', 'UTF-8')
     );
 
-    $pdf->SetXY(620, $startY);
+    $pdf->SetXY(460, $startY);
     $pdf->Cell(50, 0, $row['precio_unitario']);
 
-    $pdf->SetXY(687, $startY);
+    $pdf->SetXY(520, $startY);
     $pdf->Cell(50, 0, $row['subtotal']);
 
     if ($totalFactura == 0 && isset($row['total'])) {
@@ -126,33 +127,34 @@ while ($row = $items->fetch_assoc()) {
 
 while ($row = $details->fetch_assoc()) {
 
-    $pdf->SetXY(90, $startY);
+    $pdf->SetXY(70, $startY - 6);
 
-    $pdf->MultiCell(
-        450,
-        14,
-        mb_convert_encoding($row['descripcion'], 'ISO-8859-1', 'UTF-8')
+    $descripcion = mb_convert_encoding(
+    $row['descripcion'],
+    'ISO-8859-1',
+    'UTF-8'
     );
 
-    $pdf->SetXY(687, $startY);
+    $descripcion = wordwrap($descripcion, 64, "\r\n", false);
+
+    $lineas = substr_count($descripcion, "\r\n") + 1;
+
+    $pdf->MultiCell(390, 14, $descripcion);
+
+    $pdf->SetXY(520, $startY);
     $pdf->Cell(50, 0, $row['mano_de_obra']);
 
     if ($totalFactura == 0 && isset($row['total'])) {
         $totalFactura = $row['total'];
     }
-
-    $lines = ceil(
-        $pdf->GetStringWidth(
-            mb_convert_encoding($row['descripcion'], 'ISO-8859-1', 'UTF-8')
-        ) / 450
-    );
-
-    $startY += max($rowHeight, $lines * 14);
+    
+    $startY += $lineas * 14;
+    
 }
 
 /* TOTAL */
 
-$pdf->SetXY(687, 450);
+$pdf->SetXY(520, 345);
 $pdf->Cell(50, 0, $totalFactura);
 
 $pdf->Output(

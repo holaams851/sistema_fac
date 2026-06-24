@@ -1,143 +1,155 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 require 'vendor/autoload.php';
 include 'conexion.php';
-use Dompdf\Dompdf;
+
+use setasign\Fpdi\Fpdi; // Remove if using plain FPDF
+use FPDF;
 
 $id_factura = (int)$_GET['id'];
 
 $sql = $conn->query("SELECT * FROM Facturas WHERE id_factura = $id_factura");
 $factura = $sql->fetch_assoc();
 
-$items = $conn->query("SELECT 
-    df.cantidad,
-    df.nombre_equipo,
-    df.precio_unitario,
-    df.subtotal,
-    df.total
-FROM Detalle_Factura df
-WHERE df.id_factura = $id_factura
-    AND (df.cantidad != 0 OR df.precio_unitario != 0)");
+$items = $conn->query("
+    SELECT
+        df.cantidad,
+        df.nombre_equipo,
+        df.precio_unitario,
+        df.subtotal,
+        df.total
+    FROM Detalle_Factura df
+    WHERE df.id_factura = $id_factura
+    AND (df.cantidad != 0 OR df.precio_unitario != 0)
+");
 
-$details = $conn->query("SELECT 
-    df.mano_de_obra,
-    df.descripcion,
-    df.total
-FROM Detalle_Factura df
-WHERE df.id_factura = $id_factura
-    AND (df.mano_de_obra != 0 OR df.descripcion != '-')");
+$details = $conn->query("
+    SELECT
+        df.mano_de_obra,
+        df.descripcion,
+        df.total
+    FROM Detalle_Factura df
+    WHERE df.id_factura = $id_factura
+    AND (df.mano_de_obra != 0 OR df.descripcion != '-')
+");
 
-$sql_datos = "SELECT c.telefono, c.direccion
-        FROM Facturas f
-        JOIN Clientes c ON f.id_cliente = c.id_cliente
-        WHERE f.id_factura = $id_factura";
+$sql_datos = "
+SELECT c.telefono, c.direccion
+FROM Facturas f
+JOIN Clientes c ON f.id_cliente = c.id_cliente
+WHERE f.id_factura = $id_factura
+";
 
 $result = $conn->query($sql_datos);
+
 mysqli_set_charset($conn, "utf8mb4");
+
 $cliente = $result->fetch_assoc();
 
-$day = date("d", strtotime($factura['fecha']));
+$day   = date("d", strtotime($factura['fecha']));
 $month = date("n", strtotime($factura['fecha']));
-$year = date("y", strtotime($factura['fecha']));
+$year  = date("y", strtotime($factura['fecha']));
 
+$pdf = new FPDF('L', 'pt', [604, 396]);
+$pdf->SetAutoPageBreak(false);
 
-$html = '
-<style>
-@page { 
-    margin: 0;
-    size: 604pt 396pt;
-}
-body {
-    margin: 0;
-    padding: 0;
-    background-size: 604pt 396pt;
-    font-family: sans-serif;
-}
+$pdf->AddPage();
 
-.field {
-    position: absolute;
-    font-size: 14px;
-    color: #000;
-}
+$pdf->SetFont('Arial', '', 14);
 
-#day            { top: 140px; left: 640px; }
-#month          { top: 140px; left: 695px; }
-#year           { top: 140px; left: 740px; }
-#name           { top: 180px; left: 100px; }
-#address        { top: 210px; left: 110px; }
-</style>
+/* FECHA */
 
-<div id="day" class="field">'.$day.'</div>
-<div id="month" class="field">'.$month.'</div>
-<div id="year" class="field">'.$year.'</div>
-<div id="name" class="field">'.$factura['nombre'].'</div>
-<div id="address" class="field">'.$cliente['direccion'].'</div>
-';
+$pdf->SetXY(475, 110);
+$pdf->Cell(20, 0, $day);
 
-$startY = 267; // first row vertical position
-$rowHeight = 21; // space between rows
+$pdf->SetXY(520, 110);
+$pdf->Cell(20, 0, $month);
 
-// AGREGAR FILAS
-$manoObra = 0;
+$pdf->SetXY(550, 110);
+$pdf->Cell(20, 0, $year);
+
+/* CLIENTE */
+
+$pdf->SetXY(90, 140);
+$pdf->Cell(
+    300,
+    0,
+    mb_convert_encoding($factura['nombre'], 'ISO-8859-1', 'UTF-8')
+);
+
+$pdf->SetXY(90, 165);
+$pdf->Cell(
+    400,
+    0,
+    mb_convert_encoding($cliente['direccion'], 'ISO-8859-1', 'UTF-8')
+);
+
+/* DETALLE */
+
+$startY = 208;
+$rowHeight = 15;
+
 $totalFactura = 0;
 
-while($row = $items->fetch_assoc()) {
-    $html .= '
-    <div class="field" style="top: '.$startY.'px; left: 70px;">
-        '.$row['cantidad'].'
-    </div>
-    <div class="field" style="top: '.$startY.'px; left: 90px;">
-        '.$row['nombre_equipo'].'
-    </div>
-    <div class="field" style="top: '.$startY.'px; left: 620px;">
-        '.$row['precio_unitario'].'
-    </div>
-    <div class="field" style="top: '.$startY.'px; left: 687px;">
-        '.($row['subtotal']).'
-    </div>
-    ';
+while ($row = $items->fetch_assoc()) {
+
+    $pdf->SetXY(30, $startY);
+    $pdf->Cell(30, 0, $row['cantidad']);
+
+    $pdf->SetXY(70, $startY);
+    $pdf->Cell(
+        450,
+        0,
+        mb_convert_encoding($row['nombre_equipo'], 'ISO-8859-1', 'UTF-8')
+    );
+
+    $pdf->SetXY(460, $startY);
+    $pdf->Cell(50, 0, $row['precio_unitario']);
+
+    $pdf->SetXY(520, $startY);
+    $pdf->Cell(50, 0, $row['subtotal']);
+
     if ($totalFactura == 0 && isset($row['total'])) {
         $totalFactura = $row['total'];
     }
+
     $startY += $rowHeight;
 }
 
-while($row = $details->fetch_assoc()) {
-    $html .= '
-    <div class="field" style="
-    top: '.$startY.'px;
-    left: 90px;
-    width: 450px;
-    line-height: 1.4;
-    white-space: normal;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-">
-        '.($row['descripcion']).'
-    </div>
-    <div class="field" style="top: '.$startY.'px; left: 687px;">
-        '.($row['mano_de_obra']).'
-    </div>
-    ';
+/* MANO DE OBRA Y DESCRIPCIÓN */
+
+while ($row = $details->fetch_assoc()) {
+
+    $pdf->SetXY(70, $startY - 6);
+
+    $descripcion = mb_convert_encoding(
+    $row['descripcion'],
+    'ISO-8859-1',
+    'UTF-8'
+    );
+
+    $descripcion = wordwrap($descripcion, 64, "\r\n", false);
+
+    $lineas = substr_count($descripcion, "\r\n") + 1;
+
+    $pdf->MultiCell(390, 14, $descripcion);
+
+    $pdf->SetXY(520, $startY);
+    $pdf->Cell(50, 0, $row['mano_de_obra']);
+
     if ($totalFactura == 0 && isset($row['total'])) {
         $totalFactura = $row['total'];
     }
-    $startY += $rowHeight;
+    
+    $startY += $lineas * 14;
+    
 }
 
+/* TOTAL */
 
-$html .= '
-    <div class="field" style="top: 450px; left: 687px;">
-        '.($totalFactura).'
-    </div>
-';
+$pdf->SetXY(520, 345);
+$pdf->Cell(50, 0, $totalFactura);
 
-
-$dompdf = new Dompdf();
-$dompdf->set_option("isRemoteEnabled", true);
-$dompdf->loadHtml($html, 'UTF-8');
-$customPaper = array(0, 0, 604, 396); 
-$dompdf->setPaper($customPaper, 'landscape');
-$dompdf->render();
-$dompdf->stream("factura_{$id_factura}_" . time() . ".pdf", ["Attachment" => false]);
+$pdf->Output(
+    'I',
+    "factura_{$id_factura}.pdf"
+);
