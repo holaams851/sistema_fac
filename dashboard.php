@@ -290,7 +290,7 @@ $cant_equipos = number_format($cant_equipos);
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Ventas</p>
+                  <p class="card-title">Ventas Por Mes</p>
                    <?php if (empty($meses)) { ?>
                       <p style="color:red; text-align:center;">No hay facturas para mostrar. Asegúrate de tener facturas con detalles y totales.</p>
                   <?php } else { ?>
@@ -307,14 +307,21 @@ $cant_equipos = number_format($cant_equipos);
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">Facturas Recientes</h4>
-									<div class="list-wrapper pt-2">
                       <?php
                       // Se asume que mostrarTabla está en funciones.php
-                      $sql = "SELECT * FROM Detalle_Factura ORDER BY id_detalle DESC LIMIT 5"; 
+                      $sql = "
+                      SELECT 
+                        f.id_factura,
+                        f.nombre,
+                        df.total
+                      FROM Facturas f
+                      INNER JOIN Detalle_Factura df
+                      ON f.id_factura = df.id_factura
+                      ORDER BY id_factura 
+                      DESC LIMIT 3"; 
                       $result = $conn->query($sql);
-                      mostrarTabla($result, ['id_factura','total','nombre_equipo','descripcion']);
+                      mostrarTabla($result, ['id_factura', 'nombre', 'total']);
                       ?>
-									</div>
 								</div>
 							</div>
                 </div>
