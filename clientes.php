@@ -136,11 +136,37 @@ $totales = [];
             <div class="col-md-10 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                    <?php
-                      $sql = "SELECT * FROM Clientes ORDER BY id_cliente ASC"; // ASC = ascendente
-                      $result = $conn->query($sql);
-                      mostrarTabla($result, ['id_cliente','nombre','telefono','direccion'], ['editar'=>"crud_clientes/editar_cliente.php",'eliminar'=>"crud_clientes/eliminar_cliente.php"]);
-                     ?>
+                   <table class="table table-striped'">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Telefono</th>
+                                <th>Direccion</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                            $sql = "
+                            SELECT *
+                            FROM Clientes 
+                            ORDER BY id_cliente ASC";
+                            $result = $conn->query($sql);
+                            while($row = $result->fetch_assoc()): ?>
+                                <tr>
+                                    <td><?= $row['id_cliente'] ?></td>
+                                    <td><?= $row['nombre'] ?></td>
+                                    <td><?= $row['telefono'] ?></td>
+                                     <td><?=$row['direccion']?></td>
+                                    <td>
+                                        <a href="crud_equipos/editar_equipo.php?id=<?= $row['id_equipo'] ?>" class="btn btn-sm btn-warning">Editar</a>
+                                        <a href="crud_equipos/eliminar_equipo.php?id=<?= $row['id_equipo'] ?>" class="btn btn-sm btn-danger">Eliminar</a>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
                    </div>  
                 </div>
               </div>

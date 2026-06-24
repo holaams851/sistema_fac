@@ -5,8 +5,7 @@
 // $acciones = array opcional con botones ['editar'=>'editar_cliente.php','eliminar'=>'eliminar_cliente.php']
 
 function mostrarTabla($resultado, $columnas, $acciones = []) {
-    echo "<table class='table table-striped'>";
-    echo "<thead><tr><th>#</th>"; //
+    echo "<table class='table table-hover table-striped'>";
     foreach ($columnas as $col) {
         echo "<th>".ucfirst(str_replace('_',' ',$col))."</th>";
     }
