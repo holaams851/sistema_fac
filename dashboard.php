@@ -308,12 +308,12 @@ $cant_equipos = number_format($cant_equipos);
 								<div class="card-body">
 									<h4 class="card-title">Facturas Recientes</h4>
 									<div class="list-wrapper pt-2">
-                                        <?php
-                                        // Se asume que mostrarTabla está en funciones.php
-                                        $sql = "SELECT * FROM Detalle_Factura ORDER BY id_detalle DESC LIMIT 5"; 
-                                        $result = $conn->query($sql);
-                                        mostrarTabla($result, ['id_factura','nombre_equipo','cantidad','total']);
-                                        ?>
+                      <?php
+                      // Se asume que mostrarTabla está en funciones.php
+                      $sql = "SELECT * FROM Detalle_Factura ORDER BY id_detalle DESC LIMIT 5"; 
+                      $result = $conn->query($sql);
+                      mostrarTabla($result, ['id_factura','nombre_equipo','descripcion','total']);
+                      ?>
 									</div>
 								</div>
 							</div>

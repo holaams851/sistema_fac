@@ -84,7 +84,7 @@ if (!empty($_POST['equipos']['id']) && !empty($_POST['descripciones']['descripci
 
         if (!empty($descripcion)) {
             $sql_detalle = "INSERT INTO Detalle_Factura (id_factura, cantidad, precio_unitario, id_equipo, nombre_equipo, subtotal, mano_de_obra, descripcion)
-                             VALUES ('$id_factura', 0, 0, NULL, NULL, 0, '$mano_de_obra', '$descripcion')";
+                             VALUES ('$id_factura', 0, 0, NULL, '-', 0, '$mano_de_obra', '$descripcion')";
             $conn->query($sql_detalle);
         }
     }
@@ -104,7 +104,7 @@ if (!empty($_POST['equipos']['id']) && !empty($_POST['descripciones']['descripci
 
         if ($id_equipo > 0) {
             $sql_detalle = "INSERT INTO Detalle_Factura (id_factura, cantidad, precio_unitario, id_equipo, nombre_equipo, subtotal, mano_de_obra, descripcion)
-                             VALUES ('$id_factura', '$cantidad', '$precio', '$id_equipo', '$nombre', '$subtotal', 0, NULL)";
+                             VALUES ('$id_factura', '$cantidad', '$precio', '$id_equipo', '$nombre', '$subtotal', 0, '-')";
             $conn->query($sql_detalle);
         }
     }

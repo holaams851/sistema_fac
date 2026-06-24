@@ -26,7 +26,7 @@ $details = $conn->query("SELECT
     df.total
 FROM Detalle_Factura df
 WHERE df.id_factura = $id_factura
-    AND (df.mano_de_obra != 0 OR df.descripcion IS NOT NULL)");
+    AND (df.mano_de_obra != 0 OR df.descripcion != "-")");
 
 $sql_datos = "SELECT c.telefono, c.direccion
         FROM Facturas f
