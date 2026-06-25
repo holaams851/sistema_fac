@@ -124,11 +124,22 @@ $totales = [];
             <div class="col-md-10 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-               	 <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center"> 
-                    <i class="ti-desktop icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
-                  <p class="card-title text-md-center text-xl-left">Aquí puede registrar, editar y eliminar sus equipos.</p>
-                    <a href="crud_equipos/agregar_equipo.php" class="btn btn-primary me-2">Agregar Equipo</a>
-                  </div>  
+               	 <div class="d-flex flex-column flex-md-row
+                              justify-content-between
+                              align-items-center
+                              text-center text-md-start">
+
+                      <i class="ti-desktop icon-md text-muted mb-3 mb-md-0"></i>
+
+                      <p class="card-title mb-3 mb-md-0">
+                          Aquí puede registrar, editar y eliminar sus equipos.
+                      </p>
+
+                      <a href="crud_equipos/agregar_equipo.php"
+                        class="btn btn-primary">
+                          Agregar Equipo
+                      </a>
+                  </div>
                 </div>
               </div>
             </div>
