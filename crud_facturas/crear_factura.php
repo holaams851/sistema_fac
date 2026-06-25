@@ -191,7 +191,7 @@ if($number < 10){
                             </div>
                             <div class="col-md-6">
                                 <h5>Fecha:</h5>
-                                <input type="date" name="fecha" class="form-control" max="<?php echo $today; ?>" required>
+                                <input type="date" name="fecha" class="form-control"  min="<?php echo $today; ?>" max="<?php echo $today; ?>" required>
                             </div>
                         </div>
 
