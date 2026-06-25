@@ -172,8 +172,8 @@ $totales = [];
                                     <td><?= $row['telefono'] ?></td>
                                      <td><?=$row['direccion']?></td>
                                     <td>
-                                        <a href="crud_equipos/editar_equipo.php?id=<?= $row['id_equipo'] ?>" class="btn btn-sm btn-warning">Editar</a>
-                                        <a href="crud_equipos/eliminar_equipo.php?id=<?= $row['id_equipo'] ?>" class="btn btn-sm btn-danger">Eliminar</a>
+                                        <a href="crud_equipos/editar_cliente.php?id=<?= $row['id_cliente'] ?>" class="btn btn-sm btn-warning">Editar</a>
+                                        <a href="crud_equipos/eliminar_cliente.php?id=<?= $row['id_cliente'] ?>" class="btn btn-sm btn-danger">Eliminar</a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
