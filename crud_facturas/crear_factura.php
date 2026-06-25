@@ -337,7 +337,7 @@ if($number < 10){
                           name="descripciones[descripcion][]"
                           rows="4"
                           maxlength="512"
-                          placeholder="Describe la mano de obra realizada..."></textarea>
+                          placeholder="Describe la mano de obra realizada... Ej: Instalación de cámaras, mantenimiento de equipos"></textarea>
                 <small class="contador">0/512 caracteres</small>
             </td>
             <td><input type="number" step="0.01" class="form-control mano_de_obra" name="descripciones[mano_de_obra][]" value="1000"></td>
