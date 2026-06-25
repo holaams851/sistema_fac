@@ -321,7 +321,7 @@ if($number < 10){
         function filaEquipo() {
             return `
                 <tr>
-                    <td><input type="text" class="form-control equipo" name="equipos[nombre][]" placeholder="Buscar equipo"></td>
+                    <td><input type="text" class="form-control equipo" name="equipos[nombre][]" placeholder="Ej: Camara"></td>
                     <td><input type="number" class="form-control cantidad" name="equipos[cantidad][]" value="1" min="1"></td>
                     <td><input type="text" class="form-control precio" name="equipos[precio][]" readonly></td>
                     <td><input type="text" class="form-control subtotal" name="equipos[subtotal][]" readonly></td>
