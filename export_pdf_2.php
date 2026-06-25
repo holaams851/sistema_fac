@@ -6,6 +6,7 @@ use setasign\Fpdi\Fpdi; // Remove if using plain FPDF
 use FPDF;
 
 $id_factura = (int)$_GET['id'];
+$str_factura = $_GET['id'];
 
 $sql = $conn->query("SELECT * FROM Facturas WHERE id_factura = $id_factura");
 $factura = $sql->fetch_assoc();
@@ -65,6 +66,9 @@ $pdf->Image(
 $pdf->SetFont('Arial', '', 14);
 
 /* FECHA */
+
+$pdf->SetXY(355, 120);
+$pdf->Cell(20, 0, $str_factura);
 
 $pdf->SetXY(475, 110);
 $pdf->Cell(20, 0, $day);

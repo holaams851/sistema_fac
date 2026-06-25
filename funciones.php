@@ -5,6 +5,7 @@
 // $acciones = array opcional con botones ['editar'=>'editar_cliente.php','eliminar'=>'eliminar_cliente.php']
 
 function mostrarTabla($resultado, $columnas, $acciones = []) {
+    echo "<div class='table-responsive'>";
     echo "<table class='table table-hover table-striped'>";
     foreach ($columnas as $col) {
         echo "<th>".ucfirst(str_replace('_',' ',$col))."</th>";
@@ -17,7 +18,6 @@ function mostrarTabla($resultado, $columnas, $acciones = []) {
     $contador = 1;
     while($row = $resultado->fetch_assoc()) {
         echo "<tr>";
-        echo "<td>{$contador}</td>";
         foreach ($columnas as $col) {
             echo "<td>{$row[$col]}</td>";
         }
@@ -42,4 +42,5 @@ function mostrarTabla($resultado, $columnas, $acciones = []) {
     }
 
     echo "</tbody></table>";
+    echo "</div>";
 }

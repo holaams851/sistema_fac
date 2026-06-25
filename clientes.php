@@ -136,6 +136,7 @@ $totales = [];
             <div class="col-md-10 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
+                  <div class="table-responsive">
                    <table class="table table-striped'">
                         <thead>
                             <tr>
@@ -167,7 +168,8 @@ $totales = [];
                             <?php endwhile; ?>
                         </tbody>
                     </table>
-                   </div>  
+                  </div>
+                </div>  
                 </div>
               </div>
             </div>
