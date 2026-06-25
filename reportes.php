@@ -1,6 +1,20 @@
 <?php
 include 'conexion.php';
 
+// Ventas por dia
+$sql_dia = "
+     SELECT 
+         f.fecha AS fecha,
+         d.nombre_equipo, 
+         d.descripcion, 
+         d.total AS total
+     FROM Facturas f
+     INNER JOIN Detalle_Factura d ON f.id_factura = d.id_factura
+     WHERE fecha = CURDATE()
+     ORDER BY total DESC;
+";
+$res_dia = $conn->query($sql_dia);
+
 // --- Ventas por mes ---
 $sql_mes = "
      SELECT 
@@ -257,6 +271,33 @@ $totales_dummy = $totales;
                   <?php } else { ?>
                      <canvas id="barChart" width="800" height="400" style="display: block; height: 193px; width: 645px;" class="chartjs-render-monitor"></canvas>
                   <?php } ?>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+            <div class="col-md-10 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title">Total de Ventas del día</p>
+                   <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Equipo</th>
+                                <th>Descripcion</th>
+                                <th>Total Vendido (C$)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php while ($row = $res_dia->fetch_assoc()) { ?>
+                            <tr>
+                                <td><?= htmlspecialchars($row['nombre_equipo']) ?></td>
+                                <td><?= htmlspecialchars($row['descripcion']) ?></td>
+                                <td><?= number_format($row['total'], 2) ?></td>
+                            </tr>
+                        <?php } ?>
+                        </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
